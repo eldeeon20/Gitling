@@ -1,5 +1,7 @@
 package me.sheimi.sgit.database.models;
 
+import com.manichord.mgit.auth.RepoCredentials;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -344,11 +346,14 @@ public class Repo implements Comparable<Repo>, Serializable {
         File directory = getDir();
         if (FsUtils.renameDirectory(directory, repoName)) {
             ContentValues values = new ContentValues();
+            String oldLocalPath = mLocalPath;
             mLocalPath = isExternal()
                 ? EXTERNAL_PREFIX + directory.getParent() + File.separator + repoName
                 : repoName;
             values.put(RepoContract.RepoEntry.COLUMN_NAME_LOCAL_PATH, mLocalPath);
             RepoDbManager.updateRepo(getID(), values);
+            // Per-host credentials are keyed by local path
+            RepoCredentials.INSTANCE.onRepoRenamed(oldLocalPath, mLocalPath);
 
             return true;
         }

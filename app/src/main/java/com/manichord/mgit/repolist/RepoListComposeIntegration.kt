@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import com.manichord.mgit.auth.RepoCredentials
 import com.manichord.mgit.MainActivity
 import com.manichord.mgit.clone.CloneViewModel
 import com.manichord.mgit.models.AccountType
@@ -205,6 +206,7 @@ fun RepoListComposeContent(
                 onDismissRequest = { deleteTarget = null },
                 onConfirm = {
                     deleteTarget = null
+                    RepoCredentials.forget(repo.localPath)
                     repo.deleteRepo()
                     repo.cancelTask()
                 }
