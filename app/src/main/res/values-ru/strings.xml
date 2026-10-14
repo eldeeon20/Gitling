@@ -193,4 +193,13 @@
     <string name="error_file_not_found">File not found!</string>
     <string name="dialog_access_all_files_title">Доступ ко всем файлам</string>
     <string name="dialog_access_all_files_msg">Разрешите доступ ко всем файлам для чтения/записи репозиториев с внешнего хранилища.</string>
+    <string name="file_op_add_to_stage">Добавить</string>
+    <string name="file_op_checkout">Переключить ветвь(сброс)</string>
+    <string name="file_op_delete">Удалить</string>
+    <string name="file_op_remove_cached">Удалить кэширванное из репозитория</string>
+    <string name="file_op_remove_force">Принудительно удалить из репозитория</string>
+    <string name="file_op_make_executable">Сделать исполняемым</string>
+    <string name="file_op_make_not_executable">Сделать неисполняемым</string>
+    <string name="file_op_rename">Переименовать</string>
+    <string name="dialog_rename_file_title">Переименовать</string>
 </resources>

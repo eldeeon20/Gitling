@@ -194,4 +194,13 @@
     <string name="error_file_not_found">File not found!</string>
     <string name="dialog_access_all_files_title">Acceso a todos los archivos</string>
     <string name="dialog_access_all_files_msg">Permita el acceso a todos los archivos para leer/escribir repositorios desde almacenamiento externo.</string>
+    <string name="file_op_add_to_stage">Anadir a stage</string>
+    <string name="file_op_checkout">Checkout (Reset Changes)</string>
+    <string name="file_op_delete">Borrar</string>
+    <string name="file_op_remove_cached">Eliminar cached del repo</string>
+    <string name="file_op_remove_force">Eliminar force del repo</string>
+    <string name="file_op_make_executable">Hacer ejecutable</string>
+    <string name="file_op_make_not_executable">Hacer no ejecutable</string>
+    <string name="file_op_rename">Renombrar</string>
+    <string name="dialog_rename_file_title">Renombrar</string>
 </resources>

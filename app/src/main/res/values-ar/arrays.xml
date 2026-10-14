@@ -6,15 +6,6 @@
         <item>تمرير سريع فقط</item>
         <item>بدون تمرير سريع</item>
     </string-array>
-    <string-array name="repo_file_operations">
-        <item>إضافة إلى المرحلة</item>
-        <item>تسجيل خروج (إعادة تعيين التغييرات)</item>
-        <item>حذف</item>
-        <item>إزالة المخزن مؤقتاً من المستودع</item>
-        <item>إزالة بقوة من المستودع</item>
-        <item>جعله قابلاً للتنفيذ</item>
-        <item>جعله غير قابل للتنفيذ</item>
-    </string-array>
     <string-array name="repo_operation_names">
         <item>فرع جديد</item>
         <item>سحب</item>

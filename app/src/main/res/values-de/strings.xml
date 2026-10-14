@@ -196,4 +196,13 @@
     <string name="error_file_not_found">File not found!</string>
     <string name="dialog_access_all_files_title">Zugriff auf alle Dateien</string>
     <string name="dialog_access_all_files_msg">Bitte erlauben Sie den Zugriff auf alle Dateien, um Repositories von einem externen Speicher lesen/schreiben zu können.</string>
+    <string name="file_op_add_to_stage">Zum Staging-Bereich hinzufügen</string>
+    <string name="file_op_checkout">Auschecken (Änderungen zurücksetzen)</string>
+    <string name="file_op_delete">Löschen</string>
+    <string name="file_op_remove_cached">Löschen (cached, nur Repository)</string>
+    <string name="file_op_remove_force">Löschen (force, mit aktuellen Änderungen)</string>
+    <string name="file_op_make_executable">Ausführbar machen</string>
+    <string name="file_op_make_not_executable">Nicht ausführbar machen</string>
+    <string name="file_op_rename">Umbenennen</string>
+    <string name="dialog_rename_file_title">Umbenennen</string>
 </resources>
