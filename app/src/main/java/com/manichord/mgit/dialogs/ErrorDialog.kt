@@ -16,22 +16,46 @@ import me.sheimi.sgit.BuildConfig
 import me.sheimi.sgit.R
 import timber.log.Timber
 
+/**
+ * Error dialog shown by BasicFunctions.showError/showException.
+ *
+ * Its title, message and error details are kept in the fragment arguments, not plain fields: the
+ * FragmentManager recreates a showing dialog with its arguments whenever the activity is
+ * recreated (dark mode or language switching, the app being restored after Android killed it),
+ * and plain fields came back as 0, so getString(0) crashed the app with
+ * "Resources$NotFoundException: String resource ID #0x0".
+ */
 class ErrorDialog : SheimiDialogFragment() {
+
+    companion object {
+        private const val ARG_ERROR_RES = "error_res"
+        private const val ARG_ERROR_TITLE_RES = "error_title_res"
+        private const val ARG_DETAILS = "details"
+    }
+
+    /** Only used for debug logging; not restored when the dialog is recreated. */
     private var mThrowable: Throwable? = null
-    @StringRes
-    private var mErrorRes: Int = 0
+
     @StringRes
     var errorTitleRes: Int = 0
-        get() = if (field != 0) field else R.string.dialog_error_title
+        get() = args().getInt(ARG_ERROR_TITLE_RES).takeIf { it != 0 } ?: R.string.dialog_error_title
+        set(value) {
+            field = value
+            args().putInt(ARG_ERROR_TITLE_RES, value)
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val details = (mThrowable as? Exception)?.message ?: ""
+        val errorRes = args().getInt(ARG_ERROR_RES)
+        val details = args().getString(ARG_DETAILS).orEmpty()
         val title = getString(errorTitleRes)
-        val message = getString(mErrorRes) + "\n" + details
+        val message = listOfNotNull(
+            errorRes.takeIf { it != 0 }?.let { getString(it) },
+            details.takeIf { it.isNotEmpty() }
+        ).joinToString("\n")
 
         return ComposeView(requireContext()).apply {
             setContent {
@@ -45,8 +69,8 @@ class ErrorDialog : SheimiDialogFragment() {
                                 if (BuildConfig.DEBUG) {
                                     if (mThrowable != null) {
                                         Timber.e(mThrowable)
-                                    } else if (mErrorRes != 0) {
-                                        Timber.e(getString(mErrorRes))
+                                    } else if (errorRes != 0) {
+                                        Timber.e(getString(errorRes))
                                     }
                                 }
                                 dismiss()
@@ -62,9 +86,12 @@ class ErrorDialog : SheimiDialogFragment() {
 
     fun setThrowable(throwable: Throwable?) {
         mThrowable = throwable
+        args().putString(ARG_DETAILS, (throwable as? Exception)?.message)
     }
 
     fun setErrorRes(@StringRes errorRes: Int) {
-        mErrorRes = errorRes
+        args().putInt(ARG_ERROR_RES, errorRes)
     }
+
+    private fun args(): Bundle = arguments ?: Bundle().also { arguments = it }
 }
