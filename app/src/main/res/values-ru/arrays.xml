@@ -6,13 +6,6 @@
         <item>Fast Forward Only</item>
         <item>No Fast Forward</item>
     </string-array>
-    <string-array name="repo_file_operations">
-        <item>Добавить</item>
-        <item>Переключить ветвь(сброс)</item>
-        <item>Удалить</item>
-        <item>Удалить кэширванное из репозитория</item>
-        <item>Принудительно удалить из репозитория</item>
-    </string-array>
     <string-array name="repo_operation_names">
         <item>Новая ветвь</item>
         <item>Обновить</item>

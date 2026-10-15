@@ -195,4 +195,13 @@
     <string name="error_file_not_found">File not found!</string>
     <string name="dialog_access_all_files_title">Accès à tous les fichiers</string>
     <string name="dialog_access_all_files_msg">Veuillez autoriser l\'accès à tous les fichiers afin de lire/écrire des référentiels à partir d\'un stockage externe.</string>
+    <string name="file_op_add_to_stage">Ajouter à stage</string>
+    <string name="file_op_checkout">Checkout (Reset Changements)</string>
+    <string name="file_op_delete">Supprimer</string>
+    <string name="file_op_remove_cached">Enlever caché de repository</string>
+    <string name="file_op_remove_force">Enlever force de repository</string>
+    <string name="file_op_make_executable">Make executable</string>
+    <string name="file_op_make_not_executable">Make not executable</string>
+    <string name="file_op_rename">Renommer</string>
+    <string name="dialog_rename_file_title">Renommer</string>
 </resources>

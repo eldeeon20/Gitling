@@ -223,4 +223,13 @@
     <string name="preference_eng_lang_summary">استخدام الإنجليزية بدلاً من اللغة الافتراضية</string>
     <string name="pref_key_use_english" translatable="false">use.english</string>
     <string name="toast_submodule_update_success">تم تحديث الوحدات الفرعية</string>
+    <string name="file_op_add_to_stage">إضافة إلى المرحلة</string>
+    <string name="file_op_checkout">تسجيل خروج (إعادة تعيين التغييرات)</string>
+    <string name="file_op_delete">حذف</string>
+    <string name="file_op_remove_cached">إزالة المخزن مؤقتاً من المستودع</string>
+    <string name="file_op_remove_force">إزالة بقوة من المستودع</string>
+    <string name="file_op_make_executable">جعله قابلاً للتنفيذ</string>
+    <string name="file_op_make_not_executable">جعله غير قابل للتنفيذ</string>
+    <string name="file_op_rename">إعادة تسمية</string>
+    <string name="dialog_rename_file_title">إعادة تسمية</string>
 </resources>

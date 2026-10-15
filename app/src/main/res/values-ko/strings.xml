@@ -178,4 +178,13 @@
     <string name="error_file_not_found">File not found!</string>
     <string name="dialog_access_all_files_title">모든 파일에 대한 액세스</string>
     <string name="dialog_access_all_files_msg">외부 저장소에서 리포지토리를 읽고 쓰려면 모든 파일에 대한 액세스를 허용하세요.</string>
+    <string name="file_op_add_to_stage">Add to stage</string>
+    <string name="file_op_checkout">Checkout (Reset Changes)</string>
+    <string name="file_op_delete">Delete</string>
+    <string name="file_op_remove_cached">Remove cached from repository</string>
+    <string name="file_op_remove_force">Remove force from repository</string>
+    <string name="file_op_make_executable">실행 가능하게 만들기</string>
+    <string name="file_op_make_not_executable">실행 불가능하게 만들기</string>
+    <string name="file_op_rename">이름 바꾸기</string>
+    <string name="dialog_rename_file_title">이름 바꾸기</string>
 </resources>

@@ -6,15 +6,6 @@
         <item>Seulement Fast Forward</item>
         <item>Pas de Fast Forward</item>
     </string-array>
-    <string-array name="repo_file_operations">
-        <item>Ajouter à stage</item>
-        <item>Checkout (Reset Changements)</item>
-        <item>Supprimer</item>
-        <item>Enlever caché de repository</item>
-        <item>Enlever force de repository</item>
-        <item>Make executable</item>
-        <item>Make not executable</item>
-    </string-array>
     <string-array name="repo_operation_names">
         <item>Nouveau Branche</item>
         <item>Tirer</item>
