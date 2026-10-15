@@ -1,6 +1,6 @@
 package com.manichord.mgit.repodetail
 
-import me.sheimi.sgit.MGitApplication
+import com.manichord.mgit.auth.RepoCredentials
 import me.sheimi.sgit.database.models.Repo
 import me.sheimi.sgit.ssh.SgitTransportCallback
 import org.eclipse.jgit.api.ListBranchCommand
@@ -249,27 +249,12 @@ object GitCommandEngine {
         return sb.toString().trimEnd()
     }
 
-    /** Same fix as RepoOpTask.setCredentials(TransportCommand, String) in the legacy layer: a
-     * repo's saved username/password applies to the whole repo, not to a specific remote, so it
-     * can't tell a GitHub remote from a GitLab remote on the same repo (#59). A connected Account
-     * is already matched by host, so it's tried first for the remote this command actually
-     * targets; the repo-level saved credential is only a fallback for a remote whose host has no
-     * connected account. */
+    /** Same lookup as RepoOpTask.setCredentials(TransportCommand, String): credentials are
+     * resolved per remote host (connected account, then this repo's credentials for that host),
+     * so each of a repo's remotes gets its own host's credentials (#59, #87). */
     private fun applyCredentials(repo: Repo, remoteName: String, cmd: TransportCommand<*, *>) {
-        val account = MGitApplication.getContext().accountManager
-            ?.findAccountForRemoteUrl(repo.getRemoteURL(remoteName))
-
-        val username: String?
-        val password: String?
-        if (account != null) {
-            username = account.username
-            password = account.token
-        } else {
-            username = repo.getUsername()
-            password = repo.getPassword()
-        }
-        if (!username.isNullOrBlank() && !password.isNullOrBlank()) {
-            cmd.setCredentialsProvider(UsernamePasswordCredentialsProvider(username, password))
+        RepoCredentials.resolve(repo, repo.getRemoteURL(remoteName))?.let {
+            cmd.setCredentialsProvider(UsernamePasswordCredentialsProvider(it.username, it.password))
         }
     }
 

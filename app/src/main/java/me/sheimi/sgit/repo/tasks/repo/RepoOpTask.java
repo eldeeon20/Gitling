@@ -5,11 +5,9 @@ import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import java.util.Locale;
 
-import com.manichord.mgit.auth.AccountManager;
-import com.manichord.mgit.models.Account;
+import com.manichord.mgit.auth.RepoCredentials;
 import me.sheimi.android.activities.SheimiFragmentActivity.OnPasswordEntered;
 import me.sheimi.android.utils.BasicFunctions;
-import me.sheimi.sgit.MGitApplication;
 import me.sheimi.sgit.R;
 import me.sheimi.sgit.database.models.Repo;
 import me.sheimi.sgit.repo.tasks.SheimiAsyncTask;
@@ -88,36 +86,22 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
         setCredentials(command, mRepo.getRemoteURL());
     }
 
-    /** A repo's saved username/password (from the password prompt's "save password" checkbox)
-     * is stored once per repo, not once per remote, so it can't distinguish a GitHub remote from
-     * a GitLab remote on the same repo -- applying it unconditionally to every remote causes
-     * exactly that mismatch (#59). A connected Account, on the other hand, is already matched by
-     * host (see AccountManager.findAccountForRemoteUrl), so it's tried first for the URL actually
-     * being pushed/pulled/fetched/cloned; the repo-level saved credential is only a fallback for
-     * a remote whose host has no connected account. */
+    /** The remote URL credentials were last resolved for, so credentials typed into the password
+     * prompt after an auth failure are remembered for that remote's host (see RepoRemoteOpTask). */
+    protected String mCredentialRemoteUrl;
+
+    /** Credentials are resolved per remote host (connected account first, then this repo's
+     * credentials for that host), so a repo with e.g. a GitHub and a GitLab remote sends each
+     * host its own credentials (#59, #87). See RepoCredentials for the full lookup order. */
     protected void setCredentials(TransportCommand command, String remoteUrl) {
-        AccountManager accountManager = MGitApplication.getContext().getAccountManager();
-        Account account = accountManager == null ? null : accountManager.findAccountForRemoteUrl(remoteUrl);
-
-        String username;
-        String password;
-        if (account != null) {
-            username = account.getUsername();
-            password = account.getToken();
-        } else {
-            username = mRepo.getUsername();
-            password = mRepo.getPassword();
-        }
-
-        if (username != null && password != null && !username.trim().isEmpty()
-                && !password.trim().isEmpty()) {
-            UsernamePasswordCredentialsProvider auth = new UsernamePasswordCredentialsProvider(
-                    username, password);
-            command.setCredentialsProvider(auth);
+        mCredentialRemoteUrl = remoteUrl;
+        RepoCredentials.Credential credential = RepoCredentials.INSTANCE.resolve(mRepo, remoteUrl);
+        if (credential != null) {
+            command.setCredentialsProvider(new UsernamePasswordCredentialsProvider(
+                    credential.getUsername(), credential.getPassword()));
         } else {
             Timber.d("no CredentialsProvider when no username/password provided");
         }
-
     }
 
     protected void handleAuthError(OnPasswordEntered onPassEntered) {
