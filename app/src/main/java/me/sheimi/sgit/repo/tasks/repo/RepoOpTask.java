@@ -51,12 +51,15 @@ public abstract class RepoOpTask extends SheimiAsyncTask<Void, String, Boolean> 
                     BasicFunctions.showError(BasicFunctions.getActiveActivity(), getErrorTitleRes(), mErrorRes);
                 } else {
                     // No specific message: show the task's error title as the body under the
-                    // default title (ErrorDialog can't load a 0 message resource)
+                    // default title, so the dialog isn't left with an empty body
                     BasicFunctions.showError(BasicFunctions.getActiveActivity(), 0, getErrorTitleRes());
                 }
             } else {
-                BasicFunctions.showException(BasicFunctions.getActiveActivity(), mException, mErrorRes,
-                        getErrorTitleRes());
+                // Title first, like showError. The reversed order showed "Error occurred" twice
+                // (as the title and as the first line of the body) and put a specific message
+                // such as "Pull failed" in the title; a 0 message is skipped by ErrorDialog
+                BasicFunctions.showException(BasicFunctions.getActiveActivity(), mException,
+                        getErrorTitleRes(), mErrorRes);
             }
         }
         if (isSuccess && mSuccessMsg != 0) {

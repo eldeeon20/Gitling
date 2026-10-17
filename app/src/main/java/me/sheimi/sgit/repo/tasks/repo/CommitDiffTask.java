@@ -204,7 +204,7 @@ public class CommitDiffTask extends RepoOpTask {
                 SheimiFragmentActivity activity = BasicFunctions.getActiveActivity();
                 if (activity != null) {
                     BasicFunctions.showException(activity, FsUtils.wrapEaccesFile(e, eaccesFile),
-                            R.string.error_diff_failed, R.string.dialog_error_title);
+                            R.string.error_diff_failed, 0);
                 }
             }
         });

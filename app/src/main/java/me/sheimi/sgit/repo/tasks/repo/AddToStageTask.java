@@ -106,7 +106,7 @@ public class AddToStageTask extends RepoOpTask {
                 SheimiFragmentActivity activity = BasicFunctions.getActiveActivity();
                 if (activity != null) {
                     BasicFunctions.showException(activity, FsUtils.wrapEaccesFile(cause, eaccesFile),
-                            0, R.string.dialog_error_title);
+                            0, 0);
                 }
             }
         });
