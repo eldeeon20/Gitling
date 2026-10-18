@@ -3,6 +3,7 @@ package me.sheimi.android.utils;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import androidx.core.content.FileProvider;
 import android.webkit.MimeTypeMap;
 
@@ -132,7 +133,8 @@ public class FsUtils {
      * against, or null if none of the causes match that pattern. On recent Android, MediaProvider
      * denies raw File access to image/video/audio files -- even ones sitting inside this app's
      * own Android/media/&lt;pkg&gt; directory (used when "Make repos visible to other apps" is
-     * on) -- unless the app holds READ_MEDIA_IMAGES (or READ_EXTERNAL_STORAGE pre-API 33). JGit's
+     * on) and written there by another app -- unless the app holds READ_MEDIA_IMAGES (or
+     * READ_EXTERNAL_STORAGE pre-API 33). JGit's
      * FileTreeIterator/AddCommand open working-tree files directly via java.io.File, so diffing or
      * staging such a file throws this before Gitling gets a chance to ask for that permission. */
     public static File findEaccesFile(Throwable t) {
@@ -150,10 +152,13 @@ public class FsUtils {
     }
 
     /** Wraps an EACCES failure (see {@link #findEaccesFile}) with a message explaining the likely
-     * cause and next step, in place of JGit's raw "open failed: EACCES" message. */
+     * cause and next step, in place of JGit's raw "open failed: EACCES" message. API 33+ has no
+     * permission to point at (see SheimiFragmentActivity.requestMediaFileAccess). */
     public static Throwable wrapEaccesFile(Throwable cause, File eaccesFile) {
-        String friendly = MGitApplication.getContext()
-                .getString(R.string.error_media_permission_denied, eaccesFile.getName());
+        int message = Build.VERSION.SDK_INT >= 33
+                ? R.string.error_media_file_blocked
+                : R.string.error_media_permission_denied;
+        String friendly = MGitApplication.getContext().getString(message, eaccesFile.getName());
         return new IOException(friendly, cause);
     }
 

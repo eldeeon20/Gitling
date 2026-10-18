@@ -5,9 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.manichord.mgit.auth.DeviceFlowStatus
+import com.manichord.mgit.documents.BlockedFileRepair
 import com.manichord.mgit.ui.theme.FontOption
 import com.manichord.mgit.update.UpdateCheckResult
 import com.manichord.mgit.update.UpdateChecker
+import me.sheimi.android.activities.SheimiFragmentActivity
+import me.sheimi.android.utils.BasicFunctions
 import me.sheimi.android.utils.Profile
 import me.sheimi.sgit.BuildConfig
 import me.sheimi.sgit.MGitApplication
@@ -34,20 +37,56 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
      * preference -- both roots are always accessible to Gitling regardless of the current
      * setting (see Repo.getDefaultRepoRootDir()), so this is a real move, not a "some repos
      * become unreachable" migration. Runs off the main thread since it's real disk I/O
-     * proportional to repo size/count. */
-    fun setUseSharedMediaStorage(use: Boolean) {
+     * proportional to repo size/count.
+     *
+     * Files Android won't let Gitling read (see BlockedFileRepair) can't be copied, so they're
+     * looked for before anything moves: the user is offered the same access fix as staging such
+     * a file, and the move runs again once afterwards. If the move still fails, it's undone
+     * (see Repo.moveReposBetweenDefaultRoots) and the setting is left as it was. */
+    fun setUseSharedMediaStorage(use: Boolean) = moveRepoStorage(use, isRetry = false)
+
+    private fun moveRepoStorage(use: Boolean, isRetry: Boolean) {
         val app = getApplication<MGitApplication>()
         val oldRoot = Repo.getDefaultRepoRootDir()
-        _movingRepoStorage.value = true
+        _movingRepoStorage.postValue(true)
         Thread {
+            val blocked = BlockedFileRepair.findBlockedFiles(oldRoot)
+            if (blocked.isNotEmpty()) {
+                _movingRepoStorage.postValue(false)
+                val activity = BasicFunctions.getActiveActivity()
+                if (isRetry || activity == null) {
+                    showMoveError(app.getString(R.string.error_move_repos_blocked, blocked[0].name))
+                    return@Thread
+                }
+                activity.requestMediaFileAccess(oldRoot, blocked[0],
+                    object : SheimiFragmentActivity.OnPermissionResult {
+                        override fun onGranted() = moveRepoStorage(use, isRetry = true)
+
+                        override fun onDenied() = showMoveError(
+                            app.getString(R.string.error_move_repos_blocked, blocked[0].name))
+                    })
+                return@Thread
+            }
             prefsHelper.setUseSharedMediaStorage(use)
             val newRoot = Repo.getDefaultRepoRootDir()
-            Repo.moveReposBetweenDefaultRoots(app, oldRoot, newRoot)
+            val error = Repo.moveReposBetweenDefaultRoots(app, oldRoot, newRoot)
+            if (error != null) {
+                prefsHelper.setUseSharedMediaStorage(!use)
+                _movingRepoStorage.postValue(false)
+                showMoveError(app.getString(R.string.error_move_repos_failed,
+                    error.localizedMessage ?: error.javaClass.simpleName))
+                return@Thread
+            }
             Repo.syncNoMediaMarker(use)
             _movingRepoStorage.postValue(false)
             _useSharedMediaStorage.postValue(use)
             _repoRoot.postValue(newRoot.absolutePath)
         }.start()
+    }
+
+    private fun showMoveError(message: String) {
+        val activity = BasicFunctions.getActiveActivity() ?: return
+        activity.runOnUiThread { activity.showMessageDialog(R.string.dialog_error_title, message) }
     }
 
     private val _useEnglish = MutableLiveData(prefsHelper.useEnglish())

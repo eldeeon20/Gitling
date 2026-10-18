@@ -47,5 +47,8 @@
     <string name="alert_save_failed">Save failed</string>
     <string name="alert_file_creation_failure">Couldn\'t create file</string>
     <string name="error_no_repository">No repository found</string>
-
+    <string name="error_media_permission_denied">Android bloqueó el acceso a \"%1$s\" porque Gitling aún no tiene permiso para leer archivos multimedia. Permítelo si se te pide, o concede a Gitling acceso al almacenamiento en los Ajustes de Android, y vuelve a intentarlo.</string>
+    <string name="error_media_file_blocked">Android impide que Gitling lea \"%1$s\" porque otra app lo añadió a la carpeta compartida de repositorios. Vuelve a intentarlo y toca Arreglar acceso, o elimina el archivo y vuelve a copiarlo a través de la ubicación Gitling en la app Archivos.</string>
+    <string name="error_move_repos_blocked">No se movieron los repositorios porque Android impide que Gitling lea \"%1$s\", que añadió otra app. No se ha cambiado nada.</string>
+    <string name="error_move_repos_failed">No se movieron los repositorios (%1$s). No se ha cambiado nada.</string>
 </resources>

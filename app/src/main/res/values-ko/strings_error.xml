@@ -47,5 +47,8 @@
     <string name="alert_save_failed">Save failed</string>
     <string name="alert_file_creation_failure">Couldn\'t create file</string>
     <string name="error_no_repository">No repository found</string>
-
+    <string name="error_media_permission_denied">Gitling에 아직 미디어 파일 읽기 권한이 없어 Android가 \"%1$s\"에 대한 액세스를 차단했습니다. 요청이 표시되면 허용하거나 Android 설정에서 Gitling의 저장공간 액세스를 허용한 다음 다시 시도하세요.</string>
+    <string name="error_media_file_blocked">다른 앱이 공유 저장소 폴더에 \"%1$s\" 파일을 추가했기 때문에 Android가 Gitling의 읽기를 차단하고 있습니다. 다시 시도하여 액세스 복구를 탭하거나, 파일을 삭제한 다음 파일 앱의 Gitling 위치를 통해 다시 복사하세요.</string>
+    <string name="error_move_repos_blocked">다른 앱이 추가한 \"%1$s\" 파일을 Android가 Gitling에서 읽지 못하게 막아 저장소를 이동하지 않았습니다. 변경된 내용은 없습니다.</string>
+    <string name="error_move_repos_failed">저장소를 이동하지 않았습니다(%1$s). 변경된 내용은 없습니다.</string>
 </resources>

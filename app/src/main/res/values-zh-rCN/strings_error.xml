@@ -47,5 +47,8 @@
     <string name="alert_save_failed">保存失败</string>
     <string name="alert_file_creation_failure">无法创建文件</string>
     <string name="error_no_repository">未找到仓库</string>
-
+    <string name="error_media_permission_denied">由于 Gitling 尚无读取媒体文件的权限，Android 阻止了对 \"%1$s\" 的访问。如有提示请允许，或在 Android 设置中允许 Gitling 访问存储空间，然后重试。</string>
+    <string name="error_media_file_blocked">由于 \"%1$s\" 是其他应用添加到共享仓库文件夹中的，Android 阻止了 Gitling 读取它。请重试并点按“修复访问”，或删除该文件，再通过“文件”应用中的 Gitling 位置重新复制进来。</string>
+    <string name="error_move_repos_blocked">由于 Android 阻止 Gitling 读取其他应用添加的 \"%1$s\"，仓库未被移动。未做任何更改。</string>
+    <string name="error_move_repos_failed">仓库未被移动（%1$s）。未做任何更改。</string>
 </resources>

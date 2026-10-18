@@ -202,4 +202,9 @@
     <string name="file_op_make_not_executable">Сделать неисполняемым</string>
     <string name="file_op_rename">Переименовать</string>
     <string name="dialog_rename_file_title">Переименовать</string>
+    <string name="label_fix_file_access">Исправить доступ</string>
+    <string name="label_try_again">Повторить</string>
+    <string name="dialog_fix_file_access_title">Исправить доступ к файлам</string>
+    <string name="dialog_fix_file_access_message">Android не даёт Gitling прочитать \"%1$s\", потому что этот файл добавило в общую папку репозиториев другое приложение.\n\nGitling может это исправить, заменив каждый заблокированный файл собственной идентичной копией. Нажмите «Исправить доступ», затем подтвердите папку на следующем экране. Это нужно сделать только один раз.</string>
+    <string name="dialog_fix_file_access_wrong_folder">В этой папке нет \"%1$s\". Выберите папку, которую открывает Gitling, и подтвердите её.</string>
 </resources>
