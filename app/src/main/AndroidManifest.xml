@@ -3,11 +3,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- Requested lazily (see SheimiFragmentActivity.requestMediaImagesPermission) only when a
-         diff or stage operation actually hits the scoped-storage EACCES this works around
-         (see FsUtils.findEaccesFile). READ_MEDIA_IMAGES is the API 33+ permission; below that,
-         READ_EXTERNAL_STORAGE is the equivalent. -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <!-- Requested lazily (see SheimiFragmentActivity.requestMediaFileAccess) only when a diff,
+         stage or repo move actually hits the scoped-storage EACCES this works around (see
+         FsUtils.findEaccesFile), and only below API 33. On API 33+ the equivalent would be
+         READ_MEDIA_IMAGES, which Google Play's photo and video permissions policy doesn't allow
+         for this use; there Gitling gets one-time folder access through the system picker
+         instead and replaces each blocked file with its own copy (see BlockedFileRepair). -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
 
     <application android:name=".MGitApplication" android:allowBackup="true" android:largeHeap="true" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:logo="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme">

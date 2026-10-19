@@ -36,4 +36,8 @@
     <string name="alert_save_failed">保存に失敗</string>
 
     <string name="error_unknown_commit">コミットが見つかりません。コミットハッシュを確認してください。</string>
+    <string name="error_media_permission_denied">Gitling にはまだメディアファイルの読み取り権限がないため、Android が \"%1$s\" へのアクセスをブロックしました。求められたら許可するか、Android の設定で Gitling にストレージへのアクセスを許可してから、もう一度お試しください。</string>
+    <string name="error_media_file_blocked">\"%1$s\" は別のアプリが共有リポジトリフォルダに追加したため、Android により Gitling からの読み取りがブロックされています。もう一度試して [アクセスを修復] をタップするか、ファイルを削除して、ファイルアプリの Gitling の場所から改めてコピーしてください。</string>
+    <string name="error_move_repos_blocked">別のアプリが追加した \"%1$s\" を Android が Gitling に読み取らせないため、リポジトリを移動しませんでした。何も変更されていません。</string>
+    <string name="error_move_repos_failed">リポジトリを移動しませんでした (%1$s)。何も変更されていません。</string>
 </resources>

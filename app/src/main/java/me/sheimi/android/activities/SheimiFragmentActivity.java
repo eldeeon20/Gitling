@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
+import com.manichord.mgit.documents.BlockedFileRepair;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -35,8 +37,10 @@ import java.util.Locale;
 
 import me.sheimi.android.avatar.AvatarDownloader;
 import me.sheimi.android.utils.BasicFunctions;
+import me.sheimi.android.utils.FsUtils;
 import me.sheimi.android.utils.Profile;
 import me.sheimi.sgit.R;
+import me.sheimi.sgit.database.models.Repo;
 import me.sheimi.sgit.dialogs.DummyDialogListener;
 
 public class SheimiFragmentActivity extends AppCompatActivity {
@@ -245,7 +249,7 @@ public class SheimiFragmentActivity extends AppCompatActivity {
     }
 
     /**
-     * Callback for {@link #requestMediaImagesPermission}, mirroring the {@link OnPasswordEntered}
+     * Callback for {@link #requestMediaFileAccess}, mirroring the {@link OnPasswordEntered}
      * pattern used for auth retries -- the caller's failed task is already done by the time this
      * fires (the permission dialog is async), so onGranted() is expected to start a fresh task
      * rather than resume the old one.
@@ -273,22 +277,101 @@ public class SheimiFragmentActivity extends AppCompatActivity {
             });
 
     /**
-     * Requests whichever runtime permission is needed to read image/video/audio files on this
-     * Android version (READ_MEDIA_IMAGES on API 33+, READ_EXTERNAL_STORAGE below that) -- see
-     * FsUtils.findEaccesFile for the scoped-storage quirk this works around. Safe to call from a
-     * background thread; the actual request always runs on the UI thread. Calls back immediately,
-     * without showing anything, if the permission is already granted.
+     * Makes {@code blockedFile} (and any other file under {@code repairDir} Android won't let
+     * Gitling read) readable, then calls back -- see FsUtils.findEaccesFile for the
+     * scoped-storage quirk this works around. Below API 33 that's the READ_EXTERNAL_STORAGE
+     * runtime permission. On API 33+ the equivalent permission (READ_MEDIA_IMAGES) isn't allowed
+     * by Google Play's policy for this use, so instead the user is offered a "Fix access" button
+     * that gets one-time folder access through the system picker and replaces each blocked file
+     * with Gitling's own copy (see BlockedFileRepair); with access already given, that runs
+     * without asking. Safe to call from a background thread; all UI runs on the UI thread.
      */
-    public void requestMediaImagesPermission(final OnPermissionResult callback) {
-        final String permission = Build.VERSION.SDK_INT >= 33
-                ? Manifest.permission.READ_MEDIA_IMAGES
-                : Manifest.permission.READ_EXTERNAL_STORAGE;
+    public void requestMediaFileAccess(final File repairDir, final File blockedFile,
+                                       final OnPermissionResult callback) {
+        if (Build.VERSION.SDK_INT >= 33) {
+            fixBlockedFiles(repairDir, blockedFile, callback);
+            return;
+        }
+        final String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
         if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
             callback.onGranted();
             return;
         }
         mPendingMediaPermissionCallback = callback;
         runOnUiThread(() -> mMediaPermissionLauncher.launch(permission));
+    }
+
+    private OnPermissionResult mPendingRepairCallback;
+    private File mPendingRepairDir;
+    private File mPendingBlockedFile;
+
+    private final ActivityResultLauncher<Uri> mRepairFolderLauncher =
+            registerForActivityResult(new ActivityResultContracts.OpenDocumentTree(), treeUri -> {
+                OnPermissionResult callback = mPendingRepairCallback;
+                File repairDir = mPendingRepairDir;
+                File blockedFile = mPendingBlockedFile;
+                mPendingRepairCallback = null;
+                mPendingRepairDir = null;
+                mPendingBlockedFile = null;
+                if (callback == null) {
+                    return;
+                }
+                if (treeUri == null) {
+                    callback.onDenied();
+                    return;
+                }
+                if (!BlockedFileRepair.covers(treeUri, blockedFile)) {
+                    // Picked some other folder: explain and let them pick again
+                    showMessageDialog(R.string.dialog_fix_file_access_title,
+                            getString(R.string.dialog_fix_file_access_wrong_folder, blockedFile.getName()),
+                            R.string.label_try_again, R.string.label_cancel,
+                            (dialog, which) -> launchRepairFolderPicker(repairDir, blockedFile, callback),
+                            (dialog, which) -> callback.onDenied());
+                    return;
+                }
+                BlockedFileRepair.persistGrant(this, treeUri);
+                runRepair(treeUri, repairDir, callback);
+            });
+
+    private void fixBlockedFiles(final File repairDir, final File blockedFile,
+                                 final OnPermissionResult callback) {
+        Uri grant = BlockedFileRepair.findGrant(this, blockedFile);
+        if (grant != null) {
+            runRepair(grant, repairDir, callback);
+            return;
+        }
+        runOnUiThread(() -> showMessageDialog(R.string.dialog_fix_file_access_title,
+                getString(R.string.dialog_fix_file_access_message, blockedFile.getName()),
+                R.string.label_fix_file_access, R.string.label_cancel,
+                (dialog, which) -> launchRepairFolderPicker(repairDir, blockedFile, callback),
+                (dialog, which) -> callback.onDenied()));
+    }
+
+    /** Opens the picker on the shared repos root when the file is under it, so one grant covers
+     * every repo there, and on {@code repairDir} otherwise. */
+    private void launchRepairFolderPicker(File repairDir, File blockedFile, OnPermissionResult callback) {
+        File sharedRoot = FsUtils.getMediaDir(Repo.REPO_DIR, false);
+        boolean underSharedRoot = blockedFile.getAbsolutePath()
+                .startsWith(sharedRoot.getAbsolutePath() + File.separator);
+        mPendingRepairCallback = callback;
+        mPendingRepairDir = repairDir;
+        mPendingBlockedFile = blockedFile;
+        mRepairFolderLauncher.launch(BlockedFileRepair.initialPickerUri(
+                underSharedRoot ? sharedRoot : repairDir));
+    }
+
+    private void runRepair(final Uri treeUri, final File repairDir, final OnPermissionResult callback) {
+        new Thread(() -> {
+            BlockedFileRepair.Result result = BlockedFileRepair.repair(this, treeUri, repairDir);
+            runOnUiThread(() -> {
+                // Nothing found blocked any more also retries; the retry itself is capped at one
+                if (result.failed.isEmpty()) {
+                    callback.onGranted();
+                } else {
+                    callback.onDenied();
+                }
+            });
+        }).start();
     }
 
     /* View Utils End */

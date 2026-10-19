@@ -193,4 +193,9 @@
   <string name="file_op_make_not_executable">Make not executable</string>
   <string name="file_op_rename">שינוי שם</string>
   <string name="dialog_rename_file_title">שינוי שם</string>
+  <string name="label_fix_file_access">תיקון גישה</string>
+  <string name="label_try_again">ניסיון חוזר</string>
+  <string name="dialog_fix_file_access_title">תיקון גישה לקבצים</string>
+  <string name="dialog_fix_file_access_message">Android חוסמת את Gitling מלקרוא את \"%1$s\" כי אפליקציה אחרת הוסיפה אותו לתיקיית המאגרים המשותפת.\n\nGitling יכולה לתקן זאת על ידי החלפת כל קובץ חסום בעותק זהה משלה. הקישו על תיקון גישה ואז אשרו את התיקייה במסך הבא. צריך לעשות זאת רק פעם אחת.</string>
+  <string name="dialog_fix_file_access_wrong_folder">התיקייה הזו לא מכילה את \"%1$s\". בחרו את התיקייה ש-Gitling פותחת עבורכם ואשרו אותה.</string>
 </resources>

@@ -52,5 +52,8 @@
     <string name="alert_file_creation_failure">تعذر إنشاء الملف</string>
     <string name="error_no_repository">لم يتم العثور على مستودع</string>
     <string name="error_submodule_update_failed">فشل تحديث الوحدة الفرعية</string>
-
+    <string name="error_media_permission_denied">حظر Android الوصول إلى \"%1$s\" لأن Gitling لا يملك بعد إذن قراءة ملفات الوسائط. اسمح به إذا طُلب منك ذلك، أو اسمح لـ Gitling بالوصول إلى مساحة التخزين من إعدادات Android، ثم أعد المحاولة.</string>
+    <string name="error_media_file_blocked">يمنع Android تطبيق Gitling من قراءة \"%1$s\" لأن تطبيقًا آخر أضافه إلى مجلد المستودعات المشترك. أعد المحاولة وانقر على إصلاح الوصول، أو احذف الملف ثم انسخه مجددًا عبر موقع Gitling في تطبيق الملفات.</string>
+    <string name="error_move_repos_blocked">لم يتم نقل المستودعات لأن Android يمنع Gitling من قراءة \"%1$s\" الذي أضافه تطبيق آخر. لم يتم تغيير أي شيء.</string>
+    <string name="error_move_repos_failed">لم يتم نقل المستودعات (%1$s). لم يتم تغيير أي شيء.</string>
 </resources>

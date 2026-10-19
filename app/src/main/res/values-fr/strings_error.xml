@@ -47,5 +47,8 @@
     <string name="alert_save_failed">Échec de l\'enregistrement</string>
     <string name="alert_file_creation_failure">Échec de la création du fichier</string>
     <string name="error_no_repository">Aucun dépôt trouvé</string>
-
+    <string name="error_media_permission_denied">Android a bloqué l\'accès à \"%1$s\", car Gitling n\'a pas encore l\'autorisation de lire les fichiers multimédias. Autorisez-la si on vous le demande, ou autorisez l\'accès au stockage pour Gitling dans les paramètres Android, puis réessayez.</string>
+    <string name="error_media_file_blocked">Android empêche Gitling de lire \"%1$s\", car une autre app l\'a ajouté au dossier partagé des dépôts. Réessayez et appuyez sur Réparer l\'accès, ou supprimez le fichier et copiez-le à nouveau via l\'emplacement Gitling de l\'app Fichiers.</string>
+    <string name="error_move_repos_blocked">Les dépôts n\'ont pas été déplacés, car Android empêche Gitling de lire \"%1$s\", ajouté par une autre app. Rien n\'a été modifié.</string>
+    <string name="error_move_repos_failed">Les dépôts n\'ont pas été déplacés (%1$s). Rien n\'a été modifié.</string>
 </resources>

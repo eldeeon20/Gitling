@@ -175,12 +175,12 @@ public class CommitDiffTask extends RepoOpTask {
     }
 
     /** See FsUtils.findEaccesFile -- if this IOException is that scoped-storage EACCES, asks for
-     * the runtime permission it's actually about and reruns the whole diff from scratch if
-     * granted, mirroring how RepoRemoteOpTask retries after an auth prompt. Suppresses this
-     * attempt's own error dialog while a request is in flight (see AddToStageTask's counterpart
-     * for why) -- falls back to the normal dialog if there's no active activity to ask from, if
-     * this is already the one retry attempt allowed (see mIsMediaPermissionRetry), or directly
-     * raises one if the user ends up declining. */
+     * access to that file (see SheimiFragmentActivity.requestMediaFileAccess) and reruns the
+     * whole diff from scratch if given, mirroring how RepoRemoteOpTask retries after an auth
+     * prompt. Suppresses this attempt's own error dialog while a request is in flight (see
+     * AddToStageTask's counterpart for why) -- falls back to the normal dialog if there's no
+     * active activity to ask from, if this is already the one retry attempt allowed (see
+     * mIsMediaPermissionRetry), or directly raises one if the user ends up declining. */
     private void handleDiffIOException(final IOException e) {
         final File eaccesFile = FsUtils.findEaccesFile(e);
         if (eaccesFile == null) {
@@ -193,7 +193,7 @@ public class CommitDiffTask extends RepoOpTask {
             return;
         }
         cancelTask();
-        activity.requestMediaImagesPermission(new SheimiFragmentActivity.OnPermissionResult() {
+        activity.requestMediaFileAccess(mRepo.getDir(), eaccesFile, new SheimiFragmentActivity.OnPermissionResult() {
             @Override
             public void onGranted() {
                 new CommitDiffTask(mRepo, mOldCommit, mNewCommit, mCallback, mShowDescription, true).executeTask();

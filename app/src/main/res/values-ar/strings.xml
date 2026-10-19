@@ -232,4 +232,9 @@
     <string name="file_op_make_not_executable">جعله غير قابل للتنفيذ</string>
     <string name="file_op_rename">إعادة تسمية</string>
     <string name="dialog_rename_file_title">إعادة تسمية</string>
+    <string name="label_fix_file_access">إصلاح الوصول</string>
+    <string name="label_try_again">إعادة المحاولة</string>
+    <string name="dialog_fix_file_access_title">إصلاح الوصول إلى الملفات</string>
+    <string name="dialog_fix_file_access_message">يمنع Android تطبيق Gitling من قراءة \"%1$s\" لأن تطبيقًا آخر أضافه إلى مجلد المستودعات المشترك.\n\nيمكن لـ Gitling إصلاح ذلك باستبدال كل ملف محظور بنسخة مطابقة خاصة به. انقر على إصلاح الوصول، ثم أكّد المجلد في الشاشة التالية. ستحتاج إلى ذلك مرة واحدة فقط.</string>
+    <string name="dialog_fix_file_access_wrong_folder">هذا المجلد لا يحتوي على \"%1$s\". اختر المجلد الذي يفتحه Gitling لك، ثم أكّده.</string>
 </resources>

@@ -32,4 +32,8 @@
   <string name="alert_is_already_a_git_repo">תיקייה זו כבר מאגר git.</string>
   <string name="alert_save_failed">שמירה נכשלה</string>
   <string name="error_unknown_commit">הקומיט לא נמצא. בדקו את מזהה הקומיט.</string>
+  <string name="error_media_permission_denied">Android חסמה את הגישה אל \"%1$s\" כי ל-Gitling עדיין אין הרשאה לקרוא קובצי מדיה. אשרו אותה אם תתבקשו, או אפשרו ל-Gitling גישה לאחסון בהגדרות Android ונסו שוב.</string>
+  <string name="error_media_file_blocked">Android חוסמת את Gitling מלקרוא את \"%1$s\" כי אפליקציה אחרת הוסיפה אותו לתיקיית המאגרים המשותפת. נסו שוב והקישו על תיקון גישה, או מחקו את הקובץ והעתיקו אותו מחדש דרך המיקום Gitling באפליקציית הקבצים.</string>
+  <string name="error_move_repos_blocked">המאגרים לא הועברו כי Android חוסמת את Gitling מלקרוא את \"%1$s\", שאפליקציה אחרת הוסיפה. שום דבר לא שונה.</string>
+  <string name="error_move_repos_failed">המאגרים לא הועברו (%1$s). שום דבר לא שונה.</string>
 </resources>
