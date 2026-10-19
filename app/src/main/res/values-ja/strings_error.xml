@@ -40,4 +40,15 @@
     <string name="error_media_file_blocked">\"%1$s\" は別のアプリが共有リポジトリフォルダに追加したため、Android により Gitling からの読み取りがブロックされています。もう一度試して [アクセスを修復] をタップするか、ファイルを削除して、ファイルアプリの Gitling の場所から改めてコピーしてください。</string>
     <string name="error_move_repos_blocked">別のアプリが追加した \"%1$s\" を Android が Gitling に読み取らせないため、リポジトリを移動しませんでした。何も変更されていません。</string>
     <string name="error_move_repos_failed">リポジトリを移動しませんでした (%1$s)。何も変更されていません。</string>
+    <string name="dialog_import_failed_title">リポジトリをインポートできませんでした</string>
+    <string name="dialog_import_failed_nothing">何もインポートされていません。</string>
+    <string name="error_import_not_a_repo">このフォルダには .git フォルダがありません。.git を含むフォルダを選んでください。</string>
+    <string name="error_import_picked_git_dir">.git そのものではなく、.git を含むフォルダを選んでください。</string>
+    <string name="error_import_bare">ベアリポジトリはインポートできません。代わりにクローンしてください。</string>
+    <string name="error_import_git_file">この .git は別のリポジトリ (worktree またはサブモジュール) を指しています。代わりにメインのリポジトリをインポートしてください。</string>
+    <string name="error_import_zip_no_repo">この ZIP ファイルに Git リポジトリがありません。隠しフォルダ .git も圧縮されているか確認してください。</string>
+    <string name="error_import_zip_multiple">この ZIP ファイルには複数のリポジトリがあります。1 つずつ圧縮してください。</string>
+    <string name="error_import_zip_invalid">この ZIP ファイルは読み取れないか、安全でないパスが含まれています。</string>
+    <string name="error_import_no_space">空き容量が足りません。</string>
+    <string name="error_import_read_failed">ファイルをコピーできませんでした: %1$s</string>
 </resources>

@@ -51,4 +51,15 @@
     <string name="error_media_file_blocked">由于 \"%1$s\" 是其他应用添加到共享仓库文件夹中的，Android 阻止了 Gitling 读取它。请重试并点按“修复访问”，或删除该文件，再通过“文件”应用中的 Gitling 位置重新复制进来。</string>
     <string name="error_move_repos_blocked">由于 Android 阻止 Gitling 读取其他应用添加的 \"%1$s\"，仓库未被移动。未做任何更改。</string>
     <string name="error_move_repos_failed">仓库未被移动（%1$s）。未做任何更改。</string>
+    <string name="dialog_import_failed_title">无法导入仓库</string>
+    <string name="dialog_import_failed_nothing">未导入任何内容。</string>
+    <string name="error_import_not_a_repo">此文件夹中没有 .git 文件夹。请选择包含 .git 的文件夹。</string>
+    <string name="error_import_picked_git_dir">请选择包含 .git 的文件夹，而不是 .git 本身。</string>
+    <string name="error_import_bare">无法导入裸仓库。请改为克隆它。</string>
+    <string name="error_import_git_file">此 .git 指向另一个仓库（worktree 或子模块）。请改为导入主仓库。</string>
+    <string name="error_import_zip_no_repo">此 ZIP 文件中没有 Git 仓库。请确认隐藏的 .git 文件夹也已压缩。</string>
+    <string name="error_import_zip_multiple">此 ZIP 文件包含多个仓库。请一次压缩一个。</string>
+    <string name="error_import_zip_invalid">此 ZIP 文件无法读取，或包含不安全的路径。</string>
+    <string name="error_import_no_space">可用存储空间不足。</string>
+    <string name="error_import_read_failed">无法复制文件：%1$s</string>
 </resources>

@@ -36,7 +36,7 @@
     <!-- label msg -->
     <string name="label_ok">OK</string>
     <string name="label_remote_url">Remote URL</string>
-    <string name="label_cancel">Romper</string>
+    <string name="label_cancel">Cancelar</string>
     <string name="dialog_path_title">Ruta</string>
     <string name="dialog_path_label">Ruta del directorio (relativa a la raíz del repositorio)</string>
     <string name="dialog_path_invalid">Carpeta no encontrada</string>
@@ -52,7 +52,7 @@
     <string name="label_key_size">Key length</string>
     <string name="label_rename">Cambiar de nombre</string>
     <string name="label_send_feedback">Enviar Feedback</string>
-    <string name="label_import">Import</string>
+    <string name="label_import">Importar</string>
     <string name="label_push">Tirar</string>
     <string name="label_push_all">Tirar Todo</string>
     <string name="label_create">Creer</string>
@@ -208,4 +208,26 @@
     <string name="dialog_fix_file_access_title">Arreglar acceso a archivos</string>
     <string name="dialog_fix_file_access_message">Android impide que Gitling lea \"%1$s\" porque otra app lo añadió a la carpeta compartida de repositorios.\n\nGitling puede solucionarlo sustituyendo cada archivo bloqueado por una copia idéntica propia. Toca Arreglar acceso y confirma la carpeta en la siguiente pantalla. Solo tendrás que hacerlo una vez.</string>
     <string name="dialog_fix_file_access_wrong_folder">Esa carpeta no contiene \"%1$s\". Elige la carpeta que Gitling abre por ti y confírmala.</string>
+    <string name="label_import_repo">Importar desde este dispositivo</string>
+    <string name="label_import_folder">Carpeta</string>
+    <string name="label_import_zip">Archivo ZIP</string>
+    <string name="label_open_repo">Abrir</string>
+    <string name="dialog_import_repo_title">Importar un repositorio</string>
+    <string name="dialog_import_repo_intro">Copia un repositorio a Gitling desde una carpeta o un archivo ZIP.</string>
+    <string name="dialog_import_repo_risk_copy">El original no cambia.</string>
+    <string name="dialog_import_repo_risk_private">No se pueden elegir carpetas de Android/data. Usa un archivo ZIP en su lugar.</string>
+    <string name="dialog_import_repo_risk_modes">No se conservan los permisos de archivo ni los enlaces simbólicos.</string>
+    <string name="dialog_import_repo_risk_credentials">No se copian las contraseñas guardadas ni las claves SSH.</string>
+    <string name="dialog_import_name_title">Nombre del repositorio</string>
+    <string name="dialog_import_name_hint">Nombre</string>
+    <string name="dialog_import_name_destination">Se importará en: %1$s</string>
+    <string name="alert_import_name_dot">El nombre no puede empezar por un punto</string>
+    <string name="dialog_importing_title">Importando %1$s</string>
+    <string name="importing_progress">%1$s de %2$s</string>
+    <string name="importing_progress_unknown">%1$s copiados</string>
+    <string name="dialog_import_done_title">Repositorio importado</string>
+    <string name="dialog_import_done_message">%1$s está listo (%2$s).</string>
+    <string name="dialog_import_done_modes">En esta copia se ignoran los permisos de archivo y los enlaces simbólicos.</string>
+    <string name="dialog_import_done_skipped">Se omitieron algunos archivos fuera de la carpeta del repositorio.</string>
+    <string name="toast_import_cancelled">Importación cancelada. No se ha importado nada.</string>
 </resources>

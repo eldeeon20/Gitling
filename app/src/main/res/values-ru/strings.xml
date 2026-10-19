@@ -207,4 +207,26 @@
     <string name="dialog_fix_file_access_title">Исправить доступ к файлам</string>
     <string name="dialog_fix_file_access_message">Android не даёт Gitling прочитать \"%1$s\", потому что этот файл добавило в общую папку репозиториев другое приложение.\n\nGitling может это исправить, заменив каждый заблокированный файл собственной идентичной копией. Нажмите «Исправить доступ», затем подтвердите папку на следующем экране. Это нужно сделать только один раз.</string>
     <string name="dialog_fix_file_access_wrong_folder">В этой папке нет \"%1$s\". Выберите папку, которую открывает Gitling, и подтвердите её.</string>
+    <string name="label_import_repo">Импорт с этого устройства</string>
+    <string name="label_import_folder">Папка</string>
+    <string name="label_import_zip">ZIP-файл</string>
+    <string name="label_open_repo">Открыть</string>
+    <string name="dialog_import_repo_title">Импорт репозитория</string>
+    <string name="dialog_import_repo_intro">Копирует репозиторий в Gitling из папки или ZIP-файла.</string>
+    <string name="dialog_import_repo_risk_copy">Оригинал не меняется.</string>
+    <string name="dialog_import_repo_risk_private">Папки в Android/data выбрать нельзя. Используйте ZIP-файл.</string>
+    <string name="dialog_import_repo_risk_modes">Права доступа к файлам и символические ссылки не сохраняются.</string>
+    <string name="dialog_import_repo_risk_credentials">Сохранённые пароли и SSH-ключи не копируются.</string>
+    <string name="dialog_import_name_title">Название репозитория</string>
+    <string name="dialog_import_name_hint">Название</string>
+    <string name="dialog_import_name_destination">Импорт в: %1$s</string>
+    <string name="alert_import_name_dot">Название не может начинаться с точки</string>
+    <string name="dialog_importing_title">Импорт %1$s</string>
+    <string name="importing_progress">%1$s из %2$s</string>
+    <string name="importing_progress_unknown">Скопировано: %1$s</string>
+    <string name="dialog_import_done_title">Репозиторий импортирован</string>
+    <string name="dialog_import_done_message">%1$s готов (%2$s).</string>
+    <string name="dialog_import_done_modes">В этой копии права доступа к файлам и символические ссылки игнорируются.</string>
+    <string name="dialog_import_done_skipped">Некоторые файлы вне папки репозитория пропущены.</string>
+    <string name="toast_import_cancelled">Импорт отменён. Ничего не импортировано.</string>
 </resources>

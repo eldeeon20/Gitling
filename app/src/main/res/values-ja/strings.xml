@@ -209,4 +209,26 @@
     <string name="dialog_fix_file_access_title">ファイルアクセスの修復</string>
     <string name="dialog_fix_file_access_message">\"%1$s\" は別のアプリが共有リポジトリフォルダに追加したため、Android により Gitling からの読み取りがブロックされています。\n\nGitling は、ブロックされた各ファイルを内容が同じ自分のコピーに置き換えることで、これを修復できます。[アクセスを修復] をタップし、次の画面でフォルダを確定してください。この操作は一度だけで済みます。</string>
     <string name="dialog_fix_file_access_wrong_folder">そのフォルダには \"%1$s\" が含まれていません。Gitling が開くフォルダを選んで確定してください。</string>
+    <string name="label_import_repo">このデバイスからインポート</string>
+    <string name="label_import_folder">フォルダ</string>
+    <string name="label_import_zip">ZIP ファイル</string>
+    <string name="label_open_repo">開く</string>
+    <string name="dialog_import_repo_title">リポジトリをインポート</string>
+    <string name="dialog_import_repo_intro">フォルダまたは ZIP ファイルから Gitling にリポジトリをコピーします。</string>
+    <string name="dialog_import_repo_risk_copy">元のリポジトリは変更されません。</string>
+    <string name="dialog_import_repo_risk_private">Android/data 内のフォルダは選択できません。代わりに ZIP ファイルを使ってください。</string>
+    <string name="dialog_import_repo_risk_modes">ファイルのパーミッションとシンボリックリンクは保持されません。</string>
+    <string name="dialog_import_repo_risk_credentials">保存したパスワードと SSH 鍵はコピーされません。</string>
+    <string name="dialog_import_name_title">リポジトリ名</string>
+    <string name="dialog_import_name_hint">名前</string>
+    <string name="dialog_import_name_destination">インポート先: %1$s</string>
+    <string name="alert_import_name_dot">名前をドットで始めることはできません</string>
+    <string name="dialog_importing_title">%1$s をインポート中</string>
+    <string name="importing_progress">%1$s / %2$s</string>
+    <string name="importing_progress_unknown">%1$s をコピー済み</string>
+    <string name="dialog_import_done_title">リポジトリをインポートしました</string>
+    <string name="dialog_import_done_message">%1$s の準備ができました (%2$s)。</string>
+    <string name="dialog_import_done_modes">このコピーではファイルのパーミッションとシンボリックリンクは無視されます。</string>
+    <string name="dialog_import_done_skipped">リポジトリのフォルダ外にあった一部のファイルはスキップされました。</string>
+    <string name="toast_import_cancelled">インポートをキャンセルしました。何もインポートされていません。</string>
 </resources>
