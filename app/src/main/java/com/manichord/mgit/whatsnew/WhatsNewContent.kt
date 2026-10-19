@@ -13,6 +13,16 @@ data class WhatsNewEntry(
 object WhatsNewContent {
     val entries = listOf(
         WhatsNewEntry(
+            versionCode = 64,
+            versionName = "1.0.64",
+            highlights = listOf(
+                "Import an existing repository from a folder on your device or a ZIP file, for example to bring repos over from MGit",
+                "The console now supports git submodule status, init and update",
+                "Fixed the status bar icons being hard to see in light mode on Android 15 and newer",
+                "Fixed Spanish showing \"Romper\" instead of \"Cancelar\" on Cancel buttons, and translated a few remaining English texts in Spanish and Korean"
+            )
+        ),
+        WhatsNewEntry(
             versionCode = 63,
             versionName = "1.0.63",
             highlights = listOf(
