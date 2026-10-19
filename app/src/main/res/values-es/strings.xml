@@ -36,7 +36,7 @@
     <!-- label msg -->
     <string name="label_ok">OK</string>
     <string name="label_remote_url">Remote URL</string>
-    <string name="label_cancel">Romper</string>
+    <string name="label_cancel">Cancelar</string>
     <string name="dialog_path_title">Ruta</string>
     <string name="dialog_path_label">Ruta del directorio (relativa a la raíz del repositorio)</string>
     <string name="dialog_path_invalid">Carpeta no encontrada</string>
@@ -52,7 +52,7 @@
     <string name="label_key_size">Key length</string>
     <string name="label_rename">Cambiar de nombre</string>
     <string name="label_send_feedback">Enviar Feedback</string>
-    <string name="label_import">Import</string>
+    <string name="label_import">Importar</string>
     <string name="label_push">Tirar</string>
     <string name="label_push_all">Tirar Todo</string>
     <string name="label_create">Creer</string>
@@ -219,6 +219,7 @@
     <string name="dialog_import_repo_risk_modes">No se conservan los permisos de archivo ni los enlaces simbólicos.</string>
     <string name="dialog_import_repo_risk_credentials">No se copian las contraseñas guardadas ni las claves SSH.</string>
     <string name="dialog_import_name_title">Nombre del repositorio</string>
+    <string name="dialog_import_name_hint">Nombre</string>
     <string name="dialog_import_name_destination">Se importará en: %1$s</string>
     <string name="alert_import_name_dot">El nombre no puede empezar por un punto</string>
     <string name="dialog_importing_title">Importando %1$s</string>

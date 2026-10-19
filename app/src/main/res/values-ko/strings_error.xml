@@ -29,9 +29,9 @@
     <string name="alert_too_long_key_size">Keylength is too large</string>
     <string name="alert_field_not_empty">Field should not be empty</string>
     <string name="alert_remoteurl_required">Remote URL required</string>
-    <string name="alert_localpath_required">Repository name required</string>
-    <string name="alert_localpath_format">Repository name can\'t contain slash.</string>
-    <string name="alert_localpath_repo_exists">Repository already exists</string>
+    <string name="alert_localpath_required">저장소 이름이 필요합니다</string>
+    <string name="alert_localpath_format">저장소 이름에는 슬래시를 넣을 수 없습니다.</string>
+    <string name="alert_localpath_repo_exists">저장소가 이미 있습니다</string>
     <string name="alert_new_filename_required">File name required</string>
     <string name="alert_new_branchname_required">Branch name required</string>
     <string name="alert_file_exists">File already exists</string>

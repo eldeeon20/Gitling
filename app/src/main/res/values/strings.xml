@@ -248,6 +248,7 @@
     <string name="dialog_import_repo_risk_modes">File permissions and symlinks aren\'t kept.</string>
     <string name="dialog_import_repo_risk_credentials">Saved passwords and SSH keys aren\'t copied.</string>
     <string name="dialog_import_name_title">Name the repository</string>
+    <string name="dialog_import_name_hint">Name</string>
     <string name="dialog_import_name_destination">Importing to: %1$s</string>
     <string name="alert_import_name_dot">The name can\'t start with a dot</string>
     <string name="dialog_importing_title">Importing %1$s</string>

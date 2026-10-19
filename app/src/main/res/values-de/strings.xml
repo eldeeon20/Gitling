@@ -221,6 +221,7 @@
     <string name="dialog_import_repo_risk_modes">Dateiberechtigungen und symbolische Links werden nicht übernommen.</string>
     <string name="dialog_import_repo_risk_credentials">Gespeicherte Passwörter und SSH-Schlüssel werden nicht kopiert.</string>
     <string name="dialog_import_name_title">Repository benennen</string>
+    <string name="dialog_import_name_hint">Name</string>
     <string name="dialog_import_name_destination">Wird importiert nach: %1$s</string>
     <string name="alert_import_name_dot">Der Name darf nicht mit einem Punkt beginnen</string>
     <string name="dialog_importing_title">%1$s wird importiert</string>

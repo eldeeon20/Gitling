@@ -221,6 +221,7 @@
     <string name="dialog_import_repo_risk_modes">不会保留文件权限和符号链接。</string>
     <string name="dialog_import_repo_risk_credentials">不会复制保存的密码和 SSH 密钥。</string>
     <string name="dialog_import_name_title">为仓库命名</string>
+    <string name="dialog_import_name_hint">名称</string>
     <string name="dialog_import_name_destination">导入到：%1$s</string>
     <string name="alert_import_name_dot">名称不能以点开头</string>
     <string name="dialog_importing_title">正在导入 %1$s</string>

@@ -220,6 +220,7 @@
     <string name="dialog_import_repo_risk_modes">ファイルのパーミッションとシンボリックリンクは保持されません。</string>
     <string name="dialog_import_repo_risk_credentials">保存したパスワードと SSH 鍵はコピーされません。</string>
     <string name="dialog_import_name_title">リポジトリ名</string>
+    <string name="dialog_import_name_hint">名前</string>
     <string name="dialog_import_name_destination">インポート先: %1$s</string>
     <string name="alert_import_name_dot">名前をドットで始めることはできません</string>
     <string name="dialog_importing_title">%1$s をインポート中</string>

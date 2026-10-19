@@ -31,7 +31,7 @@
     <string name="alert_remoteurl_required">Remote URL required</string>
     <string name="alert_localpath_required">Se necesita nombre de repo</string>
     <string name="alert_localpath_format">Nombre de repo no puede contener slash.</string>
-    <string name="alert_localpath_repo_exists">Repository already exists</string>
+    <string name="alert_localpath_repo_exists">El repositorio ya existe</string>
     <string name="alert_new_filename_required">Fichero necesita un nombre</string>
     <string name="alert_new_branchname_required">Ramo necesita un nombre</string>
     <string name="alert_file_exists">File already exists</string>

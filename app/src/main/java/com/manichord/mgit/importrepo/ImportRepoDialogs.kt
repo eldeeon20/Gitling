@@ -132,7 +132,7 @@ private fun NameDialog(state: ImportRepoViewModel.State.Naming, viewModel: Impor
             OutlinedTextField(
                 state = nameState,
                 inputTransformation = onUserTextChange { viewModel.onNameChanged(it) },
-                label = { Text(stringResource(R.string.dialog_clone_local_path_hint)) },
+                label = { Text(stringResource(R.string.dialog_import_name_hint)) },
                 isError = state.error != null,
                 supportingText = {
                     Text(state.error ?: stringResource(R.string.dialog_import_name_destination,

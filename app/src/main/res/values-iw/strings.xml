@@ -209,6 +209,7 @@
   <string name="dialog_import_repo_risk_modes">הרשאות קבצים וקישורים סמליים לא נשמרים.</string>
   <string name="dialog_import_repo_risk_credentials">סיסמאות שמורות ומפתחות SSH לא מועתקים.</string>
   <string name="dialog_import_name_title">שם למאגר</string>
+  <string name="dialog_import_name_hint">שם</string>
   <string name="dialog_import_name_destination">ייבוא אל: %1$s</string>
   <string name="alert_import_name_dot">השם לא יכול להתחיל בנקודה</string>
   <string name="dialog_importing_title">מייבא את %1$s</string>

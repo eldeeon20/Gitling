@@ -203,6 +203,7 @@
     <string name="dialog_import_repo_risk_modes">파일 권한과 심볼릭 링크는 유지되지 않습니다.</string>
     <string name="dialog_import_repo_risk_credentials">저장된 비밀번호와 SSH 키는 복사되지 않습니다.</string>
     <string name="dialog_import_name_title">저장소 이름</string>
+    <string name="dialog_import_name_hint">이름</string>
     <string name="dialog_import_name_destination">가져올 위치: %1$s</string>
     <string name="alert_import_name_dot">이름은 점으로 시작할 수 없습니다</string>
     <string name="dialog_importing_title">%1$s 가져오는 중</string>
