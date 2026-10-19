@@ -3,12 +3,16 @@ package com.manichord.mgit.repodetail
 import com.manichord.mgit.auth.RepoCredentials
 import me.sheimi.sgit.database.models.Repo
 import me.sheimi.sgit.ssh.SgitTransportCallback
+import org.eclipse.jgit.api.Git
 import org.eclipse.jgit.api.ListBranchCommand
 import org.eclipse.jgit.api.TransportCommand
 import org.eclipse.jgit.diff.DiffFormatter
 import org.eclipse.jgit.diff.RawTextComparator
 import org.eclipse.jgit.lib.Constants
+import org.eclipse.jgit.lib.Repository
 import org.eclipse.jgit.revwalk.RevWalk
+import org.eclipse.jgit.submodule.SubmoduleStatusType
+import org.eclipse.jgit.submodule.SubmoduleWalk
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -35,6 +39,7 @@ object GitCommandEngine {
                 "stash" -> runStash(repo, parts.drop(1))
                 "fetch" -> runFetch(repo, parts.drop(1))
                 "pull" -> runPull(repo, parts.drop(1))
+                "submodule" -> runSubmodule(repo, parts.drop(1))
                 "help", "--help", "-h" -> helpText()
                 else -> "unknown command: ${parts[0]}\n\n${helpText()}"
             }
@@ -249,6 +254,110 @@ object GitCommandEngine {
         return sb.toString().trimEnd()
     }
 
+    private fun runSubmodule(repo: Repo, args: List<String>): String {
+        val sub = args.firstOrNull() ?: "status"
+        val options = args.drop(1)
+        val paths = options.filter { !it.startsWith("-") }.map { it.trimEnd('/') }
+        val db = repo.getGit().repository
+        if (sub in listOf("status", "init", "update") && Git.wrap(db).submoduleStatus().call().isEmpty()) {
+            return "(no submodules)"
+        }
+        val out = StringBuilder()
+        when (sub) {
+            "status" -> submoduleStatus(db, "", "--recursive" in options, out)
+            "init" -> submoduleInit(db, "", paths, out)
+            "update" -> {
+                val notInitialized = updateSubmodules(repo, db, "", paths,
+                    "--init" in options, "--recursive" in options, out)
+                notInitialized.forEach {
+                    out.appendLine("Submodule '$it' is not initialized, use 'submodule update --init'")
+                }
+            }
+            else -> return "unknown submodule subcommand: $sub\n" +
+                "Usage: submodule [status [--recursive] | init [path] | update [--init] [--recursive] [path]]"
+        }
+        return out.toString().trimEnd().ifEmpty { "Submodules already up to date." }
+    }
+
+    /** Same markers as git: '-' not initialized, '+' checked out commit differs from the one
+     * the superproject records, ' ' in sync. */
+    private fun submoduleStatus(db: Repository, prefix: String, recursive: Boolean, out: StringBuilder) {
+        val statuses = Git.wrap(db).submoduleStatus().call()
+        for ((path, status) in statuses.toSortedMap()) {
+            val marker = when (status.type) {
+                SubmoduleStatusType.UNINITIALIZED, SubmoduleStatusType.MISSING -> "-"
+                SubmoduleStatusType.REV_CHECKED_OUT -> "+"
+                else -> " "
+            }
+            val id = (if (marker == "+") status.headId else status.indexId)?.name ?: "0".repeat(40)
+            out.appendLine("$marker$id $prefix$path")
+            if (recursive && marker != "-") {
+                SubmoduleWalk.getSubmoduleRepository(db, path)?.use {
+                    submoduleStatus(it, "$prefix$path/", true, out)
+                }
+            }
+        }
+    }
+
+    private fun submoduleInit(db: Repository, prefix: String, paths: List<String>, out: StringBuilder) {
+        val initialized = Git.wrap(db).submoduleInit().apply { paths.forEach { addPath(it) } }.call()
+        initialized.sorted().forEach { out.appendLine("Submodule '$prefix$it' registered") }
+    }
+
+    /** Updates submodules one at a time, so each is fetched with the credentials for its own
+     * URL's host (submodules are often on a different host than the superproject). Like git,
+     * submodules that were never initialized are skipped; their paths are returned so the
+     * caller can point to --init. */
+    private fun updateSubmodules(repo: Repo, db: Repository, prefix: String, paths: List<String>,
+                                 init: Boolean, recursive: Boolean, out: StringBuilder): List<String> {
+        if (init) {
+            submoduleInit(db, prefix, paths, out)
+        }
+        val notInitialized = mutableListOf<String>()
+        SubmoduleWalk.forIndex(db).use { walk ->
+            while (walk.next()) {
+                val path = walk.path
+                if (paths.isNotEmpty() && path !in paths) continue
+                val url = walk.configUrl
+                if (url == null) {
+                    notInitialized.add(prefix + path)
+                    continue
+                }
+                // JGit only fetches into an already cloned submodule when asked; like git, fetch
+                // when it doesn't have the commit the superproject records (e.g. after a pull)
+                val (before, missingCommit) = walk.repository?.use {
+                    it.resolve(Constants.HEAD) to !it.objectDatabase.has(walk.objectId)
+                } ?: (null to false)
+                val cmd = Git.wrap(db).submoduleUpdate()
+                    .addPath(path)
+                    .setFetch(missingCommit)
+                    .setTransportConfigCallback(SgitTransportCallback())
+                RepoCredentials.resolve(repo, url)?.let {
+                    cmd.setCredentialsProvider(UsernamePasswordCredentialsProvider(it.username, it.password))
+                }
+                try {
+                    cmd.call()
+                } catch (e: Exception) {
+                    // Like git, one unreachable submodule doesn't stop the others from updating
+                    out.appendLine("error: failed to update '$prefix$path': ${e.message ?: e.javaClass.simpleName}")
+                    continue
+                }
+                // Like git, only report submodules whose checkout actually changed
+                val after = SubmoduleWalk.getSubmoduleRepository(db, path)?.use { it.resolve(Constants.HEAD) }
+                if (after != null && after != before) {
+                    out.appendLine("Submodule path '$prefix$path': checked out '${walk.objectId.name}'")
+                }
+                if (recursive) {
+                    walk.repository?.use {
+                        notInitialized += updateSubmodules(repo, it, "$prefix$path/", emptyList(),
+                            init, true, out)
+                    }
+                }
+            }
+        }
+        return notInitialized
+    }
+
     /** Same lookup as RepoOpTask.setCredentials(TransportCommand, String): credentials are
      * resolved per remote host (connected account, then this repo's credentials for that host),
      * so each of a repo's remotes gets its own host's credentials (#59, #87). */
@@ -278,6 +387,12 @@ supported commands:
     drop [stash@{n}]  drop a specific stash entry
   fetch [remote]      fetch from remote (default: origin)
   pull [remote]       fetch + merge into current branch (default: origin)
+  submodule           show submodule status
+    status            list submodules and their commits
+    init [path]       register submodules from .gitmodules
+    update [path]     check out the commits the repo records
+      --init          initialize submodules first
+      --recursive     include nested submodules
   help                show this help
     """.trimIndent()
 
