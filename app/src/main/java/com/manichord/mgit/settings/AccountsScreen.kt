@@ -43,7 +43,7 @@ fun AccountsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Managed Accounts", fontWeight = FontWeight.Bold) },
+                title = { Text("Managed Accounts") },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")

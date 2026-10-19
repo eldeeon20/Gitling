@@ -274,4 +274,7 @@
         <item quantity="other">%d مستودع</item>
     </plurals>
     <string name="label_switch_branch">تبديل الفرع</string>
+    <string name="label_diff">الفرق</string>
+    <string name="label_diff_staged">التغييرات المرحلية</string>
+    <string name="label_diff_working_tree">شجرة العمل</string>
 </resources>

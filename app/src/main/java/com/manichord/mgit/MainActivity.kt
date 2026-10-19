@@ -309,6 +309,7 @@ class MainActivity : SheimiFragmentActivity() {
                         AppTheme {
                             CommitDiffScreen(
                                 title = host.screenTitle,
+                                subtitle = host.screenSubtitle,
                                 isLoading = host.isLoading,
                                 onBackClick = { navController.popBackStack() },
                                 onShareClick = { host.shareDiff() },

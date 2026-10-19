@@ -27,6 +27,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 @Composable
 fun CommitDiffScreen(
     title: String,
+    subtitle: String,
     isLoading: Boolean,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
@@ -37,6 +38,7 @@ fun CommitDiffScreen(
         topBar = {
             TopAppBar(
                 title = { Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                subtitle = { Text(subtitle, maxLines = 1, overflow = TextOverflow.Ellipsis) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
