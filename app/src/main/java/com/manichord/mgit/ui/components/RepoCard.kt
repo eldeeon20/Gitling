@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+
 package com.manichord.mgit.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -101,9 +103,8 @@ fun RepoCard(
             if (isProcessing) {
                 Spacer(modifier = Modifier.height(12.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(16.dp),
-                        strokeWidth = 2.dp,
+                    LoadingIndicator(
+                        modifier = Modifier.size(28.dp),
                         color = MaterialTheme.colorScheme.primary
                     )
                     Spacer(modifier = Modifier.width(12.dp))

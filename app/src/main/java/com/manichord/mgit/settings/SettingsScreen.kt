@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+
 package com.manichord.mgit.settings
 
 import androidx.compose.foundation.clickable
@@ -49,7 +51,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.action_settings), fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.action_settings)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -245,9 +247,9 @@ fun SettingsUpdateCheckItem(
         leadingContent = { Icon(Icons.Default.Refresh, null) },
         trailingContent = {
             when {
-                checking -> CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
+                checking -> LoadingIndicator(modifier = Modifier.size(24.dp))
                 result is UpdateCheckResult.UpdateAvailable -> {
-                    TextButton(onClick = { onViewReleaseClick(result.releaseUrl) }) { Text("View") }
+                    TextButton(shapes = ButtonDefaults.shapes(), onClick = { onViewReleaseClick(result.releaseUrl) }) { Text("View") }
                 }
             }
         },
@@ -294,7 +296,7 @@ fun SettingsFontItem(selected: FontOption, onSelect: (FontOption) -> Unit) {
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showDialog = false }) {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = { showDialog = false }) {
                     Text(stringResource(R.string.label_cancel))
                 }
             }
@@ -329,7 +331,7 @@ fun SettingsEditTextItem(title: String, value: String, onValueChange: (String) -
                 )
             },
             confirmButton = {
-                TextButton(onClick = {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = {
                     onValueChange(tempValue.text.toString())
                     showDialog = false
                 }) {
@@ -337,7 +339,7 @@ fun SettingsEditTextItem(title: String, value: String, onValueChange: (String) -
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showDialog = false }) {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = { showDialog = false }) {
                     Text(stringResource(R.string.label_cancel))
                 }
             }

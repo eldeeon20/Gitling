@@ -309,6 +309,7 @@ class MainActivity : SheimiFragmentActivity() {
                         AppTheme {
                             CommitDiffScreen(
                                 title = host.screenTitle,
+                                subtitle = host.screenSubtitle,
                                 isLoading = host.isLoading,
                                 onBackClick = { navController.popBackStack() },
                                 onShareClick = { host.shareDiff() },
@@ -646,6 +647,8 @@ class MainActivity : SheimiFragmentActivity() {
     }
 
     private fun showCloneView() {
+        // Opened for a clone link: never in "Init Local" mode left over from the add menu
+        cloneViewModel.initLocal.value = false
         cloneViewModel.show(true)
     }
 
