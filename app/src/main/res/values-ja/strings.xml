@@ -237,4 +237,8 @@
     <string name="label_menu_new_local">新しいローカルリポジトリ</string>
     <string name="label_current_branch">現在のブランチ</string>
     <string name="label_all_branches">すべてのブランチ</string>
+    <plurals name="repo_count">
+        <item quantity="other">%d 個のリポジトリ</item>
+    </plurals>
+    <string name="label_switch_branch">ブランチを切り替え</string>
 </resources>

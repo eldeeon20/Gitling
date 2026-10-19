@@ -235,4 +235,11 @@
     <string name="label_menu_new_local">Новый локальный репозиторий</string>
     <string name="label_current_branch">Текущая ветка</string>
     <string name="label_all_branches">Все ветки</string>
+    <plurals name="repo_count">
+        <item quantity="one">%d репозиторий</item>
+        <item quantity="few">%d репозитория</item>
+        <item quantity="many">%d репозиториев</item>
+        <item quantity="other">%d репозитория</item>
+    </plurals>
+    <string name="label_switch_branch">Сменить ветку</string>
 </resources>

@@ -265,4 +265,13 @@
     <string name="label_menu_new_local">مستودع محلي جديد</string>
     <string name="label_current_branch">الفرع الحالي</string>
     <string name="label_all_branches">كل الفروع</string>
+    <plurals name="repo_count">
+        <item quantity="zero">لا توجد مستودعات</item>
+        <item quantity="one">مستودع واحد</item>
+        <item quantity="two">مستودعان</item>
+        <item quantity="few">%d مستودعات</item>
+        <item quantity="many">%d مستودعًا</item>
+        <item quantity="other">%d مستودع</item>
+    </plurals>
+    <string name="label_switch_branch">تبديل الفرع</string>
 </resources>

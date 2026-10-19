@@ -238,4 +238,9 @@
     <string name="label_menu_new_local">Neues lokales Repository</string>
     <string name="label_current_branch">Aktueller Branch</string>
     <string name="label_all_branches">Alle Branches</string>
+    <plurals name="repo_count">
+        <item quantity="one">%d Repository</item>
+        <item quantity="other">%d Repositorys</item>
+    </plurals>
+    <string name="label_switch_branch">Branch wechseln</string>
 </resources>

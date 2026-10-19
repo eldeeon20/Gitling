@@ -226,4 +226,10 @@
   <string name="label_menu_new_local">מאגר מקומי חדש</string>
   <string name="label_current_branch">הענף הנוכחי</string>
   <string name="label_all_branches">כל הענפים</string>
+  <plurals name="repo_count">
+    <item quantity="one">מאגר אחד</item>
+    <item quantity="two">2 מאגרים</item>
+    <item quantity="other">%d מאגרים</item>
+  </plurals>
+  <string name="label_switch_branch">החלפת ענף</string>
 </resources>

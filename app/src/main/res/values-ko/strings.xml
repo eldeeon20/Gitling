@@ -220,4 +220,8 @@
     <string name="label_menu_new_local">새 로컬 저장소</string>
     <string name="label_current_branch">현재 브랜치</string>
     <string name="label_all_branches">모든 브랜치</string>
+    <plurals name="repo_count">
+        <item quantity="other">저장소 %d개</item>
+    </plurals>
+    <string name="label_switch_branch">브랜치 전환</string>
 </resources>

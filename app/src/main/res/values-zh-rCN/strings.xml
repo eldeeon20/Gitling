@@ -238,4 +238,8 @@
     <string name="label_menu_new_local">新建本地仓库</string>
     <string name="label_current_branch">当前分支</string>
     <string name="label_all_branches">所有分支</string>
+    <plurals name="repo_count">
+        <item quantity="other">%d 个仓库</item>
+    </plurals>
+    <string name="label_switch_branch">切换分支</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.manichord.mgit.repolist
 
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -73,6 +75,7 @@ fun RepoListScreen(
 ) {
     var isSearchActive by remember { mutableStateOf(false) }
     var addMenuExpanded by rememberSaveable { mutableStateOf(false) }
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     BackHandler(enabled = addMenuExpanded) { addMenuExpanded = false }
     val searchState = rememberTextFieldState()
     val searchQuery = searchState.text.toString()
@@ -95,10 +98,11 @@ fun RepoListScreen(
     }
 
     Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
-                title = {
-                    if (isSearchActive) {
+            if (isSearchActive) {
+                TopAppBar(
+                    title = {
                         val focusRequester = searchFocusRequester
                         LaunchedEffect(Unit) { focusRequester.requestFocus() }
                         TextField(
@@ -116,41 +120,48 @@ fun RepoListScreen(
                                 unfocusedIndicatorColor = androidx.compose.ui.graphics.Color.Transparent
                             )
                         )
-                    } else {
-                        Text(stringResource(R.string.app_name), fontWeight = FontWeight.Bold)
-                    }
-                },
-                navigationIcon = {
-                    if (isSearchActive) {
+                    },
+                    navigationIcon = {
                         IconButton(onClick = {
                             isSearchActive = false
                             searchState.clearText()
                         }) {
                             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Close search")
                         }
-                    }
-                },
-                actions = {
-                    if (isSearchActive) {
+                    },
+                    actions = {
                         if (searchQuery.isNotEmpty()) {
                             IconButton(onClick = { searchState.clearText() }) {
                                 Icon(Icons.Default.Clear, contentDescription = "Clear search")
                             }
                         }
-                    } else {
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surface,
+                        titleContentColor = MaterialTheme.colorScheme.onSurface
+                    )
+                )
+            } else {
+                // Expressive flexible bar: large title with the repo count, collapsing to one
+                // line as the list scrolls
+                LargeFlexibleTopAppBar(
+                    title = { Text(stringResource(R.string.app_name)) },
+                    subtitle = {
+                        if (repoList.isNotEmpty()) {
+                            Text(pluralStringResource(R.plurals.repo_count, repoList.size, repoList.size))
+                        }
+                    },
+                    actions = {
                         IconButton(onClick = { isSearchActive = true }) {
                             Icon(Icons.Default.Search, contentDescription = "Search")
                         }
                         IconButton(onClick = onSettingsClick) {
                             Icon(Icons.Default.Settings, contentDescription = "Settings")
                         }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                    titleContentColor = MaterialTheme.colorScheme.onSurface
+                    },
+                    scrollBehavior = scrollBehavior
                 )
-            )
+            }
         },
         floatingActionButton = {
             AddRepositoryMenu(
