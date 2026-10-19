@@ -6,13 +6,6 @@
         <item>Fast Forward Only</item>
         <item>No Fast Forward</item>
     </string-array>
-    <string-array name="repo_file_operations">
-        <item>Anadir a stage</item>
-        <item>Checkout (Reset Changes)</item>
-        <item>Borrar</item>
-        <item>Eliminar cached del repo</item>
-        <item>Eliminar force del repo</item>
-    </string-array>
     <string-array name="repo_operation_names">
         <item>Nuevo Ramo</item>
         <item>Tirar</item>

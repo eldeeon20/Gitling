@@ -68,11 +68,11 @@ public class AddToStageTask extends RepoOpTask {
         return true;
     }
 
-    /** See FsUtils.findEaccesFile -- asks for the runtime permission the EACCES was actually
-     * about, then (if granted) reruns this task from scratch, mirroring how RepoRemoteOpTask
-     * retries after an auth prompt. Returns whether a request was actually kicked off (false if
-     * there's no active activity to ask from, in which case the caller shows the normal error
-     * dialog instead).
+    /** See FsUtils.findEaccesFile -- asks for access to the file the EACCES was about (see
+     * SheimiFragmentActivity.requestMediaFileAccess), then (if given) reruns this task from
+     * scratch, mirroring how RepoRemoteOpTask retries after an auth prompt. Returns whether a
+     * request was actually kicked off (false if there's no active activity to ask from, in which
+     * case the caller shows the normal error dialog instead).
      *
      * <p>The retry is capped at exactly one attempt (see mIsMediaPermissionRetry) rather than
      * re-checking the permission indefinitely -- confirmed on-device that after certain photo
@@ -90,12 +90,12 @@ public class AddToStageTask extends RepoOpTask {
         cancelTask();
         // Frees the repo's exclusive-task slot right now rather than waiting for this task's own
         // onPostExecute (which normally does this) to get posted and run -- when the permission
-        // is already granted, requestMediaImagesPermission below calls onGranted() immediately,
+        // is already granted, requestMediaFileAccess below calls onGranted() immediately,
         // still nested inside this very call stack, and the new AddToStageTask it constructs
         // would otherwise find the slot still held by this one and refuse to start ("A task for
         // this repo is already running").
         mRepo.removeTask(this);
-        activity.requestMediaImagesPermission(new SheimiFragmentActivity.OnPermissionResult() {
+        activity.requestMediaFileAccess(mRepo.getDir(), eaccesFile, new SheimiFragmentActivity.OnPermissionResult() {
             @Override
             public void onGranted() {
                 new AddToStageTask(mRepo, mFilePattern, mCallback, true).executeTask();
@@ -106,7 +106,7 @@ public class AddToStageTask extends RepoOpTask {
                 SheimiFragmentActivity activity = BasicFunctions.getActiveActivity();
                 if (activity != null) {
                     BasicFunctions.showException(activity, FsUtils.wrapEaccesFile(cause, eaccesFile),
-                            0, R.string.dialog_error_title);
+                            0, 0);
                 }
             }
         });

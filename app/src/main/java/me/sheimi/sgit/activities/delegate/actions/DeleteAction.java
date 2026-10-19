@@ -1,5 +1,6 @@
 package me.sheimi.sgit.activities.delegate.actions;
 
+import com.manichord.mgit.auth.RepoCredentials;
 import android.content.DialogInterface;
 import me.sheimi.sgit.R;
 import me.sheimi.sgit.activities.RepoDetailActivity;
@@ -18,6 +19,7 @@ public class DeleteAction extends RepoAction {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        RepoCredentials.INSTANCE.forget(mRepo.getLocalPath());
                         mRepo.deleteRepo();
                         mActivity.finish();
                     }

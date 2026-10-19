@@ -37,4 +37,8 @@
     <string name="alert_key_exists">Schlüssel existiert bereits</string>
 
     <string name="error_unknown_commit">Commit nicht gefunden. Bitte den Commit-Hash prüfen.</string>
+    <string name="error_media_permission_denied">Android hat den Zugriff auf \"%1$s\" blockiert, weil Gitling noch keine Berechtigung zum Lesen von Mediendateien hat. Erlaube sie, falls du gefragt wirst, oder erlaube Gitling den Speicherzugriff in den Android-Einstellungen und versuche es dann erneut.</string>
+    <string name="error_media_file_blocked">Android verhindert, dass Gitling \"%1$s\" liest, weil eine andere App die Datei in den gemeinsamen Repo-Ordner gelegt hat. Versuche es erneut und tippe auf Zugriff reparieren, oder lösche die Datei und kopiere sie über den Gitling-Speicherort in der Dateien-App wieder hinein.</string>
+    <string name="error_move_repos_blocked">Die Repos wurden nicht verschoben, weil Android Gitling das Lesen von \"%1$s\" verwehrt, das eine andere App hinzugefügt hat. Es wurde nichts geändert.</string>
+    <string name="error_move_repos_failed">Die Repos wurden nicht verschoben (%1$s). Es wurde nichts geändert.</string>
 </resources>

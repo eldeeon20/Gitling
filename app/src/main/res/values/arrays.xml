@@ -7,14 +7,14 @@
         <item>No Fast Forward</item>
     </string-array>
     <string-array name="repo_file_operations">
-        <item>Add to stage</item>
-        <item>Checkout (Reset Changes)</item>
-        <item>Delete</item>
-        <item>Remove cached from repository</item>
-        <item>Remove force from repository</item>
-        <item>Make executable</item>
-        <item>Make not executable</item>
-        <item>Rename</item>
+        <item>@string/file_op_add_to_stage</item>
+        <item>@string/file_op_checkout</item>
+        <item>@string/file_op_delete</item>
+        <item>@string/file_op_remove_cached</item>
+        <item>@string/file_op_remove_force</item>
+        <item>@string/file_op_make_executable</item>
+        <item>@string/file_op_make_not_executable</item>
+        <item>@string/file_op_rename</item>
     </string-array>
     <string-array name="repo_operation_names">
         <item>New Branch</item>

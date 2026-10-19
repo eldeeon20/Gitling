@@ -5,15 +5,6 @@
     <item>Fast Forward Only</item>
     <item>No Fast Forward</item>
   </string-array>
-  <string-array name="repo_file_operations">
-    <item>הוסף לשלב</item>
-    <item>בדיקה (אפס שינויים)</item>
-    <item>מחק</item>
-    <item>Remove cached from repository</item>
-    <item>Remove force from repository</item>
-      <item>Make executable</item>
-      <item>Make not executable</item>
-  </string-array>
   <string-array name="repo_operation_names">
     <item>סניף חדש</item>
     <item>משוך</item>

@@ -5,6 +5,14 @@ in-app "What's New" history (`app/src/main/java/com/manichord/mgit/whatsnew/What
 and the per-release notes under `fastlane/metadata/android/en-US/changelogs/`; update this file
 as part of cutting each release (see `docs/agents/release-process.md`).
 
+## 1.0.63 - 2026-10-19
+- Gitling no longer asks for the photos and videos permission. On Android 13 and newer, if an image another app added to a repo can't be read, a "Fix access" button repairs it in one step.
+- Fixed turning "Make repos visible to other apps" on or off leaving repos half moved when a file couldn't be copied.
+- Passwords typed into the login prompt are now remembered per remote host, so a repo with remotes on different hosts uses the right login for each.
+- Every option in the file long-press menu now shows in all languages, and "Make executable" now takes effect.
+- Fixed a crash when the screen changed (for example switching dark mode or language) while an error was showing.
+- Fixed error messages showing "Error occurred" twice.
+
 ## 1.0.62 - 2026-09-30
 - Tap the path bar on the Files tab to jump straight to a folder (contributed by BugeStudioTeam).
 - You can now drag and drop text from other apps into any text field.

@@ -178,4 +178,18 @@
     <string name="error_file_not_found">File not found!</string>
     <string name="dialog_access_all_files_title">모든 파일에 대한 액세스</string>
     <string name="dialog_access_all_files_msg">외부 저장소에서 리포지토리를 읽고 쓰려면 모든 파일에 대한 액세스를 허용하세요.</string>
+    <string name="file_op_add_to_stage">Add to stage</string>
+    <string name="file_op_checkout">Checkout (Reset Changes)</string>
+    <string name="file_op_delete">Delete</string>
+    <string name="file_op_remove_cached">Remove cached from repository</string>
+    <string name="file_op_remove_force">Remove force from repository</string>
+    <string name="file_op_make_executable">실행 가능하게 만들기</string>
+    <string name="file_op_make_not_executable">실행 불가능하게 만들기</string>
+    <string name="file_op_rename">이름 바꾸기</string>
+    <string name="dialog_rename_file_title">이름 바꾸기</string>
+    <string name="label_fix_file_access">액세스 복구</string>
+    <string name="label_try_again">다시 시도</string>
+    <string name="dialog_fix_file_access_title">파일 액세스 복구</string>
+    <string name="dialog_fix_file_access_message">다른 앱이 공유 저장소 폴더에 \"%1$s\" 파일을 추가했기 때문에 Android가 Gitling의 읽기를 차단하고 있습니다.\n\nGitling은 차단된 각 파일을 내용이 같은 자체 사본으로 바꿔 이 문제를 해결할 수 있습니다. 액세스 복구를 탭한 다음 다음 화면에서 폴더를 확인하세요. 한 번만 하면 됩니다.</string>
+    <string name="dialog_fix_file_access_wrong_folder">이 폴더에는 \"%1$s\" 파일이 없습니다. Gitling이 열어 주는 폴더를 선택한 다음 확인하세요.</string>
 </resources>

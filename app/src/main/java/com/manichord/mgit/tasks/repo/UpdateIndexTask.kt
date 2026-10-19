@@ -9,6 +9,7 @@ import org.eclipse.jgit.dircache.DirCache
 import org.eclipse.jgit.errors.CorruptObjectException
 import org.eclipse.jgit.errors.NoWorkTreeException
 import org.eclipse.jgit.lib.FileMode
+import java.io.IOException
 
 class UpdateIndexTask(repo: Repo, private val path: String, private val newMode: Int) : RepoOpTask(repo) {
     companion object {
@@ -39,7 +40,13 @@ class UpdateIndexTask(repo: Repo, private val path: String, private val newMode:
             }
             val oldMode = entry.fileMode
             entry.fileMode = FileMode.fromBits(newMode or (oldMode.bits or 0b111111111 xor 0b111111111))
-
+            // Persist the change: only setting fileMode on the locked in-memory DirCache and then
+            // unlocking discarded it, so "Make (not) executable" silently did nothing
+            dircache.write()
+            dircache.commit()
+        } catch (e: IOException) {
+            setException(e)
+            return false
         } finally {
             dircache.unlock()
         }

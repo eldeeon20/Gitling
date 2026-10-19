@@ -1,5 +1,7 @@
 package me.sheimi.sgit.database.models;
 
+import com.manichord.mgit.auth.RepoCredentials;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -344,11 +346,14 @@ public class Repo implements Comparable<Repo>, Serializable {
         File directory = getDir();
         if (FsUtils.renameDirectory(directory, repoName)) {
             ContentValues values = new ContentValues();
+            String oldLocalPath = mLocalPath;
             mLocalPath = isExternal()
                 ? EXTERNAL_PREFIX + directory.getParent() + File.separator + repoName
                 : repoName;
             values.put(RepoContract.RepoEntry.COLUMN_NAME_LOCAL_PATH, mLocalPath);
             RepoDbManager.updateRepo(getID(), values);
+            // Per-host credentials are keyed by local path
+            RepoCredentials.INSTANCE.onRepoRenamed(oldLocalPath, mLocalPath);
 
             return true;
         }
@@ -615,9 +620,19 @@ public class Repo implements Comparable<Repo>, Serializable {
      * toggle. Both roots are always accessible to Gitling regardless of the current setting (see
      * getDefaultRepoRootDir()), so this is a real move, not just a migration notice like
      * migrateAwayFromCustomRoot() -- nothing needs to become unreachable here. Skips (and logs)
-     * any repo whose destination already exists rather than risk overwriting unrelated data. */
-    public static void moveReposBetweenDefaultRoots(Context context, File oldRoot, File newRoot) {
+     * any repo whose destination already exists rather than risk overwriting unrelated data.
+     *
+     * <p>All or nothing: the two roots are on different mounts, so a move is a copy then a
+     * delete, and a copy can fail partway (e.g. on a file Android won't let Gitling read, see
+     * FsUtils.findEaccesFile, or a full disk). Then the partial copy is deleted and every repo
+     * already moved is moved back, so no repo is left resolving to a half-copied directory.
+     * Callers should check for unreadable files first (see BlockedFileRepair) and restore the
+     * setting when this fails.
+     *
+     * @return null if everything moved, else the error that stopped it */
+    public static IOException moveReposBetweenDefaultRoots(Context context, File oldRoot, File newRoot) {
         List<Repo> allRepos = Repo.getRepoList(context, RepoDbManager.queryAllRepo());
+        List<File[]> moved = new ArrayList<>();
         for (Repo repo : allRepos) {
             if (repo.isExternal()) {
                 continue;
@@ -632,10 +647,41 @@ public class Repo implements Comparable<Repo>, Serializable {
                 continue;
             }
             try {
-                org.apache.commons.io.FileUtils.moveDirectory(oldDir, newDir);
+                moveRepoDir(oldDir, newDir);
+                moved.add(new File[]{oldDir, newDir});
             } catch (IOException e) {
                 Timber.e(e, "Failed to move repo %s from %s to %s", repo.mLocalPath, oldDir, newDir);
+                for (File[] pair : moved) {
+                    try {
+                        moveRepoDir(pair[1], pair[0]);
+                    } catch (IOException back) {
+                        Timber.e(back, "Failed to move %s back to %s", pair[1], pair[0]);
+                    }
+                }
+                return e;
             }
+        }
+        return null;
+    }
+
+    /** Rename when possible, otherwise copy then delete. Unlike commons-io's moveDirectory, a
+     * failed copy deletes the partial destination, and the source is only deleted once the copy
+     * is complete, so an exception always means the source is still whole. A failure deleting
+     * the source after a complete copy is only logged: the repo is already whole at newDir. */
+    private static void moveRepoDir(File oldDir, File newDir) throws IOException {
+        if (oldDir.renameTo(newDir)) {
+            return;
+        }
+        try {
+            org.apache.commons.io.FileUtils.copyDirectory(oldDir, newDir);
+        } catch (IOException e) {
+            org.apache.commons.io.FileUtils.deleteQuietly(newDir);
+            throw e;
+        }
+        try {
+            org.apache.commons.io.FileUtils.deleteDirectory(oldDir);
+        } catch (IOException e) {
+            Timber.e(e, "Moved %s but could not delete the original", oldDir);
         }
     }
 

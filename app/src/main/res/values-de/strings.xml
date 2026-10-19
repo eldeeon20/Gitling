@@ -196,4 +196,18 @@
     <string name="error_file_not_found">File not found!</string>
     <string name="dialog_access_all_files_title">Zugriff auf alle Dateien</string>
     <string name="dialog_access_all_files_msg">Bitte erlauben Sie den Zugriff auf alle Dateien, um Repositories von einem externen Speicher lesen/schreiben zu können.</string>
+    <string name="file_op_add_to_stage">Zum Staging-Bereich hinzufügen</string>
+    <string name="file_op_checkout">Auschecken (Änderungen zurücksetzen)</string>
+    <string name="file_op_delete">Löschen</string>
+    <string name="file_op_remove_cached">Löschen (cached, nur Repository)</string>
+    <string name="file_op_remove_force">Löschen (force, mit aktuellen Änderungen)</string>
+    <string name="file_op_make_executable">Ausführbar machen</string>
+    <string name="file_op_make_not_executable">Nicht ausführbar machen</string>
+    <string name="file_op_rename">Umbenennen</string>
+    <string name="dialog_rename_file_title">Umbenennen</string>
+    <string name="label_fix_file_access">Zugriff reparieren</string>
+    <string name="label_try_again">Erneut versuchen</string>
+    <string name="dialog_fix_file_access_title">Dateizugriff reparieren</string>
+    <string name="dialog_fix_file_access_message">Android verhindert, dass Gitling \"%1$s\" liest, weil eine andere App die Datei in den gemeinsamen Repo-Ordner gelegt hat.\n\nGitling kann das beheben, indem jede gesperrte Datei durch eine identische eigene Kopie ersetzt wird. Tippe auf Zugriff reparieren und bestätige auf dem nächsten Bildschirm den Ordner. Das ist nur einmal nötig.</string>
+    <string name="dialog_fix_file_access_wrong_folder">Dieser Ordner enthält \"%1$s\" nicht. Wähle den Ordner, den Gitling für dich öffnet, und bestätige ihn.</string>
 </resources>

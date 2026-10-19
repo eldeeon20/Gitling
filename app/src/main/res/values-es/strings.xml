@@ -194,4 +194,18 @@
     <string name="error_file_not_found">File not found!</string>
     <string name="dialog_access_all_files_title">Acceso a todos los archivos</string>
     <string name="dialog_access_all_files_msg">Permita el acceso a todos los archivos para leer/escribir repositorios desde almacenamiento externo.</string>
+    <string name="file_op_add_to_stage">Anadir a stage</string>
+    <string name="file_op_checkout">Checkout (Reset Changes)</string>
+    <string name="file_op_delete">Borrar</string>
+    <string name="file_op_remove_cached">Eliminar cached del repo</string>
+    <string name="file_op_remove_force">Eliminar force del repo</string>
+    <string name="file_op_make_executable">Hacer ejecutable</string>
+    <string name="file_op_make_not_executable">Hacer no ejecutable</string>
+    <string name="file_op_rename">Renombrar</string>
+    <string name="dialog_rename_file_title">Renombrar</string>
+    <string name="label_fix_file_access">Arreglar acceso</string>
+    <string name="label_try_again">Reintentar</string>
+    <string name="dialog_fix_file_access_title">Arreglar acceso a archivos</string>
+    <string name="dialog_fix_file_access_message">Android impide que Gitling lea \"%1$s\" porque otra app lo añadió a la carpeta compartida de repositorios.\n\nGitling puede solucionarlo sustituyendo cada archivo bloqueado por una copia idéntica propia. Toca Arreglar acceso y confirma la carpeta en la siguiente pantalla. Solo tendrás que hacerlo una vez.</string>
+    <string name="dialog_fix_file_access_wrong_folder">Esa carpeta no contiene \"%1$s\". Elige la carpeta que Gitling abre por ti y confírmala.</string>
 </resources>

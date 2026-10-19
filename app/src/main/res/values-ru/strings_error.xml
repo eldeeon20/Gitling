@@ -46,5 +46,8 @@
     <string name="alert_save_failed">Ошибка сохранения</string>
     <string name="alert_file_creation_failure">Невозможно создать файл</string>
     <string name="error_no_repository">Репозиторий не найден</string>
-
+    <string name="error_media_permission_denied">Android заблокировал доступ к \"%1$s\", потому что у Gitling пока нет разрешения на чтение медиафайлов. Разрешите его, если появится запрос, или разрешите Gitling доступ к хранилищу в настройках Android, затем повторите попытку.</string>
+    <string name="error_media_file_blocked">Android не даёт Gitling прочитать \"%1$s\", потому что этот файл добавило в общую папку репозиториев другое приложение. Повторите попытку и нажмите «Исправить доступ» или удалите файл и скопируйте его снова через раздел Gitling в приложении «Файлы».</string>
+    <string name="error_move_repos_blocked">Репозитории не перемещены, потому что Android не даёт Gitling прочитать \"%1$s\", добавленный другим приложением. Ничего не изменено.</string>
+    <string name="error_move_repos_failed">Репозитории не перемещены (%1$s). Ничего не изменено.</string>
 </resources>
