@@ -237,4 +237,9 @@
     <string name="label_menu_new_local">Nouveau dépôt local</string>
     <string name="label_current_branch">Branche actuelle</string>
     <string name="label_all_branches">Toutes les branches</string>
+    <plurals name="repo_count">
+        <item quantity="one">%d dépôt</item>
+        <item quantity="other">%d dépôts</item>
+    </plurals>
+    <string name="label_switch_branch">Changer de branche</string>
 </resources>

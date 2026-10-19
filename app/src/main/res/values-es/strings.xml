@@ -236,4 +236,9 @@
     <string name="label_menu_new_local">Nuevo repositorio local</string>
     <string name="label_current_branch">Rama actual</string>
     <string name="label_all_branches">Todas las ramas</string>
+    <plurals name="repo_count">
+        <item quantity="one">%d repositorio</item>
+        <item quantity="other">%d repositorios</item>
+    </plurals>
+    <string name="label_switch_branch">Cambiar de rama</string>
 </resources>
