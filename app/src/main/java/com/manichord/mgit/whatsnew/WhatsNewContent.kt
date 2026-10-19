@@ -13,6 +13,18 @@ data class WhatsNewEntry(
 object WhatsNewContent {
     val entries = listOf(
         WhatsNewEntry(
+            versionCode = 63,
+            versionName = "1.0.63",
+            highlights = listOf(
+                "Gitling no longer asks for the photos and videos permission. On Android 13 and newer, if an image another app added to a repo can't be read, a \"Fix access\" button repairs it in one step",
+                "Fixed turning \"Make repos visible to other apps\" on or off leaving repos half moved when a file couldn't be copied",
+                "Passwords typed into the login prompt are now remembered per remote host, so a repo with remotes on different hosts uses the right login for each",
+                "Every option in the file long-press menu now shows in all languages, and \"Make executable\" now takes effect",
+                "Fixed a crash when the screen changed (for example switching dark mode or language) while an error was showing",
+                "Fixed error messages showing \"Error occurred\" twice"
+            )
+        ),
+        WhatsNewEntry(
             versionCode = 62,
             versionName = "1.0.62",
             highlights = listOf(
