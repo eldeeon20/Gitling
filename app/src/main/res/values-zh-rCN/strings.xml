@@ -232,4 +232,10 @@
     <string name="dialog_import_done_modes">此副本会忽略文件权限和符号链接。</string>
     <string name="dialog_import_done_skipped">已跳过仓库文件夹之外的部分文件。</string>
     <string name="toast_import_cancelled">已取消导入。未导入任何内容。</string>
+    <string name="label_add_repository">添加仓库</string>
+    <string name="label_close_menu">关闭菜单</string>
+    <string name="label_menu_clone">克隆仓库</string>
+    <string name="label_menu_new_local">新建本地仓库</string>
+    <string name="label_current_branch">当前分支</string>
+    <string name="label_all_branches">所有分支</string>
 </resources>

@@ -220,4 +220,10 @@
   <string name="dialog_import_done_modes">בעותק הזה מתעלמים מהרשאות קבצים ומקישורים סמליים.</string>
   <string name="dialog_import_done_skipped">חלק מהקבצים שמחוץ לתיקיית המאגר דולגו.</string>
   <string name="toast_import_cancelled">הייבוא בוטל. שום דבר לא יובא.</string>
+  <string name="label_add_repository">הוספת מאגר</string>
+  <string name="label_close_menu">סגירת התפריט</string>
+  <string name="label_menu_clone">שכפול מאגר</string>
+  <string name="label_menu_new_local">מאגר מקומי חדש</string>
+  <string name="label_current_branch">הענף הנוכחי</string>
+  <string name="label_all_branches">כל הענפים</string>
 </resources>

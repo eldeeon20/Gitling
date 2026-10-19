@@ -229,4 +229,10 @@
     <string name="dialog_import_done_modes">В этой копии права доступа к файлам и символические ссылки игнорируются.</string>
     <string name="dialog_import_done_skipped">Некоторые файлы вне папки репозитория пропущены.</string>
     <string name="toast_import_cancelled">Импорт отменён. Ничего не импортировано.</string>
+    <string name="label_add_repository">Добавить репозиторий</string>
+    <string name="label_close_menu">Закрыть меню</string>
+    <string name="label_menu_clone">Клонировать репозиторий</string>
+    <string name="label_menu_new_local">Новый локальный репозиторий</string>
+    <string name="label_current_branch">Текущая ветка</string>
+    <string name="label_all_branches">Все ветки</string>
 </resources>

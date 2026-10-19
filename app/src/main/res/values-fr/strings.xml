@@ -231,4 +231,10 @@
     <string name="dialog_import_done_modes">Les permissions de fichiers et les liens symboliques sont ignorés dans cette copie.</string>
     <string name="dialog_import_done_skipped">Certains fichiers hors du dossier du dépôt ont été ignorés.</string>
     <string name="toast_import_cancelled">Importation annulée. Rien n\'a été importé.</string>
+    <string name="label_add_repository">Ajouter un dépôt</string>
+    <string name="label_close_menu">Fermer le menu</string>
+    <string name="label_menu_clone">Cloner un dépôt</string>
+    <string name="label_menu_new_local">Nouveau dépôt local</string>
+    <string name="label_current_branch">Branche actuelle</string>
+    <string name="label_all_branches">Toutes les branches</string>
 </resources>

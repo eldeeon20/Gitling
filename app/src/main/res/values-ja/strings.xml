@@ -231,4 +231,10 @@
     <string name="dialog_import_done_modes">このコピーではファイルのパーミッションとシンボリックリンクは無視されます。</string>
     <string name="dialog_import_done_skipped">リポジトリのフォルダ外にあった一部のファイルはスキップされました。</string>
     <string name="toast_import_cancelled">インポートをキャンセルしました。何もインポートされていません。</string>
+    <string name="label_add_repository">リポジトリを追加</string>
+    <string name="label_close_menu">メニューを閉じる</string>
+    <string name="label_menu_clone">リポジトリをクローン</string>
+    <string name="label_menu_new_local">新しいローカルリポジトリ</string>
+    <string name="label_current_branch">現在のブランチ</string>
+    <string name="label_all_branches">すべてのブランチ</string>
 </resources>

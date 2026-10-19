@@ -214,4 +214,10 @@
     <string name="dialog_import_done_modes">이 복사본에서는 파일 권한과 심볼릭 링크가 무시됩니다.</string>
     <string name="dialog_import_done_skipped">저장소 폴더 밖에 있던 일부 파일은 건너뛰었습니다.</string>
     <string name="toast_import_cancelled">가져오기를 취소했습니다. 아무것도 가져오지 않았습니다.</string>
+    <string name="label_add_repository">저장소 추가</string>
+    <string name="label_close_menu">메뉴 닫기</string>
+    <string name="label_menu_clone">저장소 클론</string>
+    <string name="label_menu_new_local">새 로컬 저장소</string>
+    <string name="label_current_branch">현재 브랜치</string>
+    <string name="label_all_branches">모든 브랜치</string>
 </resources>

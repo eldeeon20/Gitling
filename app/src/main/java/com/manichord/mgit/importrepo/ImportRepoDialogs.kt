@@ -1,5 +1,8 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+
 package com.manichord.mgit.importrepo
 
+import androidx.compose.material3.LinearWavyProgressIndicator
 import android.os.Build
 import android.text.format.Formatter
 import android.widget.Toast
@@ -17,7 +20,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -164,7 +166,7 @@ private fun ProgressDialog(state: ImportRepoViewModel.State.Importing, onCancel:
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 if (state.total > 0) {
-                    LinearProgressIndicator(
+                    LinearWavyProgressIndicator(
                         progress = { (state.done.toFloat() / state.total).coerceIn(0f, 1f) },
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -172,7 +174,7 @@ private fun ProgressDialog(state: ImportRepoViewModel.State.Importing, onCancel:
                         Formatter.formatShortFileSize(context, state.done),
                         Formatter.formatShortFileSize(context, state.total)))
                 } else {
-                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                    LinearWavyProgressIndicator(modifier = Modifier.fillMaxWidth())
                     Text(stringResource(R.string.importing_progress_unknown,
                         Formatter.formatShortFileSize(context, state.done)))
                 }

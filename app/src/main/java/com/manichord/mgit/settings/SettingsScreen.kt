@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+
 package com.manichord.mgit.settings
 
 import androidx.compose.foundation.clickable
@@ -245,7 +247,7 @@ fun SettingsUpdateCheckItem(
         leadingContent = { Icon(Icons.Default.Refresh, null) },
         trailingContent = {
             when {
-                checking -> CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
+                checking -> LoadingIndicator(modifier = Modifier.size(24.dp))
                 result is UpdateCheckResult.UpdateAvailable -> {
                     TextButton(onClick = { onViewReleaseClick(result.releaseUrl) }) { Text("View") }
                 }

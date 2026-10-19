@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+
 package com.manichord.mgit.branchchooser
 
 import androidx.compose.foundation.clickable
@@ -66,7 +68,7 @@ fun BranchChooserScreen(
 
             Box(modifier = Modifier.fillMaxSize()) {
                 if (isLoading && branches.isEmpty()) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    LoadingIndicator(modifier = Modifier.align(Alignment.Center))
                 } else {
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         items(branches) { item ->

@@ -646,6 +646,8 @@ class MainActivity : SheimiFragmentActivity() {
     }
 
     private fun showCloneView() {
+        // Opened for a clone link: never in "Init Local" mode left over from the add menu
+        cloneViewModel.initLocal.value = false
         cloneViewModel.show(true)
     }
 

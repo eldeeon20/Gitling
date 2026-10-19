@@ -120,9 +120,16 @@ fun RepoListComposeContent(
                 }
             },
             onCloneClick = {
+                cloneViewModel.initLocal.value = false
                 cloneViewModel.refreshCloneLocation()
                 showCloneSheet = true
             },
+            onInitLocalClick = {
+                cloneViewModel.initLocal.value = true
+                cloneViewModel.refreshCloneLocation()
+                showCloneSheet = true
+            },
+            onImportClick = { importRepoViewModel.start() },
             onSettingsClick = {
                 (activity as MainActivity).openUserSettings()
             },
@@ -149,11 +156,6 @@ fun RepoListComposeContent(
                     onCancelClick = {
                         showCloneSheet = false
                         onCancelCloneViewClick()
-                    },
-                    onImportClick = {
-                        showCloneSheet = false
-                        onCancelCloneViewClick()
-                        importRepoViewModel.start()
                     }
                 )
             }

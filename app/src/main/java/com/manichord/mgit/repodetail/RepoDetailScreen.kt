@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+
 package com.manichord.mgit.repodetail
 
 import androidx.activity.compose.BackHandler
@@ -297,10 +299,16 @@ fun RepoDetailScreen(
                                     style = MaterialTheme.typography.headlineSmall
                                 )
                                 Spacer(Modifier.height(16.dp))
-                                LinearProgressIndicator(
-                                    progress = progressState!!.progress / 100f,
-                                    modifier = Modifier.fillMaxWidth()
-                                )
+                                // Some git operations don't report a total; show the
+                                // indeterminate wave then instead of a bar stuck at 0
+                                if (progressState!!.progress > 0) {
+                                    LinearWavyProgressIndicator(
+                                        progress = { progressState!!.progress / 100f },
+                                        modifier = Modifier.fillMaxWidth()
+                                    )
+                                } else {
+                                    LinearWavyProgressIndicator(modifier = Modifier.fillMaxWidth())
+                                }
                                 Spacer(Modifier.height(8.dp))
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),

@@ -230,4 +230,10 @@
     <string name="dialog_import_done_modes">En esta copia se ignoran los permisos de archivo y los enlaces simbólicos.</string>
     <string name="dialog_import_done_skipped">Se omitieron algunos archivos fuera de la carpeta del repositorio.</string>
     <string name="toast_import_cancelled">Importación cancelada. No se ha importado nada.</string>
+    <string name="label_add_repository">Añadir repositorio</string>
+    <string name="label_close_menu">Cerrar menú</string>
+    <string name="label_menu_clone">Clonar repositorio</string>
+    <string name="label_menu_new_local">Nuevo repositorio local</string>
+    <string name="label_current_branch">Rama actual</string>
+    <string name="label_all_branches">Todas las ramas</string>
 </resources>

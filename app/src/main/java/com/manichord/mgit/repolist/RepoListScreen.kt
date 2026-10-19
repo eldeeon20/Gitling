@@ -1,5 +1,12 @@
 package com.manichord.mgit.repolist
 
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -11,6 +18,10 @@ import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.CreateNewFolder
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.FileOpen
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.SearchOff
@@ -21,11 +32,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -42,7 +56,7 @@ private fun Repo.matchesSearch(query: String): Boolean {
         .any { it.contains(q, ignoreCase = true) }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun RepoListScreen(
     repoList: List<Repo>,
@@ -52,10 +66,14 @@ fun RepoListScreen(
     onRepoClick: (Repo) -> Unit,
     onRepoLongClick: (Repo) -> Unit,
     onCloneClick: () -> Unit,
+    onInitLocalClick: () -> Unit,
+    onImportClick: () -> Unit,
     onSettingsClick: () -> Unit,
     onConnectGitHubClick: () -> Unit
 ) {
     var isSearchActive by remember { mutableStateOf(false) }
+    var addMenuExpanded by rememberSaveable { mutableStateOf(false) }
+    BackHandler(enabled = addMenuExpanded) { addMenuExpanded = false }
     val searchState = rememberTextFieldState()
     val searchQuery = searchState.text.toString()
     var selectedTag by remember { mutableStateOf<String?>(null) }
@@ -135,13 +153,13 @@ fun RepoListScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = onCloneClick,
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
-            ) {
-                Icon(Icons.Default.Add, contentDescription = "Add repository")
-            }
+            AddRepositoryMenu(
+                expanded = addMenuExpanded,
+                onExpandedChange = { addMenuExpanded = it },
+                onCloneClick = onCloneClick,
+                onInitLocalClick = onInitLocalClick,
+                onImportClick = onImportClick
+            )
         }
     ) { paddingValues ->
         Column(
@@ -202,6 +220,75 @@ fun RepoListScreen(
                 }
             }
         }
+        // Dims the list while the add menu is open; a tap outside closes it
+        AnimatedVisibility(visible = addMenuExpanded, enter = fadeIn(), exit = fadeOut()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.scrim.copy(alpha = 0.32f))
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null,
+                        onClickLabel = stringResource(R.string.label_close_menu)
+                    ) { addMenuExpanded = false }
+            )
+        }
+    }
+}
+
+/** The + button: opens a menu with every way to add a repository, so Import doesn't hide at
+ * the bottom of the clone sheet. Each item closes the menu before acting. */
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+private fun AddRepositoryMenu(
+    expanded: Boolean,
+    onExpandedChange: (Boolean) -> Unit,
+    onCloneClick: () -> Unit,
+    onInitLocalClick: () -> Unit,
+    onImportClick: () -> Unit
+) {
+    val toggleLabel = stringResource(if (expanded) R.string.label_close_menu else R.string.label_add_repository)
+    FloatingActionButtonMenu(
+        expanded = expanded,
+        button = {
+            // Primary both closed and open, like the + button before; the default starts out
+            // in the much lighter primary container color
+            val primary = MaterialTheme.colorScheme.primary
+            val onPrimary = MaterialTheme.colorScheme.onPrimary
+            ToggleFloatingActionButton(
+                checked = expanded,
+                onCheckedChange = onExpandedChange,
+                modifier = Modifier.semantics { contentDescription = toggleLabel },
+                containerColor = ToggleFloatingActionButtonDefaults.containerColor(primary, primary)
+            ) {
+                Icon(
+                    imageVector = if (checkedProgress > 0.5f) Icons.Default.Close else Icons.Default.Add,
+                    contentDescription = null,
+                    modifier = with(ToggleFloatingActionButtonDefaults) {
+                        Modifier.animateIcon(
+                            checkedProgress = { checkedProgress },
+                            color = ToggleFloatingActionButtonDefaults.iconColor(onPrimary, onPrimary)
+                        )
+                    }
+                )
+            }
+        }
+    ) {
+        FloatingActionButtonMenuItem(
+            onClick = { onExpandedChange(false); onCloneClick() },
+            icon = { Icon(Icons.Default.Download, contentDescription = null) },
+            text = { Text(stringResource(R.string.label_menu_clone)) }
+        )
+        FloatingActionButtonMenuItem(
+            onClick = { onExpandedChange(false); onInitLocalClick() },
+            icon = { Icon(Icons.Default.CreateNewFolder, contentDescription = null) },
+            text = { Text(stringResource(R.string.label_menu_new_local)) }
+        )
+        FloatingActionButtonMenuItem(
+            onClick = { onExpandedChange(false); onImportClick() },
+            icon = { Icon(Icons.Default.FileOpen, contentDescription = null) },
+            text = { Text(stringResource(R.string.label_import_repo)) }
+        )
     }
 }
 

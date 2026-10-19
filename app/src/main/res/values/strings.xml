@@ -259,4 +259,10 @@
     <string name="dialog_import_done_modes">File permissions and symlinks are ignored in this copy.</string>
     <string name="dialog_import_done_skipped">Some files outside the repository folder were skipped.</string>
     <string name="toast_import_cancelled">Import cancelled. Nothing was imported.</string>
+    <string name="label_add_repository">Add repository</string>
+    <string name="label_close_menu">Close menu</string>
+    <string name="label_menu_clone">Clone repository</string>
+    <string name="label_menu_new_local">New local repository</string>
+    <string name="label_current_branch">Current branch</string>
+    <string name="label_all_branches">All branches</string>
 </resources>
