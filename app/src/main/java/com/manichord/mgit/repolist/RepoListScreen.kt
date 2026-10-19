@@ -358,9 +358,9 @@ private fun ConnectGitHubBanner(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                TextButton(onClick = onDismissClick) { Text("Not now") }
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = onDismissClick) { Text("Not now") }
                 Spacer(modifier = Modifier.width(8.dp))
-                Button(onClick = onConnectClick) { Text("Connect") }
+                Button(shapes = ButtonDefaults.shapes(), onClick = onConnectClick) { Text("Connect") }
             }
         }
     }

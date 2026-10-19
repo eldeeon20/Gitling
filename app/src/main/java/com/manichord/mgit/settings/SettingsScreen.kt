@@ -249,7 +249,7 @@ fun SettingsUpdateCheckItem(
             when {
                 checking -> LoadingIndicator(modifier = Modifier.size(24.dp))
                 result is UpdateCheckResult.UpdateAvailable -> {
-                    TextButton(onClick = { onViewReleaseClick(result.releaseUrl) }) { Text("View") }
+                    TextButton(shapes = ButtonDefaults.shapes(), onClick = { onViewReleaseClick(result.releaseUrl) }) { Text("View") }
                 }
             }
         },
@@ -296,7 +296,7 @@ fun SettingsFontItem(selected: FontOption, onSelect: (FontOption) -> Unit) {
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showDialog = false }) {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = { showDialog = false }) {
                     Text(stringResource(R.string.label_cancel))
                 }
             }
@@ -331,7 +331,7 @@ fun SettingsEditTextItem(title: String, value: String, onValueChange: (String) -
                 )
             },
             confirmButton = {
-                TextButton(onClick = {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = {
                     onValueChange(tempValue.text.toString())
                     showDialog = false
                 }) {
@@ -339,7 +339,7 @@ fun SettingsEditTextItem(title: String, value: String, onValueChange: (String) -
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showDialog = false }) {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = { showDialog = false }) {
                     Text(stringResource(R.string.label_cancel))
                 }
             }
