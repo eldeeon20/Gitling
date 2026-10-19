@@ -210,4 +210,26 @@
     <string name="dialog_fix_file_access_title">Dateizugriff reparieren</string>
     <string name="dialog_fix_file_access_message">Android verhindert, dass Gitling \"%1$s\" liest, weil eine andere App die Datei in den gemeinsamen Repo-Ordner gelegt hat.\n\nGitling kann das beheben, indem jede gesperrte Datei durch eine identische eigene Kopie ersetzt wird. Tippe auf Zugriff reparieren und bestätige auf dem nächsten Bildschirm den Ordner. Das ist nur einmal nötig.</string>
     <string name="dialog_fix_file_access_wrong_folder">Dieser Ordner enthält \"%1$s\" nicht. Wähle den Ordner, den Gitling für dich öffnet, und bestätige ihn.</string>
+    <string name="label_import_repo">Von diesem Gerät importieren</string>
+    <string name="label_import_folder">Ordner auswählen</string>
+    <string name="label_import_zip">ZIP-Datei auswählen</string>
+    <string name="label_open_repo">Öffnen</string>
+    <string name="dialog_import_repo_title">Repository importieren</string>
+    <string name="dialog_import_repo_intro">Gitling kopiert ein Git-Repository aus einem Ordner auf diesem Gerät oder aus einer ZIP-Datei in seinen eigenen Speicher. Verlauf, Branches, Stashes und nicht committete Änderungen werden mitkopiert. Bevor du anfängst:</string>
+    <string name="dialog_import_repo_risk_copy">Es ist eine Kopie. Das Original wird nicht verändert, und spätere Änderungen an einem von beiden werden nicht auf das andere übertragen.</string>
+    <string name="dialog_import_repo_risk_private">Ab Android 11 können Ordner im privaten Speicher anderer Apps (Android/data) nicht ausgewählt werden, weil Android das blockiert. Kopiere das Repository zuerst an einen anderen Ort, zum Beispiel als ZIP-Datei von einem Computer.</string>
+    <string name="dialog_import_repo_risk_space">Die Kopie belegt so viel Speicher wie das Original, und ein großes Repository kann eine Weile dauern.</string>
+    <string name="dialog_import_repo_risk_modes">Der Speicher von Gitling kann keine Dateiberechtigungen und keine symbolischen Links speichern. Ausführbare Dateien werden zu normalen Dateien, und ein symbolischer Link wird zu einer kleinen Datei, die sein Ziel enthält. Gitling stellt die Kopie so ein, dass diese Unterschiede ignoriert werden und nicht als Änderungen erscheinen.</string>
+    <string name="dialog_import_repo_risk_credentials">Gespeicherte Passwörter und SSH-Schlüssel gehören nicht zum Repository. Möglicherweise musst du dich zum Pushen oder Pullen erneut anmelden.</string>
+    <string name="dialog_import_name_title">Repository benennen</string>
+    <string name="dialog_import_name_destination">Wird importiert nach: %1$s</string>
+    <string name="alert_import_name_dot">Der Name darf nicht mit einem Punkt beginnen</string>
+    <string name="dialog_importing_title">%1$s wird importiert</string>
+    <string name="importing_progress">%1$s von %2$s</string>
+    <string name="importing_progress_unknown">%1$s kopiert</string>
+    <string name="dialog_import_done_title">Repository importiert</string>
+    <string name="dialog_import_done_message">%1$s wurde kopiert (%2$s). Das Original wurde nicht verändert.</string>
+    <string name="dialog_import_done_modes">Gitling hat core.filemode und core.symlinks in der Kopie ausgeschaltet, damit verlorene Dateiberechtigungen und symbolische Links nicht als Änderungen erscheinen.</string>
+    <string name="dialog_import_done_skipped">Dateien in der ZIP-Datei außerhalb des Repository-Ordners wurden nicht importiert.</string>
+    <string name="toast_import_cancelled">Import abgebrochen. Es wurde nichts importiert.</string>
 </resources>

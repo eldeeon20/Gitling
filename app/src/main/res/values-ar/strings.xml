@@ -237,4 +237,26 @@
     <string name="dialog_fix_file_access_title">إصلاح الوصول إلى الملفات</string>
     <string name="dialog_fix_file_access_message">يمنع Android تطبيق Gitling من قراءة \"%1$s\" لأن تطبيقًا آخر أضافه إلى مجلد المستودعات المشترك.\n\nيمكن لـ Gitling إصلاح ذلك باستبدال كل ملف محظور بنسخة مطابقة خاصة به. انقر على إصلاح الوصول، ثم أكّد المجلد في الشاشة التالية. ستحتاج إلى ذلك مرة واحدة فقط.</string>
     <string name="dialog_fix_file_access_wrong_folder">هذا المجلد لا يحتوي على \"%1$s\". اختر المجلد الذي يفتحه Gitling لك، ثم أكّده.</string>
+    <string name="label_import_repo">استيراد من هذا الجهاز</string>
+    <string name="label_import_folder">اختيار مجلد</string>
+    <string name="label_import_zip">اختيار ملف ZIP</string>
+    <string name="label_open_repo">فتح</string>
+    <string name="dialog_import_repo_title">استيراد مستودع</string>
+    <string name="dialog_import_repo_intro">ينسخ Gitling مستودع Git من مجلد على هذا الجهاز، أو من ملف ZIP، إلى مساحة التخزين الخاصة به. ويُنسخ معه السجل والفروع وعمليات stash والتغييرات غير المُثبتة. قبل أن تبدأ:</string>
+    <string name="dialog_import_repo_risk_copy">إنها نسخة. لا يتغير الأصل، ولا تنتقل التغييرات اللاحقة في أحدهما إلى الآخر.</string>
+    <string name="dialog_import_repo_risk_private">في Android 11 والإصدارات الأحدث، لا يمكن اختيار المجلدات الموجودة في التخزين الخاص بالتطبيقات الأخرى (Android/data) لأن Android يمنع ذلك. انسخ المستودع إلى مكان آخر أولًا، مثلًا كملف ZIP من جهاز كمبيوتر.</string>
+    <string name="dialog_import_repo_risk_space">تشغل النسخة مساحة تخزين بقدر الأصل، وقد يستغرق المستودع الكبير بعض الوقت.</string>
+    <string name="dialog_import_repo_risk_modes">لا يمكن لمساحة تخزين Gitling الاحتفاظ بأذونات الملفات أو الروابط الرمزية. تصبح الملفات القابلة للتنفيذ ملفات عادية، ويصبح الرابط الرمزي ملفًا صغيرًا يحتوي على هدفه. يضبط Gitling النسخة لتتجاهل هذه الاختلافات، فلا تظهر كتغييرات.</string>
+    <string name="dialog_import_repo_risk_credentials">كلمات المرور المحفوظة ومفاتيح SSH ليست جزءًا من المستودع. قد تحتاج إلى تسجيل الدخول مرة أخرى لإجراء push أو pull.</string>
+    <string name="dialog_import_name_title">تسمية المستودع</string>
+    <string name="dialog_import_name_destination">الاستيراد إلى: %1$s</string>
+    <string name="alert_import_name_dot">لا يمكن أن يبدأ الاسم بنقطة</string>
+    <string name="dialog_importing_title">جارٍ استيراد %1$s</string>
+    <string name="importing_progress">%1$s من %2$s</string>
+    <string name="importing_progress_unknown">تم نسخ %1$s</string>
+    <string name="dialog_import_done_title">تم استيراد المستودع</string>
+    <string name="dialog_import_done_message">تم نسخ %1$s (%2$s). لم يتغير الأصل.</string>
+    <string name="dialog_import_done_modes">أوقف Gitling الخيارين core.filemode وcore.symlinks في النسخة، حتى لا تظهر أذونات الملفات والروابط الرمزية المفقودة كتغييرات.</string>
+    <string name="dialog_import_done_skipped">لم يتم استيراد الملفات الموجودة في ملف ZIP خارج مجلد المستودع.</string>
+    <string name="toast_import_cancelled">تم إلغاء الاستيراد. لم يتم استيراد أي شيء.</string>
 </resources>

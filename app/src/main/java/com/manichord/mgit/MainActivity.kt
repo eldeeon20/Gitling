@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.manichord.mgit.branchchooser.BranchChooserScreen
 import com.manichord.mgit.branchchooser.BranchChooserViewModel
 import com.manichord.mgit.clone.CloneViewModel
+import com.manichord.mgit.importrepo.ImportRepoViewModel
 import com.manichord.mgit.diff.CommitDiffScreen
 import com.manichord.mgit.dialogs.MessageDialog
 import com.manichord.mgit.explorer.FileExplorerScreen
@@ -85,6 +86,7 @@ class MainActivity : SheimiFragmentActivity() {
     }
 
     private lateinit var cloneViewModel: CloneViewModel
+    private lateinit var importRepoViewModel: ImportRepoViewModel
     private lateinit var viewModel: RepoListViewModel
     private lateinit var navController: NavHostController
 
@@ -177,6 +179,7 @@ class MainActivity : SheimiFragmentActivity() {
 
         viewModel = ViewModelProvider(this)[RepoListViewModel::class.java]
         cloneViewModel = ViewModelProvider(this)[CloneViewModel::class.java]
+        importRepoViewModel = ViewModelProvider(this)[ImportRepoViewModel::class.java]
         settingsViewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
 
         PrivateKeyUtils.migratePrivateKeys()
@@ -202,6 +205,7 @@ class MainActivity : SheimiFragmentActivity() {
                     RepoListComposeContent(
                         activity = this@MainActivity,
                         cloneViewModel = cloneViewModel,
+                        importRepoViewModel = importRepoViewModel,
                         viewModel = viewModel,
                         onCloneClick = { cloneRepo() },
                         onCancelCloneViewClick = { hideCloneView() }

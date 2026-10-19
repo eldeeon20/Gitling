@@ -36,4 +36,15 @@
   <string name="error_media_file_blocked">Android חוסמת את Gitling מלקרוא את \"%1$s\" כי אפליקציה אחרת הוסיפה אותו לתיקיית המאגרים המשותפת. נסו שוב והקישו על תיקון גישה, או מחקו את הקובץ והעתיקו אותו מחדש דרך המיקום Gitling באפליקציית הקבצים.</string>
   <string name="error_move_repos_blocked">המאגרים לא הועברו כי Android חוסמת את Gitling מלקרוא את \"%1$s\", שאפליקציה אחרת הוסיפה. שום דבר לא שונה.</string>
   <string name="error_move_repos_failed">המאגרים לא הועברו (%1$s). שום דבר לא שונה.</string>
+  <string name="dialog_import_failed_title">לא ניתן היה לייבא את המאגר</string>
+  <string name="dialog_import_failed_nothing">שום דבר לא יובא.</string>
+  <string name="error_import_not_a_repo">התיקייה הזו אינה מאגר Git, כי אין בה תיקיית .git. בחרו את התיקייה שמכילה את .git.</string>
+  <string name="error_import_picked_git_dir">זו תיקיית ה-.git של מאגר. בחרו במקומה את התיקייה שמכילה אותה.</string>
+  <string name="error_import_bare">זהו מאגר bare ללא קובצי עבודה. Gitling יכולה לייבא רק מאגרים עם קובצי עבודה. שכפלו אותו במקום זאת.</string>
+  <string name="error_import_git_file">ה-.git של המאגר הזה הוא קישור למיקום אחר (worktree או תת-מודול), ולכן אי אפשר להעתיק אותו לבד. ייבאו במקום זאת את המאגר הראשי.</string>
+  <string name="error_import_zip_no_repo">קובץ ה-ZIP הזה לא מכיל מאגר Git. ודאו שתיקיית ה-.git המוסתרת נכללה בדחיסה.</string>
+  <string name="error_import_zip_multiple">קובץ ה-ZIP הזה מכיל יותר ממאגר אחד. דחסו מאגר אחד בכל פעם.</string>
+  <string name="error_import_zip_invalid">אי אפשר לקרוא את קובץ ה-ZIP הזה, או שהוא מכיל נתיבים שיצביעו אל מחוץ למאגר.</string>
+  <string name="error_import_no_space">אין מספיק נפח אחסון פנוי עבור העותק.</string>
+  <string name="error_import_read_failed">לא ניתן היה להעתיק את הקבצים: %1$s</string>
 </resources>

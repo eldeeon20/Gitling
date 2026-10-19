@@ -209,4 +209,26 @@
     <string name="dialog_fix_file_access_title">Réparer l\'accès aux fichiers</string>
     <string name="dialog_fix_file_access_message">Android empêche Gitling de lire \"%1$s\", car une autre app l\'a ajouté au dossier partagé des dépôts.\n\nGitling peut corriger cela en remplaçant chaque fichier bloqué par sa propre copie identique. Appuyez sur Réparer l\'accès, puis confirmez le dossier sur l\'écran suivant. Vous n\'aurez à le faire qu\'une fois.</string>
     <string name="dialog_fix_file_access_wrong_folder">Ce dossier ne contient pas \"%1$s\". Choisissez le dossier que Gitling ouvre pour vous, puis confirmez-le.</string>
+    <string name="label_import_repo">Importer depuis cet appareil</string>
+    <string name="label_import_folder">Choisir un dossier</string>
+    <string name="label_import_zip">Choisir un fichier ZIP</string>
+    <string name="label_open_repo">Ouvrir</string>
+    <string name="dialog_import_repo_title">Importer un dépôt</string>
+    <string name="dialog_import_repo_intro">Gitling copie un dépôt Git depuis un dossier de cet appareil, ou depuis un fichier ZIP, dans son propre stockage. L\'historique, les branches, les stashs et les modifications non validées sont copiés aussi. Avant de commencer :</string>
+    <string name="dialog_import_repo_risk_copy">C\'est une copie. L\'original n\'est pas modifié, et les modifications ultérieures de l\'un ne sont pas reportées sur l\'autre.</string>
+    <string name="dialog_import_repo_risk_private">Sur Android 11 et versions ultérieures, les dossiers du stockage privé d\'autres apps (Android/data) ne peuvent pas être choisis, car Android le bloque. Copiez d\'abord le dépôt ailleurs, par exemple sous forme de fichier ZIP depuis un ordinateur.</string>
+    <string name="dialog_import_repo_risk_space">La copie occupe autant d\'espace que l\'original, et un gros dépôt peut prendre un moment.</string>
+    <string name="dialog_import_repo_risk_modes">Le stockage de Gitling ne peut pas conserver les permissions de fichiers ni les liens symboliques. Les fichiers exécutables deviennent des fichiers normaux, et un lien symbolique devient un petit fichier contenant sa cible. Gitling configure la copie pour ignorer ces différences, afin qu\'elles n\'apparaissent pas comme des modifications.</string>
+    <string name="dialog_import_repo_risk_credentials">Les mots de passe enregistrés et les clés SSH ne font pas partie d\'un dépôt. Vous devrez peut-être vous reconnecter pour faire un push ou un pull.</string>
+    <string name="dialog_import_name_title">Nommer le dépôt</string>
+    <string name="dialog_import_name_destination">Importation vers : %1$s</string>
+    <string name="alert_import_name_dot">Le nom ne peut pas commencer par un point</string>
+    <string name="dialog_importing_title">Importation de %1$s</string>
+    <string name="importing_progress">%1$s sur %2$s</string>
+    <string name="importing_progress_unknown">%1$s copiés</string>
+    <string name="dialog_import_done_title">Dépôt importé</string>
+    <string name="dialog_import_done_message">%1$s a été copié (%2$s). L\'original n\'a pas été modifié.</string>
+    <string name="dialog_import_done_modes">Gitling a désactivé core.filemode et core.symlinks dans la copie, pour que les permissions de fichiers et les liens symboliques perdus n\'apparaissent pas comme des modifications.</string>
+    <string name="dialog_import_done_skipped">Les fichiers du ZIP situés en dehors du dossier du dépôt n\'ont pas été importés.</string>
+    <string name="toast_import_cancelled">Importation annulée. Rien n\'a été importé.</string>
 </resources>

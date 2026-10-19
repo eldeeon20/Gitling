@@ -198,4 +198,26 @@
   <string name="dialog_fix_file_access_title">תיקון גישה לקבצים</string>
   <string name="dialog_fix_file_access_message">Android חוסמת את Gitling מלקרוא את \"%1$s\" כי אפליקציה אחרת הוסיפה אותו לתיקיית המאגרים המשותפת.\n\nGitling יכולה לתקן זאת על ידי החלפת כל קובץ חסום בעותק זהה משלה. הקישו על תיקון גישה ואז אשרו את התיקייה במסך הבא. צריך לעשות זאת רק פעם אחת.</string>
   <string name="dialog_fix_file_access_wrong_folder">התיקייה הזו לא מכילה את \"%1$s\". בחרו את התיקייה ש-Gitling פותחת עבורכם ואשרו אותה.</string>
+  <string name="label_import_repo">ייבוא מהמכשיר הזה</string>
+  <string name="label_import_folder">בחירת תיקייה</string>
+  <string name="label_import_zip">בחירת קובץ ZIP</string>
+  <string name="label_open_repo">פתיחה</string>
+  <string name="dialog_import_repo_title">ייבוא מאגר</string>
+  <string name="dialog_import_repo_intro">Gitling מעתיקה מאגר Git מתיקייה במכשיר הזה, או מקובץ ZIP, אל האחסון שלה. ההיסטוריה, הענפים, ה-stash והשינויים שלא בוצעו להם commit מועתקים גם הם. לפני שמתחילים:</string>
+  <string name="dialog_import_repo_risk_copy">זה עותק. המקור לא משתנה, ושינויים מאוחרים יותר באחד מהם לא עוברים לשני.</string>
+  <string name="dialog_import_repo_risk_private">ב-Android 11 ואילך אי אפשר לבחור תיקיות באחסון הפרטי של אפליקציות אחרות (Android/data), כי Android חוסמת זאת. העתיקו קודם את המאגר למקום אחר, למשל כקובץ ZIP ממחשב.</string>
+  <string name="dialog_import_repo_risk_space">העותק תופס נפח אחסון כמו המקור, ומאגר גדול עשוי לקחת זמן.</string>
+  <string name="dialog_import_repo_risk_modes">האחסון של Gitling לא יכול לשמור הרשאות קבצים או קישורים סמליים. קבצי הפעלה הופכים לקבצים רגילים, וקישור סמלי הופך לקובץ קטן שמכיל את היעד שלו. Gitling מגדירה את העותק להתעלם מההבדלים האלה, כך שהם לא מופיעים כשינויים.</string>
+  <string name="dialog_import_repo_risk_credentials">סיסמאות שמורות ומפתחות SSH אינם חלק מהמאגר. ייתכן שתצטרכו להתחבר שוב כדי לבצע push או pull.</string>
+  <string name="dialog_import_name_title">שם למאגר</string>
+  <string name="dialog_import_name_destination">ייבוא אל: %1$s</string>
+  <string name="alert_import_name_dot">השם לא יכול להתחיל בנקודה</string>
+  <string name="dialog_importing_title">מייבא את %1$s</string>
+  <string name="importing_progress">%1$s מתוך %2$s</string>
+  <string name="importing_progress_unknown">הועתקו %1$s</string>
+  <string name="dialog_import_done_title">המאגר יובא</string>
+  <string name="dialog_import_done_message">%1$s הועתק (%2$s). המקור לא שונה.</string>
+  <string name="dialog_import_done_modes">Gitling כיבתה את core.filemode ואת core.symlinks בעותק, כדי שהרשאות קבצים וקישורים סמליים שאבדו לא יופיעו כשינויים.</string>
+  <string name="dialog_import_done_skipped">קבצים בקובץ ה-ZIP שנמצאים מחוץ לתיקיית המאגר לא יובאו.</string>
+  <string name="toast_import_cancelled">הייבוא בוטל. שום דבר לא יובא.</string>
 </resources>

@@ -56,4 +56,15 @@
     <string name="error_media_file_blocked">Android blocks Gitling from reading \"%1$s\" because another app added it to the shared repos folder. Try again and tap Fix access, or delete the file and copy it back in through the Gitling location in the Files app.</string>
     <string name="error_move_repos_blocked">Repos weren\'t moved because Android blocks Gitling from reading \"%1$s\", which another app added. Nothing was changed.</string>
     <string name="error_move_repos_failed">Repos weren\'t moved (%1$s). Nothing was changed.</string>
+    <string name="dialog_import_failed_title">Couldn\'t import the repository</string>
+    <string name="dialog_import_failed_nothing">Nothing was imported.</string>
+    <string name="error_import_not_a_repo">This folder isn\'t a Git repository: there\'s no .git folder in it. Pick the folder that contains .git.</string>
+    <string name="error_import_picked_git_dir">This is a repository\'s .git folder. Pick the folder that contains it instead.</string>
+    <string name="error_import_bare">This is a bare repository, which has no working files. Gitling can only import repositories with working files. Clone it instead.</string>
+    <string name="error_import_git_file">This repository\'s .git is a link to another location (a worktree or a submodule), so it can\'t be copied on its own. Import the main repository instead.</string>
+    <string name="error_import_zip_no_repo">This ZIP file doesn\'t contain a Git repository. Make sure the hidden .git folder was included when it was zipped.</string>
+    <string name="error_import_zip_multiple">This ZIP file contains more than one repository. Zip one repository at a time.</string>
+    <string name="error_import_zip_invalid">This ZIP file can\'t be read, or it contains paths that would point outside the repository.</string>
+    <string name="error_import_no_space">There isn\'t enough free storage for the copy.</string>
+    <string name="error_import_read_failed">The files couldn\'t be copied: %1$s</string>
 </resources>
