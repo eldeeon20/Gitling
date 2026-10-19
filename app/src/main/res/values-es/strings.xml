@@ -241,4 +241,7 @@
         <item quantity="other">%d repositorios</item>
     </plurals>
     <string name="label_switch_branch">Cambiar de rama</string>
+    <string name="label_diff">Diff</string>
+    <string name="label_diff_staged">Cambios preparados</string>
+    <string name="label_diff_working_tree">Directorio de trabajo</string>
 </resources>

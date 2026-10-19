@@ -242,4 +242,7 @@
         <item quantity="other">%d репозитория</item>
     </plurals>
     <string name="label_switch_branch">Сменить ветку</string>
+    <string name="label_diff">Diff</string>
+    <string name="label_diff_staged">Индексированные изменения</string>
+    <string name="label_diff_working_tree">Рабочая копия</string>
 </resources>

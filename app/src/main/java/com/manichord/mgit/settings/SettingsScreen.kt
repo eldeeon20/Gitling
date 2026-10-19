@@ -51,7 +51,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.action_settings), fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.action_settings)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")

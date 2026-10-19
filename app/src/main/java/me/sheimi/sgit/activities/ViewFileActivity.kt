@@ -93,11 +93,16 @@ class ViewFileActivity : SheimiFragmentActivity() {
         }
 
         val screenTitle = File(fileName).name
+        // The folder inside the repo, e.g. "app/src/main"; the repo name for a file at its root
+        val screenSubtitle = repo?.let { r ->
+            File(FsUtils.getRelativePath(File(fileName), r.dir)).parent ?: r.diaplayName
+        }
 
         setContent {
             AppTheme {
                 ViewFileScreen(
                     title = screenTitle,
+                    subtitle = screenSubtitle,
                     hasCommitsTab = commitsFragment != null,
                     hasBlameTab = repo != null,
                     activityMode = activityMode,
