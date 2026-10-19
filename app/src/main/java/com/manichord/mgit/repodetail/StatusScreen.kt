@@ -2,6 +2,7 @@
 
 package com.manichord.mgit.repodetail
 
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LoadingIndicator
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -137,10 +138,10 @@ private fun SectionHeader(
             Text(title, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
             Row {
                 if (onBulkAction != null && bulkActionLabel != null) {
-                    TextButton(onClick = onBulkAction) { Text(bulkActionLabel) }
+                    TextButton(shapes = ButtonDefaults.shapes(), onClick = onBulkAction) { Text(bulkActionLabel) }
                 }
                 if (onViewDiff != null) {
-                    TextButton(onClick = onViewDiff) { Text("View diff") }
+                    TextButton(shapes = ButtonDefaults.shapes(), onClick = onViewDiff) { Text("View diff") }
                 }
             }
         }

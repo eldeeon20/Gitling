@@ -2,6 +2,7 @@
 
 package com.manichord.mgit.importrepo
 
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LinearWavyProgressIndicator
 import android.os.Build
 import android.text.format.Formatter
@@ -110,7 +111,7 @@ private fun IntroDialog(onChooseFolder: () -> Unit, onChooseZip: () -> Unit, onD
             }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.label_cancel)) }
+            TextButton(shapes = ButtonDefaults.shapes(), onClick = onDismiss) { Text(stringResource(R.string.label_cancel)) }
         }
     )
 }
@@ -144,12 +145,12 @@ private fun NameDialog(state: ImportRepoViewModel.State.Naming, viewModel: Impor
             )
         },
         confirmButton = {
-            TextButton(onClick = viewModel::startImport, enabled = state.error == null) {
+            TextButton(shapes = ButtonDefaults.shapes(), onClick = viewModel::startImport, enabled = state.error == null) {
                 Text(stringResource(R.string.label_import))
             }
         },
         dismissButton = {
-            TextButton(onClick = viewModel::dismiss) { Text(stringResource(R.string.label_cancel)) }
+            TextButton(shapes = ButtonDefaults.shapes(), onClick = viewModel::dismiss) { Text(stringResource(R.string.label_cancel)) }
         }
     )
 }
@@ -182,7 +183,7 @@ private fun ProgressDialog(state: ImportRepoViewModel.State.Importing, onCancel:
         },
         confirmButton = {},
         dismissButton = {
-            TextButton(onClick = onCancel) { Text(stringResource(R.string.label_cancel)) }
+            TextButton(shapes = ButtonDefaults.shapes(), onClick = onCancel) { Text(stringResource(R.string.label_cancel)) }
         }
     )
 }
@@ -209,10 +210,10 @@ private fun DoneDialog(state: ImportRepoViewModel.State.Done, onOpen: () -> Unit
             }
         },
         confirmButton = {
-            TextButton(onClick = onOpen) { Text(stringResource(R.string.label_open_repo)) }
+            TextButton(shapes = ButtonDefaults.shapes(), onClick = onOpen) { Text(stringResource(R.string.label_open_repo)) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.label_done)) }
+            TextButton(shapes = ButtonDefaults.shapes(), onClick = onDismiss) { Text(stringResource(R.string.label_done)) }
         }
     )
 }
@@ -236,7 +237,7 @@ private fun FailedDialog(state: ImportRepoViewModel.State.Failed, onDismiss: () 
         title = { Text(stringResource(R.string.dialog_import_failed_title)) },
         text = { Text(message + "\n\n" + stringResource(R.string.dialog_import_failed_nothing)) },
         confirmButton = {
-            TextButton(onClick = onDismiss) { Text(stringResource(R.string.label_ok)) }
+            TextButton(shapes = ButtonDefaults.shapes(), onClick = onDismiss) { Text(stringResource(R.string.label_ok)) }
         }
     )
 }

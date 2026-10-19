@@ -211,13 +211,13 @@ fun CloneView(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            OutlinedButton(
+            OutlinedButton(shapes = ButtonDefaults.shapes(), 
                 onClick = onCancelClick,
                 modifier = Modifier.weight(1f).height(48.dp)
             ) {
                 Text(stringResource(id = R.string.label_cancel))
             }
-            Button(
+            Button(shapes = ButtonDefaults.shapes(), 
                 onClick = onCloneClick,
                 modifier = Modifier.weight(1f).height(48.dp)
             ) {
