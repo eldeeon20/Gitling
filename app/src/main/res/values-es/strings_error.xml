@@ -53,13 +53,13 @@
     <string name="error_move_repos_failed">No se movieron los repositorios (%1$s). No se ha cambiado nada.</string>
     <string name="dialog_import_failed_title">No se pudo importar el repositorio</string>
     <string name="dialog_import_failed_nothing">No se ha importado nada.</string>
-    <string name="error_import_not_a_repo">Esta carpeta no es un repositorio Git, porque no contiene una carpeta .git. Elige la carpeta que contiene .git.</string>
-    <string name="error_import_picked_git_dir">Esta es la carpeta .git de un repositorio. Elige en su lugar la carpeta que la contiene.</string>
-    <string name="error_import_bare">Este es un repositorio bare, sin archivos de trabajo. Gitling solo puede importar repositorios con archivos de trabajo. Clónalo en su lugar.</string>
-    <string name="error_import_git_file">El .git de este repositorio es un enlace a otra ubicación (un worktree o un submódulo), así que no se puede copiar por sí solo. Importa en su lugar el repositorio principal.</string>
-    <string name="error_import_zip_no_repo">Este archivo ZIP no contiene un repositorio Git. Asegúrate de incluir la carpeta oculta .git al comprimirlo.</string>
-    <string name="error_import_zip_multiple">Este archivo ZIP contiene más de un repositorio. Comprime los repositorios de uno en uno.</string>
-    <string name="error_import_zip_invalid">Este archivo ZIP no se puede leer, o contiene rutas que apuntarían fuera del repositorio.</string>
-    <string name="error_import_no_space">No hay suficiente espacio libre para la copia.</string>
+    <string name="error_import_not_a_repo">Esta carpeta no tiene una carpeta .git. Elige la carpeta que contiene .git.</string>
+    <string name="error_import_picked_git_dir">Elige la carpeta que contiene .git, no .git en sí.</string>
+    <string name="error_import_bare">Los repositorios bare no se pueden importar. Clónalo en su lugar.</string>
+    <string name="error_import_git_file">Este .git apunta a otro repositorio (worktree o submódulo). Importa el repositorio principal en su lugar.</string>
+    <string name="error_import_zip_no_repo">No hay un repositorio Git en este archivo ZIP. Asegúrate de que la carpeta oculta .git también se comprimió.</string>
+    <string name="error_import_zip_multiple">Este archivo ZIP tiene más de un repositorio. Comprímelos de uno en uno.</string>
+    <string name="error_import_zip_invalid">Este archivo ZIP no se puede leer o tiene rutas inseguras.</string>
+    <string name="error_import_no_space">No hay suficiente espacio libre.</string>
     <string name="error_import_read_failed">No se pudieron copiar los archivos: %1$s</string>
 </resources>

@@ -58,13 +58,13 @@
     <string name="error_move_repos_failed">لم يتم نقل المستودعات (%1$s). لم يتم تغيير أي شيء.</string>
     <string name="dialog_import_failed_title">تعذر استيراد المستودع</string>
     <string name="dialog_import_failed_nothing">لم يتم استيراد أي شيء.</string>
-    <string name="error_import_not_a_repo">هذا المجلد ليس مستودع Git، لأنه لا يحتوي على مجلد .git. اختر المجلد الذي يحتوي على .git.</string>
-    <string name="error_import_picked_git_dir">هذا مجلد .git الخاص بمستودع. اختر بدلًا منه المجلد الذي يحتويه.</string>
-    <string name="error_import_bare">هذا مستودع bare لا يحتوي على ملفات عمل. لا يمكن لـ Gitling استيراد إلا المستودعات التي تحتوي على ملفات عمل. استنسخه بدلًا من ذلك.</string>
-    <string name="error_import_git_file">مجلد .git في هذا المستودع رابط إلى موقع آخر (worktree أو وحدة فرعية)، لذا لا يمكن نسخه وحده. استورد المستودع الرئيسي بدلًا من ذلك.</string>
-    <string name="error_import_zip_no_repo">لا يحتوي ملف ZIP هذا على مستودع Git. تأكد من تضمين مجلد .git المخفي عند الضغط.</string>
-    <string name="error_import_zip_multiple">يحتوي ملف ZIP هذا على أكثر من مستودع. اضغط مستودعًا واحدًا في كل مرة.</string>
-    <string name="error_import_zip_invalid">تتعذر قراءة ملف ZIP هذا، أو أنه يحتوي على مسارات تشير إلى خارج المستودع.</string>
-    <string name="error_import_no_space">لا توجد مساحة تخزين كافية للنسخة.</string>
+    <string name="error_import_not_a_repo">لا يحتوي هذا المجلد على مجلد .git. اختر المجلد الذي يحتوي على .git.</string>
+    <string name="error_import_picked_git_dir">اختر المجلد الذي يحتوي على .git، وليس .git نفسه.</string>
+    <string name="error_import_bare">لا يمكن استيراد مستودعات bare. استنسخه بدلًا من ذلك.</string>
+    <string name="error_import_git_file">يشير .git هذا إلى مستودع آخر (worktree أو وحدة فرعية). استورد المستودع الرئيسي بدلًا من ذلك.</string>
+    <string name="error_import_zip_no_repo">لا يوجد مستودع Git في ملف ZIP هذا. تأكد من ضغط مجلد .git المخفي أيضًا.</string>
+    <string name="error_import_zip_multiple">يحتوي ملف ZIP هذا على أكثر من مستودع. اضغطها واحدًا تلو الآخر.</string>
+    <string name="error_import_zip_invalid">تتعذر قراءة ملف ZIP هذا أو أنه يحتوي على مسارات غير آمنة.</string>
+    <string name="error_import_no_space">لا توجد مساحة تخزين كافية.</string>
     <string name="error_import_read_failed">تعذر نسخ الملفات: %1$s</string>
 </resources>

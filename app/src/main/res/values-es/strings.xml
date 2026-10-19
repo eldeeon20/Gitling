@@ -209,16 +209,15 @@
     <string name="dialog_fix_file_access_message">Android impide que Gitling lea \"%1$s\" porque otra app lo añadió a la carpeta compartida de repositorios.\n\nGitling puede solucionarlo sustituyendo cada archivo bloqueado por una copia idéntica propia. Toca Arreglar acceso y confirma la carpeta en la siguiente pantalla. Solo tendrás que hacerlo una vez.</string>
     <string name="dialog_fix_file_access_wrong_folder">Esa carpeta no contiene \"%1$s\". Elige la carpeta que Gitling abre por ti y confírmala.</string>
     <string name="label_import_repo">Importar desde este dispositivo</string>
-    <string name="label_import_folder">Elegir carpeta</string>
-    <string name="label_import_zip">Elegir archivo ZIP</string>
+    <string name="label_import_folder">Carpeta</string>
+    <string name="label_import_zip">Archivo ZIP</string>
     <string name="label_open_repo">Abrir</string>
     <string name="dialog_import_repo_title">Importar un repositorio</string>
-    <string name="dialog_import_repo_intro">Gitling copia un repositorio Git desde una carpeta de este dispositivo, o desde un archivo ZIP, a su propio almacenamiento. Se copian su historial, ramas, stashes y cambios sin confirmar. Antes de empezar:</string>
-    <string name="dialog_import_repo_risk_copy">Es una copia. El original no cambia, y los cambios posteriores en uno no se trasladan al otro.</string>
-    <string name="dialog_import_repo_risk_private">En Android 11 y posteriores no se pueden elegir carpetas del almacenamiento privado de otras apps (Android/data), porque Android lo bloquea. Copia antes el repositorio a otro lugar, por ejemplo como archivo ZIP desde un ordenador.</string>
-    <string name="dialog_import_repo_risk_space">La copia ocupa tanto espacio como el original, y un repositorio grande puede tardar un rato.</string>
-    <string name="dialog_import_repo_risk_modes">El almacenamiento de Gitling no puede conservar permisos de archivo ni enlaces simbólicos. Los archivos ejecutables pasan a ser archivos normales, y un enlace simbólico pasa a ser un pequeño archivo con su destino. Gitling configura la copia para ignorar estas diferencias, así que no aparecen como cambios.</string>
-    <string name="dialog_import_repo_risk_credentials">Las contraseñas guardadas y las claves SSH no forman parte de un repositorio. Puede que tengas que volver a iniciar sesión para hacer push o pull.</string>
+    <string name="dialog_import_repo_intro">Copia un repositorio a Gitling desde una carpeta o un archivo ZIP.</string>
+    <string name="dialog_import_repo_risk_copy">El original no cambia.</string>
+    <string name="dialog_import_repo_risk_private">No se pueden elegir carpetas de Android/data. Usa un archivo ZIP en su lugar.</string>
+    <string name="dialog_import_repo_risk_modes">No se conservan los permisos de archivo ni los enlaces simbólicos.</string>
+    <string name="dialog_import_repo_risk_credentials">No se copian las contraseñas guardadas ni las claves SSH.</string>
     <string name="dialog_import_name_title">Nombre del repositorio</string>
     <string name="dialog_import_name_destination">Se importará en: %1$s</string>
     <string name="alert_import_name_dot">El nombre no puede empezar por un punto</string>
@@ -226,8 +225,8 @@
     <string name="importing_progress">%1$s de %2$s</string>
     <string name="importing_progress_unknown">%1$s copiados</string>
     <string name="dialog_import_done_title">Repositorio importado</string>
-    <string name="dialog_import_done_message">Se copió %1$s (%2$s). El original no ha cambiado.</string>
-    <string name="dialog_import_done_modes">Gitling desactivó core.filemode y core.symlinks en la copia, para que los permisos de archivo y los enlaces simbólicos perdidos no aparezcan como cambios.</string>
-    <string name="dialog_import_done_skipped">No se importaron los archivos del ZIP que estaban fuera de la carpeta del repositorio.</string>
+    <string name="dialog_import_done_message">%1$s está listo (%2$s).</string>
+    <string name="dialog_import_done_modes">En esta copia se ignoran los permisos de archivo y los enlaces simbólicos.</string>
+    <string name="dialog_import_done_skipped">Se omitieron algunos archivos fuera de la carpeta del repositorio.</string>
     <string name="toast_import_cancelled">Importación cancelada. No se ha importado nada.</string>
 </resources>

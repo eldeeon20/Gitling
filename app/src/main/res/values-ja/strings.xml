@@ -210,16 +210,15 @@
     <string name="dialog_fix_file_access_message">\"%1$s\" は別のアプリが共有リポジトリフォルダに追加したため、Android により Gitling からの読み取りがブロックされています。\n\nGitling は、ブロックされた各ファイルを内容が同じ自分のコピーに置き換えることで、これを修復できます。[アクセスを修復] をタップし、次の画面でフォルダを確定してください。この操作は一度だけで済みます。</string>
     <string name="dialog_fix_file_access_wrong_folder">そのフォルダには \"%1$s\" が含まれていません。Gitling が開くフォルダを選んで確定してください。</string>
     <string name="label_import_repo">このデバイスからインポート</string>
-    <string name="label_import_folder">フォルダを選択</string>
-    <string name="label_import_zip">ZIP ファイルを選択</string>
+    <string name="label_import_folder">フォルダ</string>
+    <string name="label_import_zip">ZIP ファイル</string>
     <string name="label_open_repo">開く</string>
     <string name="dialog_import_repo_title">リポジトリをインポート</string>
-    <string name="dialog_import_repo_intro">Gitling は、このデバイス上のフォルダまたは ZIP ファイルから Git リポジトリを自身のストレージにコピーします。履歴、ブランチ、stash、未コミットの変更もコピーされます。始める前に:</string>
-    <string name="dialog_import_repo_risk_copy">これはコピーです。元のリポジトリは変更されず、その後どちらかに加えた変更はもう一方には反映されません。</string>
-    <string name="dialog_import_repo_risk_private">Android 11 以降では、他のアプリの専用ストレージ (Android/data) 内のフォルダは Android によってブロックされるため選択できません。先にリポジトリを別の場所にコピーしてください。たとえばパソコンから ZIP ファイルとして移します。</string>
-    <string name="dialog_import_repo_risk_space">コピーには元と同じだけの容量が必要で、大きなリポジトリには時間がかかることがあります。</string>
-    <string name="dialog_import_repo_risk_modes">Gitling のストレージはファイルのパーミッションやシンボリックリンクを保持できません。実行ファイルは通常のファイルになり、シンボリックリンクはリンク先を記した小さなファイルになります。Gitling はこれらの違いを無視するようにコピーを設定するため、変更として表示されません。</string>
-    <string name="dialog_import_repo_risk_credentials">保存したパスワードや SSH 鍵はリポジトリに含まれません。プッシュやプルのために再度サインインが必要になる場合があります。</string>
+    <string name="dialog_import_repo_intro">フォルダまたは ZIP ファイルから Gitling にリポジトリをコピーします。</string>
+    <string name="dialog_import_repo_risk_copy">元のリポジトリは変更されません。</string>
+    <string name="dialog_import_repo_risk_private">Android/data 内のフォルダは選択できません。代わりに ZIP ファイルを使ってください。</string>
+    <string name="dialog_import_repo_risk_modes">ファイルのパーミッションとシンボリックリンクは保持されません。</string>
+    <string name="dialog_import_repo_risk_credentials">保存したパスワードと SSH 鍵はコピーされません。</string>
     <string name="dialog_import_name_title">リポジトリ名</string>
     <string name="dialog_import_name_destination">インポート先: %1$s</string>
     <string name="alert_import_name_dot">名前をドットで始めることはできません</string>
@@ -227,8 +226,8 @@
     <string name="importing_progress">%1$s / %2$s</string>
     <string name="importing_progress_unknown">%1$s をコピー済み</string>
     <string name="dialog_import_done_title">リポジトリをインポートしました</string>
-    <string name="dialog_import_done_message">%1$s をコピーしました (%2$s)。元のリポジトリは変更されていません。</string>
-    <string name="dialog_import_done_modes">失われたファイルのパーミッションやシンボリックリンクが変更として表示されないように、Gitling はコピーの core.filemode と core.symlinks をオフにしました。</string>
-    <string name="dialog_import_done_skipped">ZIP ファイル内のリポジトリのフォルダ外にあったファイルはインポートされませんでした。</string>
+    <string name="dialog_import_done_message">%1$s の準備ができました (%2$s)。</string>
+    <string name="dialog_import_done_modes">このコピーではファイルのパーミッションとシンボリックリンクは無視されます。</string>
+    <string name="dialog_import_done_skipped">リポジトリのフォルダ外にあった一部のファイルはスキップされました。</string>
     <string name="toast_import_cancelled">インポートをキャンセルしました。何もインポートされていません。</string>
 </resources>

@@ -52,13 +52,13 @@
     <string name="error_move_repos_failed">Репозитории не перемещены (%1$s). Ничего не изменено.</string>
     <string name="dialog_import_failed_title">Не удалось импортировать репозиторий</string>
     <string name="dialog_import_failed_nothing">Ничего не импортировано.</string>
-    <string name="error_import_not_a_repo">Эта папка не является Git-репозиторием: в ней нет папки .git. Выберите папку, в которой находится .git.</string>
-    <string name="error_import_picked_git_dir">Это папка .git репозитория. Выберите вместо неё папку, в которой она находится.</string>
-    <string name="error_import_bare">Это bare-репозиторий без рабочих файлов. Gitling может импортировать только репозитории с рабочими файлами. Вместо этого клонируйте его.</string>
-    <string name="error_import_git_file">Папка .git этого репозитория является ссылкой на другое место (worktree или подмодуль), поэтому её нельзя скопировать отдельно. Импортируйте основной репозиторий.</string>
-    <string name="error_import_zip_no_repo">В этом ZIP-файле нет Git-репозитория. Убедитесь, что при архивации была включена скрытая папка .git.</string>
-    <string name="error_import_zip_multiple">В этом ZIP-файле больше одного репозитория. Архивируйте по одному репозиторию.</string>
-    <string name="error_import_zip_invalid">Этот ZIP-файл не удаётся прочитать, или в нём есть пути, указывающие за пределы репозитория.</string>
-    <string name="error_import_no_space">Недостаточно свободного места для копии.</string>
+    <string name="error_import_not_a_repo">В этой папке нет папки .git. Выберите папку, в которой находится .git.</string>
+    <string name="error_import_picked_git_dir">Выберите папку, в которой находится .git, а не саму .git.</string>
+    <string name="error_import_bare">Bare-репозитории импортировать нельзя. Клонируйте его.</string>
+    <string name="error_import_git_file">Этот .git указывает на другой репозиторий (worktree или подмодуль). Импортируйте основной репозиторий.</string>
+    <string name="error_import_zip_no_repo">В этом ZIP-файле нет Git-репозитория. Убедитесь, что скрытая папка .git тоже была заархивирована.</string>
+    <string name="error_import_zip_multiple">В этом ZIP-файле больше одного репозитория. Архивируйте по одному.</string>
+    <string name="error_import_zip_invalid">Этот ZIP-файл не читается или содержит небезопасные пути.</string>
+    <string name="error_import_no_space">Недостаточно свободного места.</string>
     <string name="error_import_read_failed">Не удалось скопировать файлы: %1$s</string>
 </resources>

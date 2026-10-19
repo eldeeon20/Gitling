@@ -208,16 +208,15 @@
     <string name="dialog_fix_file_access_message">Android не даёт Gitling прочитать \"%1$s\", потому что этот файл добавило в общую папку репозиториев другое приложение.\n\nGitling может это исправить, заменив каждый заблокированный файл собственной идентичной копией. Нажмите «Исправить доступ», затем подтвердите папку на следующем экране. Это нужно сделать только один раз.</string>
     <string name="dialog_fix_file_access_wrong_folder">В этой папке нет \"%1$s\". Выберите папку, которую открывает Gitling, и подтвердите её.</string>
     <string name="label_import_repo">Импорт с этого устройства</string>
-    <string name="label_import_folder">Выбрать папку</string>
-    <string name="label_import_zip">Выбрать ZIP-файл</string>
+    <string name="label_import_folder">Папка</string>
+    <string name="label_import_zip">ZIP-файл</string>
     <string name="label_open_repo">Открыть</string>
     <string name="dialog_import_repo_title">Импорт репозитория</string>
-    <string name="dialog_import_repo_intro">Gitling копирует Git-репозиторий из папки на этом устройстве или из ZIP-файла в своё хранилище. Вместе с ним копируются история, ветки, stash и незакоммиченные изменения. Прежде чем начать:</string>
-    <string name="dialog_import_repo_risk_copy">Это копия. Оригинал не меняется, а последующие изменения в одном не переносятся в другой.</string>
-    <string name="dialog_import_repo_risk_private">В Android 11 и новее нельзя выбрать папки в личном хранилище других приложений (Android/data): Android это блокирует. Сначала скопируйте репозиторий в другое место, например в виде ZIP-файла с компьютера.</string>
-    <string name="dialog_import_repo_risk_space">Копия занимает столько же места, сколько оригинал, а большой репозиторий может копироваться долго.</string>
-    <string name="dialog_import_repo_risk_modes">Хранилище Gitling не сохраняет права доступа к файлам и символические ссылки. Исполняемые файлы становятся обычными, а символическая ссылка становится небольшим файлом с путём к цели. Gitling настраивает копию так, чтобы эти различия игнорировались и не отображались как изменения.</string>
-    <string name="dialog_import_repo_risk_credentials">Сохранённые пароли и SSH-ключи не входят в репозиторий. Возможно, для push или pull придётся войти снова.</string>
+    <string name="dialog_import_repo_intro">Копирует репозиторий в Gitling из папки или ZIP-файла.</string>
+    <string name="dialog_import_repo_risk_copy">Оригинал не меняется.</string>
+    <string name="dialog_import_repo_risk_private">Папки в Android/data выбрать нельзя. Используйте ZIP-файл.</string>
+    <string name="dialog_import_repo_risk_modes">Права доступа к файлам и символические ссылки не сохраняются.</string>
+    <string name="dialog_import_repo_risk_credentials">Сохранённые пароли и SSH-ключи не копируются.</string>
     <string name="dialog_import_name_title">Название репозитория</string>
     <string name="dialog_import_name_destination">Импорт в: %1$s</string>
     <string name="alert_import_name_dot">Название не может начинаться с точки</string>
@@ -225,8 +224,8 @@
     <string name="importing_progress">%1$s из %2$s</string>
     <string name="importing_progress_unknown">Скопировано: %1$s</string>
     <string name="dialog_import_done_title">Репозиторий импортирован</string>
-    <string name="dialog_import_done_message">%1$s скопирован (%2$s). Оригинал не изменён.</string>
-    <string name="dialog_import_done_modes">Gitling отключил core.filemode и core.symlinks в копии, чтобы потерянные права доступа и символические ссылки не отображались как изменения.</string>
-    <string name="dialog_import_done_skipped">Файлы в ZIP-архиве вне папки репозитория не импортированы.</string>
+    <string name="dialog_import_done_message">%1$s готов (%2$s).</string>
+    <string name="dialog_import_done_modes">В этой копии права доступа к файлам и символические ссылки игнорируются.</string>
+    <string name="dialog_import_done_skipped">Некоторые файлы вне папки репозитория пропущены.</string>
     <string name="toast_import_cancelled">Импорт отменён. Ничего не импортировано.</string>
 </resources>

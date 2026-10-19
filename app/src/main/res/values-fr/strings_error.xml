@@ -53,13 +53,13 @@
     <string name="error_move_repos_failed">Les dépôts n\'ont pas été déplacés (%1$s). Rien n\'a été modifié.</string>
     <string name="dialog_import_failed_title">Impossible d\'importer le dépôt</string>
     <string name="dialog_import_failed_nothing">Rien n\'a été importé.</string>
-    <string name="error_import_not_a_repo">Ce dossier n\'est pas un dépôt Git, car il ne contient pas de dossier .git. Choisissez le dossier qui contient .git.</string>
-    <string name="error_import_picked_git_dir">C\'est le dossier .git d\'un dépôt. Choisissez plutôt le dossier qui le contient.</string>
-    <string name="error_import_bare">C\'est un dépôt bare, sans fichiers de travail. Gitling ne peut importer que des dépôts avec des fichiers de travail. Clonez-le plutôt.</string>
-    <string name="error_import_git_file">Le .git de ce dépôt est un lien vers un autre emplacement (un worktree ou un sous-module), il ne peut donc pas être copié seul. Importez plutôt le dépôt principal.</string>
-    <string name="error_import_zip_no_repo">Ce fichier ZIP ne contient pas de dépôt Git. Vérifiez que le dossier caché .git a bien été inclus lors de la compression.</string>
-    <string name="error_import_zip_multiple">Ce fichier ZIP contient plusieurs dépôts. Compressez un seul dépôt à la fois.</string>
-    <string name="error_import_zip_invalid">Ce fichier ZIP est illisible, ou il contient des chemins qui pointeraient en dehors du dépôt.</string>
-    <string name="error_import_no_space">Il n\'y a pas assez d\'espace libre pour la copie.</string>
+    <string name="error_import_not_a_repo">Ce dossier n\'a pas de dossier .git. Choisissez le dossier qui contient .git.</string>
+    <string name="error_import_picked_git_dir">Choisissez le dossier qui contient .git, pas .git lui-même.</string>
+    <string name="error_import_bare">Les dépôts bare ne peuvent pas être importés. Clonez-le plutôt.</string>
+    <string name="error_import_git_file">Ce .git pointe vers un autre dépôt (worktree ou sous-module). Importez plutôt le dépôt principal.</string>
+    <string name="error_import_zip_no_repo">Aucun dépôt Git dans ce fichier ZIP. Vérifiez que le dossier caché .git a aussi été compressé.</string>
+    <string name="error_import_zip_multiple">Ce fichier ZIP contient plusieurs dépôts. Compressez-les un par un.</string>
+    <string name="error_import_zip_invalid">Ce fichier ZIP est illisible ou contient des chemins non sûrs.</string>
+    <string name="error_import_no_space">Pas assez d\'espace libre.</string>
     <string name="error_import_read_failed">Impossible de copier les fichiers : %1$s</string>
 </resources>

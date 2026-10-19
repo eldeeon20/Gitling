@@ -53,13 +53,13 @@
     <string name="error_move_repos_failed">仓库未被移动（%1$s）。未做任何更改。</string>
     <string name="dialog_import_failed_title">无法导入仓库</string>
     <string name="dialog_import_failed_nothing">未导入任何内容。</string>
-    <string name="error_import_not_a_repo">此文件夹不是 Git 仓库，因为其中没有 .git 文件夹。请选择包含 .git 的文件夹。</string>
-    <string name="error_import_picked_git_dir">这是仓库的 .git 文件夹。请改为选择包含它的文件夹。</string>
-    <string name="error_import_bare">这是一个没有工作文件的裸仓库。Gitling 只能导入带有工作文件的仓库。请改为克隆它。</string>
-    <string name="error_import_git_file">此仓库的 .git 是指向其他位置（worktree 或子模块）的链接，因此无法单独复制。请改为导入主仓库。</string>
-    <string name="error_import_zip_no_repo">此 ZIP 文件中没有 Git 仓库。请确认压缩时包含了隐藏的 .git 文件夹。</string>
-    <string name="error_import_zip_multiple">此 ZIP 文件包含多个仓库。请一次只压缩一个仓库。</string>
-    <string name="error_import_zip_invalid">无法读取此 ZIP 文件，或其中包含会指向仓库之外的路径。</string>
-    <string name="error_import_no_space">可用存储空间不足，无法复制。</string>
+    <string name="error_import_not_a_repo">此文件夹中没有 .git 文件夹。请选择包含 .git 的文件夹。</string>
+    <string name="error_import_picked_git_dir">请选择包含 .git 的文件夹，而不是 .git 本身。</string>
+    <string name="error_import_bare">无法导入裸仓库。请改为克隆它。</string>
+    <string name="error_import_git_file">此 .git 指向另一个仓库（worktree 或子模块）。请改为导入主仓库。</string>
+    <string name="error_import_zip_no_repo">此 ZIP 文件中没有 Git 仓库。请确认隐藏的 .git 文件夹也已压缩。</string>
+    <string name="error_import_zip_multiple">此 ZIP 文件包含多个仓库。请一次压缩一个。</string>
+    <string name="error_import_zip_invalid">此 ZIP 文件无法读取，或包含不安全的路径。</string>
+    <string name="error_import_no_space">可用存储空间不足。</string>
     <string name="error_import_read_failed">无法复制文件：%1$s</string>
 </resources>

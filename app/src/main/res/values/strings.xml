@@ -238,16 +238,15 @@
     <string name="dialog_fix_file_access_message">Android blocks Gitling from reading \"%1$s\" because another app added it to the shared repos folder.\n\nGitling can fix this by replacing each blocked file with an identical copy of its own. Tap Fix access, then confirm the folder on the next screen. You only need to do this once.</string>
     <string name="dialog_fix_file_access_wrong_folder">That folder doesn\'t contain \"%1$s\". Choose the folder Gitling opens for you, then confirm it.</string>
     <string name="label_import_repo">Import from this device</string>
-    <string name="label_import_folder">Choose folder</string>
-    <string name="label_import_zip">Choose ZIP file</string>
+    <string name="label_import_folder">Folder</string>
+    <string name="label_import_zip">ZIP file</string>
     <string name="label_open_repo">Open</string>
     <string name="dialog_import_repo_title">Import a repository</string>
-    <string name="dialog_import_repo_intro">Gitling copies a Git repository from a folder on this device, or from a ZIP file, into its own storage. Its history, branches, stashes and uncommitted changes come along. Before you start:</string>
-    <string name="dialog_import_repo_risk_copy">It\'s a copy. The original isn\'t changed, and later changes to either one don\'t carry over to the other.</string>
-    <string name="dialog_import_repo_risk_private">On Android 11 and newer, folders in other apps\' private storage (Android/data) can\'t be picked, because Android blocks it. Copy the repository somewhere else first, for example as a ZIP file from a computer.</string>
-    <string name="dialog_import_repo_risk_space">The copy takes as much storage as the original, and a large repository can take a while.</string>
-    <string name="dialog_import_repo_risk_modes">Gitling\'s storage can\'t keep file permissions or symbolic links. Executable files become regular files, and a symbolic link becomes a small file containing its target. Gitling sets the copy to ignore these differences, so they don\'t show up as changes.</string>
-    <string name="dialog_import_repo_risk_credentials">Saved passwords and SSH keys aren\'t part of a repository. You may need to sign in again to push or pull.</string>
+    <string name="dialog_import_repo_intro">Copies a repository into Gitling from a folder or ZIP file.</string>
+    <string name="dialog_import_repo_risk_copy">The original isn\'t changed.</string>
+    <string name="dialog_import_repo_risk_private">Android/data folders can\'t be picked. Use a ZIP file instead.</string>
+    <string name="dialog_import_repo_risk_modes">File permissions and symlinks aren\'t kept.</string>
+    <string name="dialog_import_repo_risk_credentials">Saved passwords and SSH keys aren\'t copied.</string>
     <string name="dialog_import_name_title">Name the repository</string>
     <string name="dialog_import_name_destination">Importing to: %1$s</string>
     <string name="alert_import_name_dot">The name can\'t start with a dot</string>
@@ -255,8 +254,8 @@
     <string name="importing_progress">%1$s of %2$s</string>
     <string name="importing_progress_unknown">%1$s copied</string>
     <string name="dialog_import_done_title">Repository imported</string>
-    <string name="dialog_import_done_message">%1$s was copied (%2$s). The original wasn\'t changed.</string>
-    <string name="dialog_import_done_modes">Gitling turned off core.filemode and core.symlinks in the copy, so lost file permissions and symbolic links don\'t show up as changes.</string>
-    <string name="dialog_import_done_skipped">Files in the ZIP file outside the repository\'s folder weren\'t imported.</string>
+    <string name="dialog_import_done_message">%1$s is ready (%2$s).</string>
+    <string name="dialog_import_done_modes">File permissions and symlinks are ignored in this copy.</string>
+    <string name="dialog_import_done_skipped">Some files outside the repository folder were skipped.</string>
     <string name="toast_import_cancelled">Import cancelled. Nothing was imported.</string>
 </resources>

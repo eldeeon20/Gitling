@@ -1,5 +1,6 @@
 package com.manichord.mgit.importrepo
 
+import android.os.Build
 import android.text.format.Formatter
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -80,9 +81,16 @@ fun ImportRepoDialogs(viewModel: ImportRepoViewModel, onOpenRepo: (Repo) -> Unit
     }
 }
 
-/** Everything the user should know before copying a repo in, shown before anything is picked. */
+/** What the user should know before copying a repo in, kept to a few short points. */
 @Composable
 private fun IntroDialog(onChooseFolder: () -> Unit, onChooseZip: () -> Unit, onDismiss: () -> Unit) {
+    val points = buildList {
+        add(R.string.dialog_import_repo_risk_copy)
+        // Android 10 and older still let the picker open other apps' Android/data folders
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) add(R.string.dialog_import_repo_risk_private)
+        add(R.string.dialog_import_repo_risk_modes)
+        add(R.string.dialog_import_repo_risk_credentials)
+    }
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.dialog_import_repo_title)) },
@@ -90,25 +98,17 @@ private fun IntroDialog(onChooseFolder: () -> Unit, onChooseZip: () -> Unit, onD
             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 Text(stringResource(R.string.dialog_import_repo_intro))
                 Spacer(Modifier.height(12.dp))
-                listOf(
-                    R.string.dialog_import_repo_risk_copy,
-                    R.string.dialog_import_repo_risk_private,
-                    R.string.dialog_import_repo_risk_space,
-                    R.string.dialog_import_repo_risk_modes,
-                    R.string.dialog_import_repo_risk_credentials
-                ).forEach { Bullet(stringResource(it)) }
+                points.forEach { Bullet(stringResource(it)) }
             }
         },
-        // In the button row rather than under the text, so both choices stay visible however
-        // far the text needs to scroll
         confirmButton = {
-            TextButton(onClick = onChooseFolder) { Text(stringResource(R.string.label_import_folder)) }
+            Row {
+                TextButton(onClick = onChooseZip) { Text(stringResource(R.string.label_import_zip)) }
+                TextButton(onClick = onChooseFolder) { Text(stringResource(R.string.label_import_folder)) }
+            }
         },
         dismissButton = {
-            Row {
-                TextButton(onClick = onDismiss) { Text(stringResource(R.string.label_cancel)) }
-                TextButton(onClick = onChooseZip) { Text(stringResource(R.string.label_import_zip)) }
-            }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.label_cancel)) }
         }
     )
 }
