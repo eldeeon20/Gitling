@@ -56,4 +56,15 @@
     <string name="error_media_file_blocked">يمنع Android تطبيق Gitling من قراءة \"%1$s\" لأن تطبيقًا آخر أضافه إلى مجلد المستودعات المشترك. أعد المحاولة وانقر على إصلاح الوصول، أو احذف الملف ثم انسخه مجددًا عبر موقع Gitling في تطبيق الملفات.</string>
     <string name="error_move_repos_blocked">لم يتم نقل المستودعات لأن Android يمنع Gitling من قراءة \"%1$s\" الذي أضافه تطبيق آخر. لم يتم تغيير أي شيء.</string>
     <string name="error_move_repos_failed">لم يتم نقل المستودعات (%1$s). لم يتم تغيير أي شيء.</string>
+    <string name="dialog_import_failed_title">تعذر استيراد المستودع</string>
+    <string name="dialog_import_failed_nothing">لم يتم استيراد أي شيء.</string>
+    <string name="error_import_not_a_repo">لا يحتوي هذا المجلد على مجلد .git. اختر المجلد الذي يحتوي على .git.</string>
+    <string name="error_import_picked_git_dir">اختر المجلد الذي يحتوي على .git، وليس .git نفسه.</string>
+    <string name="error_import_bare">لا يمكن استيراد مستودعات bare. استنسخه بدلًا من ذلك.</string>
+    <string name="error_import_git_file">يشير .git هذا إلى مستودع آخر (worktree أو وحدة فرعية). استورد المستودع الرئيسي بدلًا من ذلك.</string>
+    <string name="error_import_zip_no_repo">لا يوجد مستودع Git في ملف ZIP هذا. تأكد من ضغط مجلد .git المخفي أيضًا.</string>
+    <string name="error_import_zip_multiple">يحتوي ملف ZIP هذا على أكثر من مستودع. اضغطها واحدًا تلو الآخر.</string>
+    <string name="error_import_zip_invalid">تتعذر قراءة ملف ZIP هذا أو أنه يحتوي على مسارات غير آمنة.</string>
+    <string name="error_import_no_space">لا توجد مساحة تخزين كافية.</string>
+    <string name="error_import_read_failed">تعذر نسخ الملفات: %1$s</string>
 </resources>

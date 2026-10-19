@@ -1,0 +1,1 @@
+Import an existing repository from a folder on your device or a ZIP file, for example to bring repos over from MGit. The console now supports git submodule status, init and update. Fixed hard to see status bar icons in light mode on Android 15 and newer. Fixed Spanish "Cancel" buttons and a few untranslated Spanish and Korean texts.

@@ -237,4 +237,26 @@
     <string name="dialog_fix_file_access_title">Fix file access</string>
     <string name="dialog_fix_file_access_message">Android blocks Gitling from reading \"%1$s\" because another app added it to the shared repos folder.\n\nGitling can fix this by replacing each blocked file with an identical copy of its own. Tap Fix access, then confirm the folder on the next screen. You only need to do this once.</string>
     <string name="dialog_fix_file_access_wrong_folder">That folder doesn\'t contain \"%1$s\". Choose the folder Gitling opens for you, then confirm it.</string>
+    <string name="label_import_repo">Import from this device</string>
+    <string name="label_import_folder">Folder</string>
+    <string name="label_import_zip">ZIP file</string>
+    <string name="label_open_repo">Open</string>
+    <string name="dialog_import_repo_title">Import a repository</string>
+    <string name="dialog_import_repo_intro">Copies a repository into Gitling from a folder or ZIP file.</string>
+    <string name="dialog_import_repo_risk_copy">The original isn\'t changed.</string>
+    <string name="dialog_import_repo_risk_private">Android/data folders can\'t be picked. Use a ZIP file instead.</string>
+    <string name="dialog_import_repo_risk_modes">File permissions and symlinks aren\'t kept.</string>
+    <string name="dialog_import_repo_risk_credentials">Saved passwords and SSH keys aren\'t copied.</string>
+    <string name="dialog_import_name_title">Name the repository</string>
+    <string name="dialog_import_name_hint">Name</string>
+    <string name="dialog_import_name_destination">Importing to: %1$s</string>
+    <string name="alert_import_name_dot">The name can\'t start with a dot</string>
+    <string name="dialog_importing_title">Importing %1$s</string>
+    <string name="importing_progress">%1$s of %2$s</string>
+    <string name="importing_progress_unknown">%1$s copied</string>
+    <string name="dialog_import_done_title">Repository imported</string>
+    <string name="dialog_import_done_message">%1$s is ready (%2$s).</string>
+    <string name="dialog_import_done_modes">File permissions and symlinks are ignored in this copy.</string>
+    <string name="dialog_import_done_skipped">Some files outside the repository folder were skipped.</string>
+    <string name="toast_import_cancelled">Import cancelled. Nothing was imported.</string>
 </resources>

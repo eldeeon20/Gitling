@@ -41,4 +41,15 @@
     <string name="error_media_file_blocked">Android verhindert, dass Gitling \"%1$s\" liest, weil eine andere App die Datei in den gemeinsamen Repo-Ordner gelegt hat. Versuche es erneut und tippe auf Zugriff reparieren, oder lösche die Datei und kopiere sie über den Gitling-Speicherort in der Dateien-App wieder hinein.</string>
     <string name="error_move_repos_blocked">Die Repos wurden nicht verschoben, weil Android Gitling das Lesen von \"%1$s\" verwehrt, das eine andere App hinzugefügt hat. Es wurde nichts geändert.</string>
     <string name="error_move_repos_failed">Die Repos wurden nicht verschoben (%1$s). Es wurde nichts geändert.</string>
+    <string name="dialog_import_failed_title">Das Repository konnte nicht importiert werden</string>
+    <string name="dialog_import_failed_nothing">Es wurde nichts importiert.</string>
+    <string name="error_import_not_a_repo">Dieser Ordner hat keinen .git-Ordner. Wähle den Ordner, der .git enthält.</string>
+    <string name="error_import_picked_git_dir">Wähle den Ordner, der .git enthält, nicht .git selbst.</string>
+    <string name="error_import_bare">Bare-Repositorys können nicht importiert werden. Klone es stattdessen.</string>
+    <string name="error_import_git_file">Dieses .git verweist auf ein anderes Repository (Worktree oder Submodul). Importiere stattdessen das Haupt-Repository.</string>
+    <string name="error_import_zip_no_repo">Kein Git-Repository in dieser ZIP-Datei. Achte darauf, dass der versteckte .git-Ordner mitgezippt wurde.</string>
+    <string name="error_import_zip_multiple">Diese ZIP-Datei enthält mehr als ein Repository. Zippe eines nach dem anderen.</string>
+    <string name="error_import_zip_invalid">Diese ZIP-Datei ist nicht lesbar oder enthält unsichere Pfade.</string>
+    <string name="error_import_no_space">Nicht genug freier Speicher.</string>
+    <string name="error_import_read_failed">Die Dateien konnten nicht kopiert werden: %1$s</string>
 </resources>

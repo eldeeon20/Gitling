@@ -237,4 +237,26 @@
     <string name="dialog_fix_file_access_title">إصلاح الوصول إلى الملفات</string>
     <string name="dialog_fix_file_access_message">يمنع Android تطبيق Gitling من قراءة \"%1$s\" لأن تطبيقًا آخر أضافه إلى مجلد المستودعات المشترك.\n\nيمكن لـ Gitling إصلاح ذلك باستبدال كل ملف محظور بنسخة مطابقة خاصة به. انقر على إصلاح الوصول، ثم أكّد المجلد في الشاشة التالية. ستحتاج إلى ذلك مرة واحدة فقط.</string>
     <string name="dialog_fix_file_access_wrong_folder">هذا المجلد لا يحتوي على \"%1$s\". اختر المجلد الذي يفتحه Gitling لك، ثم أكّده.</string>
+    <string name="label_import_repo">استيراد من هذا الجهاز</string>
+    <string name="label_import_folder">مجلد</string>
+    <string name="label_import_zip">ملف ZIP</string>
+    <string name="label_open_repo">فتح</string>
+    <string name="dialog_import_repo_title">استيراد مستودع</string>
+    <string name="dialog_import_repo_intro">ينسخ مستودعًا إلى Gitling من مجلد أو ملف ZIP.</string>
+    <string name="dialog_import_repo_risk_copy">لا يتغير الأصل.</string>
+    <string name="dialog_import_repo_risk_private">لا يمكن اختيار مجلدات Android/data. استخدم ملف ZIP بدلًا من ذلك.</string>
+    <string name="dialog_import_repo_risk_modes">لا يتم الاحتفاظ بأذونات الملفات والروابط الرمزية.</string>
+    <string name="dialog_import_repo_risk_credentials">لا يتم نسخ كلمات المرور المحفوظة ومفاتيح SSH.</string>
+    <string name="dialog_import_name_title">تسمية المستودع</string>
+    <string name="dialog_import_name_hint">الاسم</string>
+    <string name="dialog_import_name_destination">الاستيراد إلى: %1$s</string>
+    <string name="alert_import_name_dot">لا يمكن أن يبدأ الاسم بنقطة</string>
+    <string name="dialog_importing_title">جارٍ استيراد %1$s</string>
+    <string name="importing_progress">%1$s من %2$s</string>
+    <string name="importing_progress_unknown">تم نسخ %1$s</string>
+    <string name="dialog_import_done_title">تم استيراد المستودع</string>
+    <string name="dialog_import_done_message">%1$s جاهز (%2$s).</string>
+    <string name="dialog_import_done_modes">يتم تجاهل أذونات الملفات والروابط الرمزية في هذه النسخة.</string>
+    <string name="dialog_import_done_skipped">تم تخطي بعض الملفات الموجودة خارج مجلد المستودع.</string>
+    <string name="toast_import_cancelled">تم إلغاء الاستيراد. لم يتم استيراد أي شيء.</string>
 </resources>

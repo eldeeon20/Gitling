@@ -210,4 +210,26 @@
     <string name="dialog_fix_file_access_title">修复文件访问</string>
     <string name="dialog_fix_file_access_message">由于 \"%1$s\" 是其他应用添加到共享仓库文件夹中的，Android 阻止了 Gitling 读取它。\n\nGitling 可以将每个被阻止的文件替换为一份内容相同的自有副本来解决此问题。点按“修复访问”，然后在下一个屏幕上确认该文件夹。只需操作一次。</string>
     <string name="dialog_fix_file_access_wrong_folder">该文件夹不包含 \"%1$s\"。请选择 Gitling 为你打开的文件夹，然后确认。</string>
+    <string name="label_import_repo">从此设备导入</string>
+    <string name="label_import_folder">文件夹</string>
+    <string name="label_import_zip">ZIP 文件</string>
+    <string name="label_open_repo">打开</string>
+    <string name="dialog_import_repo_title">导入仓库</string>
+    <string name="dialog_import_repo_intro">从文件夹或 ZIP 文件将仓库复制到 Gitling。</string>
+    <string name="dialog_import_repo_risk_copy">原仓库不会被更改。</string>
+    <string name="dialog_import_repo_risk_private">无法选择 Android/data 中的文件夹。请改用 ZIP 文件。</string>
+    <string name="dialog_import_repo_risk_modes">不会保留文件权限和符号链接。</string>
+    <string name="dialog_import_repo_risk_credentials">不会复制保存的密码和 SSH 密钥。</string>
+    <string name="dialog_import_name_title">为仓库命名</string>
+    <string name="dialog_import_name_hint">名称</string>
+    <string name="dialog_import_name_destination">导入到：%1$s</string>
+    <string name="alert_import_name_dot">名称不能以点开头</string>
+    <string name="dialog_importing_title">正在导入 %1$s</string>
+    <string name="importing_progress">%1$s / %2$s</string>
+    <string name="importing_progress_unknown">已复制 %1$s</string>
+    <string name="dialog_import_done_title">仓库已导入</string>
+    <string name="dialog_import_done_message">%1$s 已就绪（%2$s）。</string>
+    <string name="dialog_import_done_modes">此副本会忽略文件权限和符号链接。</string>
+    <string name="dialog_import_done_skipped">已跳过仓库文件夹之外的部分文件。</string>
+    <string name="toast_import_cancelled">已取消导入。未导入任何内容。</string>
 </resources>

@@ -192,4 +192,26 @@
     <string name="dialog_fix_file_access_title">파일 액세스 복구</string>
     <string name="dialog_fix_file_access_message">다른 앱이 공유 저장소 폴더에 \"%1$s\" 파일을 추가했기 때문에 Android가 Gitling의 읽기를 차단하고 있습니다.\n\nGitling은 차단된 각 파일을 내용이 같은 자체 사본으로 바꿔 이 문제를 해결할 수 있습니다. 액세스 복구를 탭한 다음 다음 화면에서 폴더를 확인하세요. 한 번만 하면 됩니다.</string>
     <string name="dialog_fix_file_access_wrong_folder">이 폴더에는 \"%1$s\" 파일이 없습니다. Gitling이 열어 주는 폴더를 선택한 다음 확인하세요.</string>
+    <string name="label_import_repo">이 기기에서 가져오기</string>
+    <string name="label_import_folder">폴더</string>
+    <string name="label_import_zip">ZIP 파일</string>
+    <string name="label_open_repo">열기</string>
+    <string name="dialog_import_repo_title">저장소 가져오기</string>
+    <string name="dialog_import_repo_intro">폴더나 ZIP 파일에서 Gitling으로 저장소를 복사합니다.</string>
+    <string name="dialog_import_repo_risk_copy">원본은 변경되지 않습니다.</string>
+    <string name="dialog_import_repo_risk_private">Android/data 폴더는 선택할 수 없습니다. 대신 ZIP 파일을 사용하세요.</string>
+    <string name="dialog_import_repo_risk_modes">파일 권한과 심볼릭 링크는 유지되지 않습니다.</string>
+    <string name="dialog_import_repo_risk_credentials">저장된 비밀번호와 SSH 키는 복사되지 않습니다.</string>
+    <string name="dialog_import_name_title">저장소 이름</string>
+    <string name="dialog_import_name_hint">이름</string>
+    <string name="dialog_import_name_destination">가져올 위치: %1$s</string>
+    <string name="alert_import_name_dot">이름은 점으로 시작할 수 없습니다</string>
+    <string name="dialog_importing_title">%1$s 가져오는 중</string>
+    <string name="importing_progress">%1$s / %2$s</string>
+    <string name="importing_progress_unknown">%1$s 복사됨</string>
+    <string name="dialog_import_done_title">저장소를 가져왔습니다</string>
+    <string name="dialog_import_done_message">%1$s 준비 완료(%2$s).</string>
+    <string name="dialog_import_done_modes">이 복사본에서는 파일 권한과 심볼릭 링크가 무시됩니다.</string>
+    <string name="dialog_import_done_skipped">저장소 폴더 밖에 있던 일부 파일은 건너뛰었습니다.</string>
+    <string name="toast_import_cancelled">가져오기를 취소했습니다. 아무것도 가져오지 않았습니다.</string>
 </resources>

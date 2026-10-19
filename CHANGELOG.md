@@ -5,6 +5,12 @@ in-app "What's New" history (`app/src/main/java/com/manichord/mgit/whatsnew/What
 and the per-release notes under `fastlane/metadata/android/en-US/changelogs/`; update this file
 as part of cutting each release (see `docs/agents/release-process.md`).
 
+## 1.0.64 - 2026-10-19
+- Import an existing repository from a folder on your device or a ZIP file, for example to bring repos over from MGit.
+- The console now supports git submodule status, init and update.
+- Fixed the status bar icons being hard to see in light mode on Android 15 and newer.
+- Fixed Spanish showing "Romper" instead of "Cancelar" on Cancel buttons, and translated a few remaining English texts in Spanish and Korean.
+
 ## 1.0.63 - 2026-10-19
 - Gitling no longer asks for the photos and videos permission. On Android 13 and newer, if an image another app added to a repo can't be read, a "Fix access" button repairs it in one step.
 - Fixed turning "Make repos visible to other apps" on or off leaving repos half moved when a file couldn't be copied.

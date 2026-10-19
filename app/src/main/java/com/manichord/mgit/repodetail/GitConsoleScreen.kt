@@ -41,6 +41,8 @@ private val QUICK_COMMANDS = listOf(
     "stash pop",
     "fetch",
     "pull",
+    "submodule status",
+    "submodule update --init --recursive",
 )
 
 @Composable

@@ -35,6 +35,7 @@ fun CloneView(
     viewModel: CloneViewModel,
     onCloneClick: () -> Unit,
     onCancelClick: () -> Unit,
+    onImportClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     // The VM owns both values; they also change from outside the fields (a picked GitHub repo,
@@ -224,6 +225,16 @@ fun CloneView(
                     else stringResource(id = R.string.label_clone)
                 )
             }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+        TextButton(
+            onClick = onImportClick,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Icon(Icons.Default.FileOpen, contentDescription = null, modifier = Modifier.size(18.dp))
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(stringResource(id = R.string.label_import_repo))
         }
     }
 }

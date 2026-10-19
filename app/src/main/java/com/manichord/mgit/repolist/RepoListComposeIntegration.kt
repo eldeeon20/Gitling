@@ -26,6 +26,8 @@ import androidx.compose.ui.res.stringResource
 import com.manichord.mgit.auth.RepoCredentials
 import com.manichord.mgit.MainActivity
 import com.manichord.mgit.clone.CloneViewModel
+import com.manichord.mgit.importrepo.ImportRepoDialogs
+import com.manichord.mgit.importrepo.ImportRepoViewModel
 import com.manichord.mgit.models.AccountType
 import com.manichord.mgit.ui.theme.AppTheme
 import com.manichord.mgit.whatsnew.WhatsNewContent
@@ -44,6 +46,7 @@ import me.sheimi.sgit.database.models.Repo
 fun RepoListComposeContent(
     activity: SheimiFragmentActivity,
     cloneViewModel: CloneViewModel,
+    importRepoViewModel: ImportRepoViewModel,
     viewModel: RepoListViewModel,
     onCloneClick: () -> Boolean,
     onCancelCloneViewClick: () -> Unit
@@ -146,10 +149,20 @@ fun RepoListComposeContent(
                     onCancelClick = {
                         showCloneSheet = false
                         onCancelCloneViewClick()
+                    },
+                    onImportClick = {
+                        showCloneSheet = false
+                        onCancelCloneViewClick()
+                        importRepoViewModel.start()
                     }
                 )
             }
         }
+
+        ImportRepoDialogs(
+            viewModel = importRepoViewModel,
+            onOpenRepo = { repo -> (activity as MainActivity).openRepoDetail(repo) }
+        )
 
         repoOptionsTarget?.let { repo ->
             RepoOptionsDialog(

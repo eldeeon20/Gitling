@@ -209,4 +209,26 @@
     <string name="dialog_fix_file_access_title">Réparer l\'accès aux fichiers</string>
     <string name="dialog_fix_file_access_message">Android empêche Gitling de lire \"%1$s\", car une autre app l\'a ajouté au dossier partagé des dépôts.\n\nGitling peut corriger cela en remplaçant chaque fichier bloqué par sa propre copie identique. Appuyez sur Réparer l\'accès, puis confirmez le dossier sur l\'écran suivant. Vous n\'aurez à le faire qu\'une fois.</string>
     <string name="dialog_fix_file_access_wrong_folder">Ce dossier ne contient pas \"%1$s\". Choisissez le dossier que Gitling ouvre pour vous, puis confirmez-le.</string>
+    <string name="label_import_repo">Importer depuis cet appareil</string>
+    <string name="label_import_folder">Dossier</string>
+    <string name="label_import_zip">Fichier ZIP</string>
+    <string name="label_open_repo">Ouvrir</string>
+    <string name="dialog_import_repo_title">Importer un dépôt</string>
+    <string name="dialog_import_repo_intro">Copie un dépôt dans Gitling depuis un dossier ou un fichier ZIP.</string>
+    <string name="dialog_import_repo_risk_copy">L\'original n\'est pas modifié.</string>
+    <string name="dialog_import_repo_risk_private">Les dossiers d\'Android/data ne peuvent pas être choisis. Utilisez plutôt un fichier ZIP.</string>
+    <string name="dialog_import_repo_risk_modes">Les permissions de fichiers et les liens symboliques ne sont pas conservés.</string>
+    <string name="dialog_import_repo_risk_credentials">Les mots de passe enregistrés et les clés SSH ne sont pas copiés.</string>
+    <string name="dialog_import_name_title">Nommer le dépôt</string>
+    <string name="dialog_import_name_hint">Nom</string>
+    <string name="dialog_import_name_destination">Importation vers : %1$s</string>
+    <string name="alert_import_name_dot">Le nom ne peut pas commencer par un point</string>
+    <string name="dialog_importing_title">Importation de %1$s</string>
+    <string name="importing_progress">%1$s sur %2$s</string>
+    <string name="importing_progress_unknown">%1$s copiés</string>
+    <string name="dialog_import_done_title">Dépôt importé</string>
+    <string name="dialog_import_done_message">%1$s est prêt (%2$s).</string>
+    <string name="dialog_import_done_modes">Les permissions de fichiers et les liens symboliques sont ignorés dans cette copie.</string>
+    <string name="dialog_import_done_skipped">Certains fichiers hors du dossier du dépôt ont été ignorés.</string>
+    <string name="toast_import_cancelled">Importation annulée. Rien n\'a été importé.</string>
 </resources>
