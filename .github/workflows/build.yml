@@ -21,3 +21,10 @@ jobs:
         java-version: 21
     - name: Build with Gradle
       run: ./gradlew --no-daemon clean assembleDebug testDebug
+
+    - name: Upload debug APK
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: gitling-debug-apk
+        path: app/build/outputs/apk/debug/*.apk

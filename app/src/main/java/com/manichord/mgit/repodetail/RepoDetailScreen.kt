@@ -1,5 +1,11 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+
 package com.manichord.mgit.repodetail
 
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.draw.clip
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -106,6 +112,54 @@ fun RepoDetailScreen(
         }
     }
 
+    val navigationIcon: @Composable () -> Unit = {
+        if (isSearchActive) {
+            IconButton(onClick = {
+                isSearchActive = false
+                searchState.clearText()
+                when (pagerState.currentPage) {
+                    TAB_FILES -> onFilesSearchQueryChange("")
+                    TAB_COMMITS -> onCommitsSearchQueryChange("")
+                }
+            }) {
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Close search")
+            }
+        } else {
+            IconButton(onClick = onBackClick) {
+                Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+            }
+        }
+    }
+    val topBarActions: @Composable RowScope.() -> Unit = {
+        if (isSearchActive) {
+            if (searchQuery.isNotEmpty()) {
+                IconButton(onClick = {
+                    searchState.clearText()
+                    when (pagerState.currentPage) {
+                        TAB_FILES -> onFilesSearchQueryChange("")
+                        TAB_COMMITS -> onCommitsSearchQueryChange("")
+                    }
+                }) {
+                    Icon(Icons.Default.Clear, contentDescription = "Clear search")
+                }
+            }
+        } else {
+            if (pagerState.currentPage == TAB_FILES || pagerState.currentPage == TAB_COMMITS) {
+                IconButton(onClick = { isSearchActive = true }) {
+                    Icon(Icons.Default.Search, contentDescription = "Search")
+                }
+            }
+            if (pagerState.currentPage == TAB_CONSOLE) {
+                IconButton(onClick = { viewModel.clearConsole() }) {
+                    Icon(Icons.Default.Clear, contentDescription = "Clear console")
+                }
+            }
+            IconButton(onClick = { viewModel.setDrawerOpen(true) }) {
+                Icon(Icons.Default.Menu, contentDescription = "Menu")
+            }
+        }
+    }
+
     // ModalNavigationDrawer always opens from the layout-start edge, with no built-in option to
     // open from the end -- but the menu button that opens it lives in the TopAppBar's `actions`,
     // which Compose always renders at the layout-end (issue #64: button and drawer were on
@@ -147,9 +201,9 @@ fun RepoDetailScreen(
         CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = {
-                        if (isSearchActive) {
+                if (isSearchActive) {
+                    TopAppBar(
+                        title = {
                             LaunchedEffect(Unit) { searchFocusRequester.requestFocus() }
                             TextField(
                                 state = searchState,
@@ -177,77 +231,32 @@ fun RepoDetailScreen(
                                     unfocusedIndicatorColor = Color.Transparent
                                 )
                             )
-                        } else {
-                            Column {
-                                Text(
-                                    text = repo?.diaplayName ?: "Loading...",
-                                    style = MaterialTheme.typography.titleLarge,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                repo?.branchName?.let { branch ->
-                                    SuggestionChip(
-                                        onClick = onBranchClick,
-                                        label = {
-                                            Text(
-                                                text = branch,
-                                                maxLines = 1,
-                                                overflow = TextOverflow.Ellipsis
-                                            )
-                                        },
-                                        icon = { Icon(Icons.Default.AccountTree, null, Modifier.size(16.dp)) }
-                                    )
-                                }
+                        },
+                        navigationIcon = navigationIcon,
+                        actions = topBarActions
+                    )
+                } else {
+                    // Expressive top bar with the branch as a subtitle. Not the collapsing
+                    // flexible bar: the Files, Commits and Status tabs are fragments, and their
+                    // scrolling doesn't reach this Scaffold through the AndroidView boundary (not
+                    // even with rememberNestedScrollInteropConnection), so it would stay expanded
+                    TopAppBar(
+                        title = {
+                            Text(
+                                text = repo?.diaplayName ?: "Loading...",
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        },
+                        subtitle = {
+                            repo?.branchName?.let { branch ->
+                                BranchSubtitle(branch = branch, onClick = onBranchClick)
                             }
-                        }
-                    },
-                    navigationIcon = {
-                        if (isSearchActive) {
-                            IconButton(onClick = {
-                                isSearchActive = false
-                                searchState.clearText()
-                                when (pagerState.currentPage) {
-                                    TAB_FILES -> onFilesSearchQueryChange("")
-                                    TAB_COMMITS -> onCommitsSearchQueryChange("")
-                                }
-                            }) {
-                                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Close search")
-                            }
-                        } else {
-                            IconButton(onClick = onBackClick) {
-                                Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                            }
-                        }
-                    },
-                    actions = {
-                        if (isSearchActive) {
-                            if (searchQuery.isNotEmpty()) {
-                                IconButton(onClick = {
-                                    searchState.clearText()
-                                    when (pagerState.currentPage) {
-                                        TAB_FILES -> onFilesSearchQueryChange("")
-                                        TAB_COMMITS -> onCommitsSearchQueryChange("")
-                                    }
-                                }) {
-                                    Icon(Icons.Default.Clear, contentDescription = "Clear search")
-                                }
-                            }
-                        } else {
-                            if (pagerState.currentPage == TAB_FILES || pagerState.currentPage == TAB_COMMITS) {
-                                IconButton(onClick = { isSearchActive = true }) {
-                                    Icon(Icons.Default.Search, contentDescription = "Search")
-                                }
-                            }
-                            if (pagerState.currentPage == TAB_CONSOLE) {
-                                IconButton(onClick = { viewModel.clearConsole() }) {
-                                    Icon(Icons.Default.Clear, contentDescription = "Clear console")
-                                }
-                            }
-                            IconButton(onClick = { viewModel.setDrawerOpen(true) }) {
-                                Icon(Icons.Default.Menu, contentDescription = "Menu")
-                            }
-                        }
-                    }
-                )
+                        },
+                        navigationIcon = navigationIcon,
+                        actions = topBarActions
+                    )
+                }
             }
         ) { paddingValues ->
             Column(modifier = Modifier.padding(paddingValues)) {
@@ -297,10 +306,16 @@ fun RepoDetailScreen(
                                     style = MaterialTheme.typography.headlineSmall
                                 )
                                 Spacer(Modifier.height(16.dp))
-                                LinearProgressIndicator(
-                                    progress = progressState!!.progress / 100f,
-                                    modifier = Modifier.fillMaxWidth()
-                                )
+                                // Some git operations don't report a total; show the
+                                // indeterminate wave then instead of a bar stuck at 0
+                                if (progressState!!.progress > 0) {
+                                    LinearWavyProgressIndicator(
+                                        progress = { progressState!!.progress / 100f },
+                                        modifier = Modifier.fillMaxWidth()
+                                    )
+                                } else {
+                                    LinearWavyProgressIndicator(modifier = Modifier.fillMaxWidth())
+                                }
                                 Spacer(Modifier.height(8.dp))
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
@@ -361,3 +376,20 @@ fun RepoOperationList(onOperationClick: (index: Int) -> Unit) {
 }
 
 data class TabItem(val title: String, val icon: ImageVector)
+
+/** The current branch under the repo name; tapping it opens the branch chooser, like the chip
+ * it replaces. */
+@Composable
+private fun BranchSubtitle(branch: String, onClick: () -> Unit) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .clip(RoundedCornerShape(8.dp))
+            .clickable(onClickLabel = stringResource(R.string.label_switch_branch), onClick = onClick)
+            .padding(vertical = 2.dp)
+    ) {
+        Icon(Icons.Default.AccountTree, contentDescription = null, modifier = Modifier.size(16.dp))
+        Spacer(Modifier.width(6.dp))
+        Text(text = branch.removePrefix("refs/heads/"), maxLines = 1, overflow = TextOverflow.Ellipsis)
+    }
+}

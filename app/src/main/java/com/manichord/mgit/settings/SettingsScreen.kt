@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3ExpressiveApi::class)
+
 package com.manichord.mgit.settings
 
 import androidx.compose.foundation.clickable
@@ -36,6 +38,7 @@ fun SettingsScreen(
 ) {
     val repoRoot by viewModel.repoRoot.observeAsState(Repo.getDefaultRepoRootDir().absolutePath)
     val useSharedMediaStorage by viewModel.useSharedMediaStorage.observeAsState(false)
+    val useDocumentsStorage by viewModel.useDocumentsStorage.observeAsState(false)
     val movingRepoStorage by viewModel.movingRepoStorage.observeAsState(false)
     val useEnglish by viewModel.useEnglish.observeAsState(false)
     val gitUserName by viewModel.gitUserName.observeAsState("")
@@ -49,7 +52,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.action_settings), fontWeight = FontWeight.Bold) },
+                title = { Text(stringResource(R.string.action_settings)) },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -82,6 +85,19 @@ fun SettingsScreen(
                 checked = useSharedMediaStorage,
                 onCheckedChange = { viewModel.setUseSharedMediaStorage(it) },
                 icon = Icons.Default.FolderShared,
+                enabled = !movingRepoStorage
+            )
+
+            SettingsSwitchItem(
+                title = stringResource(R.string.preference_use_documents_storage),
+                summary = if (movingRepoStorage) {
+                    "Moving repos..."
+                } else {
+                    stringResource(R.string.preference_use_documents_storage_summary)
+                },
+                checked = useDocumentsStorage,
+                onCheckedChange = { viewModel.setUseDocumentsStorage(it) },
+                icon = Icons.Default.Description,
                 enabled = !movingRepoStorage
             )
 
@@ -245,9 +261,9 @@ fun SettingsUpdateCheckItem(
         leadingContent = { Icon(Icons.Default.Refresh, null) },
         trailingContent = {
             when {
-                checking -> CircularProgressIndicator(modifier = Modifier.size(20.dp), strokeWidth = 2.dp)
+                checking -> LoadingIndicator(modifier = Modifier.size(24.dp))
                 result is UpdateCheckResult.UpdateAvailable -> {
-                    TextButton(onClick = { onViewReleaseClick(result.releaseUrl) }) { Text("View") }
+                    TextButton(shapes = ButtonDefaults.shapes(), onClick = { onViewReleaseClick(result.releaseUrl) }) { Text("View") }
                 }
             }
         },
@@ -294,7 +310,7 @@ fun SettingsFontItem(selected: FontOption, onSelect: (FontOption) -> Unit) {
                 }
             },
             confirmButton = {
-                TextButton(onClick = { showDialog = false }) {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = { showDialog = false }) {
                     Text(stringResource(R.string.label_cancel))
                 }
             }
@@ -329,7 +345,7 @@ fun SettingsEditTextItem(title: String, value: String, onValueChange: (String) -
                 )
             },
             confirmButton = {
-                TextButton(onClick = {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = {
                     onValueChange(tempValue.text.toString())
                     showDialog = false
                 }) {
@@ -337,7 +353,7 @@ fun SettingsEditTextItem(title: String, value: String, onValueChange: (String) -
                 }
             },
             dismissButton = {
-                TextButton(onClick = { showDialog = false }) {
+                TextButton(shapes = ButtonDefaults.shapes(), onClick = { showDialog = false }) {
                     Text(stringResource(R.string.label_cancel))
                 }
             }

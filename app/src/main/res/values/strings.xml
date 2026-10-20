@@ -185,12 +185,16 @@
     <string name="preference_use_shared_media_storage">Make repos visible to other apps</string>
     <string name="preference_use_shared_media_storage_summary">Store repos somewhere other apps (e.g. a file manager with storage access) can also reach, instead of Gitling\'s own private folder</string>
     <string name="pref_key_use_shared_media_storage" translatable="false">use_shared_media_storage</string>
+    <string name="preference_use_documents_storage">Store repos in Documents</string>
+    <string name="preference_use_documents_storage_summary">Store repos in the public Documents folder, reachable by every app. On Android 11+ requires "All files access" permission.</string>
+    <string name="pref_key_use_documents_storage" translatable="false">use_documents_storage</string>
     <string name="preference_app_font">App font</string>
     <string name="pref_key_app_font" translatable="false">app_font</string>
     <string name="pref_key_last_seen_version_code" translatable="false">last_seen_version_code</string>
     <string name="pref_key_last_update_check_time" translatable="false">last_update_check_time</string>
     <string name="pref_key_dismissed_update_version" translatable="false">dismissed_update_version</string>
     <string name="pref_key_pending_storage_migration_notice" translatable="false">pending_storage_migration_notice</string>
+    <string name="pref_key_file_mode_migration_done" translatable="false">file_mode_migration_done</string>
     <string name="pref_key_github_banner_dismissed" translatable="false">github_banner_dismissed</string>
     <string name="action_git_profile">Git Profile</string>
     <string name="action_open_in_other_app">Open in other apps</string>
@@ -259,4 +263,18 @@
     <string name="dialog_import_done_modes">File permissions and symlinks are ignored in this copy.</string>
     <string name="dialog_import_done_skipped">Some files outside the repository folder were skipped.</string>
     <string name="toast_import_cancelled">Import cancelled. Nothing was imported.</string>
+    <string name="label_add_repository">Add repository</string>
+    <string name="label_close_menu">Close menu</string>
+    <string name="label_menu_clone">Clone repository</string>
+    <string name="label_menu_new_local">New local repository</string>
+    <string name="label_current_branch">Current branch</string>
+    <string name="label_all_branches">All branches</string>
+    <plurals name="repo_count">
+        <item quantity="one">%d repository</item>
+        <item quantity="other">%d repositories</item>
+    </plurals>
+    <string name="label_switch_branch">Switch branch</string>
+    <string name="label_diff">Diff</string>
+    <string name="label_diff_staged">Staged changes</string>
+    <string name="label_diff_working_tree">Working tree</string>
 </resources>

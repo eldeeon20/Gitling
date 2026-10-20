@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.content.Context;
+import android.os.Environment;
 
 import me.sheimi.android.activities.SheimiFragmentActivity;
 import me.sheimi.sgit.MGitApplication;
@@ -118,6 +119,18 @@ public class FsUtils {
         Context context = activeActivity != null ? activeActivity : MGitApplication.getContext();
         File[] mediaDirs = context.getExternalMediaDirs();
         File mDir = new File(mediaDirs[0], dirname);
+        if (!mDir.exists() && isCreate) {
+            mDir.mkdirs();
+        }
+        return mDir;
+    }
+
+    /** Public Documents folder (e.g. /storage/emulated/0/Documents): reachable by every app
+     * without any storage permission on the reader side, but writing here on Android 11+ needs
+     * MANAGE_EXTERNAL_STORAGE (all-files access), which the user grants from Settings. */
+    public static File getDocumentsDir(String dirname, boolean isCreate) {
+        File base = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        File mDir = new File(base, dirname);
         if (!mDir.exists() && isCreate) {
             mDir.mkdirs();
         }
