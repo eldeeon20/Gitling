@@ -30,6 +30,9 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val _useSharedMediaStorage = MutableLiveData(prefsHelper.useSharedMediaStorage())
     val useSharedMediaStorage: LiveData<Boolean> = _useSharedMediaStorage
 
+    private val _useDocumentsStorage = MutableLiveData(prefsHelper.useDocumentsStorage())
+    val useDocumentsStorage: LiveData<Boolean> = _useDocumentsStorage
+
     private val _movingRepoStorage = MutableLiveData(false)
     val movingRepoStorage: LiveData<Boolean> = _movingRepoStorage
 
@@ -43,9 +46,30 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
      * looked for before anything moves: the user is offered the same access fix as staging such
      * a file, and the move runs again once afterwards. If the move still fails, it's undone
      * (see Repo.moveReposBetweenDefaultRoots) and the setting is left as it was. */
-    fun setUseSharedMediaStorage(use: Boolean) = moveRepoStorage(use, isRetry = false)
+    fun setUseSharedMediaStorage(use: Boolean) = moveRepoStorage(use, toDocuments = false)
 
-    private fun moveRepoStorage(use: Boolean, isRetry: Boolean) {
+    /** Stores repos in the public Documents folder. On Android 11+ this needs the
+     * "All files access" permission; if it isn't granted yet, send the user to
+     * the system settings and leave the toggle off until they come back and retry. */
+    fun setUseDocumentsStorage(use: Boolean) {
+        val app = getApplication<MGitApplication>()
+        if (use && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R &&
+            !android.os.Environment.isExternalStorageManager()) {
+            val activity = BasicFunctions.getActiveActivity()
+            val intent = android.content.Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION).apply {
+                data = android.net.Uri.parse("package:${app.packageName}")
+            }
+            try {
+                activity?.startActivity(intent)
+            } catch (e: Exception) {
+                activity?.startActivity(android.content.Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION))
+            }
+            return
+        }
+        moveRepoStorage(use, toDocuments = true)
+    }
+
+    private fun moveRepoStorage(use: Boolean, isRetry: Boolean = false, toDocuments: Boolean = false) {
         val app = getApplication<MGitApplication>()
         val oldRoot = Repo.getDefaultRepoRootDir()
         _movingRepoStorage.postValue(true)
@@ -60,26 +84,36 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                 }
                 activity.requestMediaFileAccess(oldRoot, blocked[0],
                     object : SheimiFragmentActivity.OnPermissionResult {
-                        override fun onGranted() = moveRepoStorage(use, isRetry = true)
+                        override fun onGranted() = moveRepoStorage(use, isRetry = true, toDocuments = toDocuments)
 
                         override fun onDenied() = showMoveError(
                             app.getString(R.string.error_move_repos_blocked, blocked[0].name))
                     })
                 return@Thread
             }
-            prefsHelper.setUseSharedMediaStorage(use)
+            val oldShared = prefsHelper.useSharedMediaStorage()
+            val oldDocs = prefsHelper.useDocumentsStorage()
+            if (toDocuments) {
+                prefsHelper.setUseDocumentsStorage(use)
+                if (use) prefsHelper.setUseSharedMediaStorage(false)
+            } else {
+                prefsHelper.setUseSharedMediaStorage(use)
+                if (use) prefsHelper.setUseDocumentsStorage(false)
+            }
             val newRoot = Repo.getDefaultRepoRootDir()
             val error = Repo.moveReposBetweenDefaultRoots(app, oldRoot, newRoot)
             if (error != null) {
-                prefsHelper.setUseSharedMediaStorage(!use)
+                prefsHelper.setUseSharedMediaStorage(oldShared)
+                prefsHelper.setUseDocumentsStorage(oldDocs)
                 _movingRepoStorage.postValue(false)
                 showMoveError(app.getString(R.string.error_move_repos_failed,
                     error.localizedMessage ?: error.javaClass.simpleName))
                 return@Thread
             }
-            Repo.syncNoMediaMarker(use)
+            Repo.syncNoMediaMarker(prefsHelper.useSharedMediaStorage())
             _movingRepoStorage.postValue(false)
-            _useSharedMediaStorage.postValue(use)
+            _useDocumentsStorage.postValue(prefsHelper.useDocumentsStorage())
+            _useSharedMediaStorage.postValue(prefsHelper.useSharedMediaStorage())
             _repoRoot.postValue(newRoot.absolutePath)
         }.start()
     }

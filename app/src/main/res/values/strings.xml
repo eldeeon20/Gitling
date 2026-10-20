@@ -185,6 +185,9 @@
     <string name="preference_use_shared_media_storage">Make repos visible to other apps</string>
     <string name="preference_use_shared_media_storage_summary">Store repos somewhere other apps (e.g. a file manager with storage access) can also reach, instead of Gitling\'s own private folder</string>
     <string name="pref_key_use_shared_media_storage" translatable="false">use_shared_media_storage</string>
+    <string name="preference_use_documents_storage">Store repos in Documents</string>
+    <string name="preference_use_documents_storage_summary">Store repos in the public Documents folder, reachable by every app. On Android 11+ requires "All files access" permission.</string>
+    <string name="pref_key_use_documents_storage" translatable="false">use_documents_storage</string>
     <string name="preference_app_font">App font</string>
     <string name="pref_key_app_font" translatable="false">app_font</string>
     <string name="pref_key_last_seen_version_code" translatable="false">last_seen_version_code</string>

@@ -72,6 +72,17 @@ public class PreferenceHelper {
     /** False (default): repos live in Android/data/<pkg>/files, private to Gitling. True:
      * repos live in Android/media/<pkg>, reachable by other apps with their own storage access.
      * Both are permission-free for Gitling itself either way -- see FsUtils.getMediaDir(). */
+    /** False (default): repos live in Android/data/<pkg>/files (private) or Android/media/<pkg>
+     * (shared). True: repos live in the public Documents folder, reachable by every app, but
+     * writing there on Android 11+ needs the "All files access" permission. */
+    public boolean useDocumentsStorage() {
+        return getBoolean(mContext.getString(R.string.pref_key_use_documents_storage));
+    }
+
+    public void setUseDocumentsStorage(boolean use) {
+        edit(mContext.getString(R.string.pref_key_use_documents_storage), use);
+    }
+
     public boolean useSharedMediaStorage() {
         return getBoolean(mContext.getString(R.string.pref_key_use_shared_media_storage));
     }

@@ -592,6 +592,9 @@ public class Repo implements Comparable<Repo>, Serializable {
      * restricted to one of these two directories. */
     public static File getDefaultRepoRootDir() {
         PreferenceHelper prefs = ((MGitApplication) MGitApplication.getContext()).getPrefenceHelper();
+        if (prefs.useDocumentsStorage()) {
+            return FsUtils.getDocumentsDir(REPO_DIR, true);
+        }
         return prefs.useSharedMediaStorage()
                 ? FsUtils.getMediaDir(REPO_DIR, true)
                 : FsUtils.getExternalDir(REPO_DIR, true);

@@ -38,6 +38,7 @@ fun SettingsScreen(
 ) {
     val repoRoot by viewModel.repoRoot.observeAsState(Repo.getDefaultRepoRootDir().absolutePath)
     val useSharedMediaStorage by viewModel.useSharedMediaStorage.observeAsState(false)
+    val useDocumentsStorage by viewModel.useDocumentsStorage.observeAsState(false)
     val movingRepoStorage by viewModel.movingRepoStorage.observeAsState(false)
     val useEnglish by viewModel.useEnglish.observeAsState(false)
     val gitUserName by viewModel.gitUserName.observeAsState("")
@@ -84,6 +85,19 @@ fun SettingsScreen(
                 checked = useSharedMediaStorage,
                 onCheckedChange = { viewModel.setUseSharedMediaStorage(it) },
                 icon = Icons.Default.FolderShared,
+                enabled = !movingRepoStorage
+            )
+
+            SettingsSwitchItem(
+                title = stringResource(R.string.preference_use_documents_storage),
+                summary = if (movingRepoStorage) {
+                    "Moving repos..."
+                } else {
+                    stringResource(R.string.preference_use_documents_storage_summary)
+                },
+                checked = useDocumentsStorage,
+                onCheckedChange = { viewModel.setUseDocumentsStorage(it) },
+                icon = Icons.Default.Description,
                 enabled = !movingRepoStorage
             )
 
