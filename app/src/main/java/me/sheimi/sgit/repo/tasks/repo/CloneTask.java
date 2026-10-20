@@ -12,8 +12,10 @@ import org.eclipse.jgit.errors.NotSupportedException;
 import org.eclipse.jgit.lib.ProgressMonitor;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 
+import me.sheimi.android.utils.FsUtils;
 import me.sheimi.android.utils.Profile;
 import me.sheimi.sgit.R;
 import me.sheimi.sgit.database.RepoContract;
@@ -59,6 +61,17 @@ public class CloneTask extends RepoRemoteOpTask {
 
     public boolean cloneRepo() {
         File localRepo = mRepo.getDir();
+        try {
+            // Fail before JGit starts with the exact path that is not writable. Without this,
+            // a missing All files access grant or a revoked storage permission surfaces later
+            // as a confusing JGit IOException ("open failed: EACCES") after the target folder
+            // and part of .git have already been created.
+            FsUtils.ensureWritableDirectory(localRepo);
+        } catch (IOException e) {
+            setException(e, R.string.error_clone_failed);
+            Profile.setLastCloneFailed(mRepo);
+            return false;
+        }
         CloneCommand cloneCommand = Git.cloneRepository()
                 .setURI(mRepo.getRemoteURL()).setCloneAllBranches(true)
                 .setProgressMonitor(new RepoCloneMonitor())

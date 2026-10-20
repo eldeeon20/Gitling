@@ -276,6 +276,68 @@ public class SheimiFragmentActivity extends AppCompatActivity {
                 }
             });
 
+    private OnPermissionResult mPendingSharedStorageCallback;
+
+    private final ActivityResultLauncher<Intent> mAllFilesAccessLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                OnPermissionResult callback = mPendingSharedStorageCallback;
+                mPendingSharedStorageCallback = null;
+                if (callback == null) {
+                    return;
+                }
+                if (FsUtils.hasSharedStorageWriteAccess(this)) {
+                    callback.onGranted();
+                } else {
+                    callback.onDenied();
+                }
+            });
+
+    private final ActivityResultLauncher<String> mLegacyStoragePermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), granted -> {
+                OnPermissionResult callback = mPendingSharedStorageCallback;
+                mPendingSharedStorageCallback = null;
+                if (callback == null) {
+                    return;
+                }
+                if (granted && FsUtils.hasSharedStorageWriteAccess(this)) {
+                    callback.onGranted();
+                } else {
+                    callback.onDenied();
+                }
+            });
+
+    /**
+     * Ensures Gitling can write to shared storage (public Documents and similar folders), then
+     * calls back. API 30+ needs the special "All files access" grant, which can only be toggled
+     * in system Settings; API 29 and older need the legacy WRITE_EXTERNAL_STORAGE runtime
+     * permission. Safe to call from a background thread; the permission UI runs on the UI
+     * thread.
+     */
+    public void requestSharedStorageAccess(final OnPermissionResult callback) {
+        runOnUiThread(() -> {
+            if (FsUtils.hasSharedStorageWriteAccess(this)) {
+                callback.onGranted();
+                return;
+            }
+            mPendingSharedStorageCallback = callback;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                try {
+                    mAllFilesAccessLauncher.launch(FsUtils.allFilesAccessSettingsIntent(this));
+                } catch (Exception e) {
+                    try {
+                        mAllFilesAccessLauncher.launch(
+                                new Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION));
+                    } catch (Exception fallbackFailure) {
+                        mPendingSharedStorageCallback = null;
+                        callback.onDenied();
+                    }
+                }
+            } else {
+                mLegacyStoragePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+        });
+    }
+
     /**
      * Makes {@code blockedFile} (and any other file under {@code repairDir} Android won't let
      * Gitling read) readable, then calls back -- see FsUtils.findEaccesFile for the

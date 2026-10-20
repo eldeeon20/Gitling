@@ -1,9 +1,15 @@
 package me.sheimi.android.utils;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.Settings;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import android.webkit.MimeTypeMap;
 
@@ -17,12 +23,10 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.content.Context;
-import android.os.Environment;
-
 import me.sheimi.android.activities.SheimiFragmentActivity;
 import me.sheimi.sgit.MGitApplication;
 import me.sheimi.sgit.R;
+import timber.log.Timber;
 
 /**
  * Created by sheimi on 8/8/13.
@@ -135,6 +139,61 @@ public class FsUtils {
             mDir.mkdirs();
         }
         return mDir;
+    }
+
+    /** Whether Gitling can write to shared storage (public Documents, Downloads, etc).
+     * API 30+ uses the special "All files access" grant; older releases use the legacy
+     * WRITE_EXTERNAL_STORAGE runtime permission (see AndroidManifest's maxSdkVersion=29). */
+    public static boolean hasSharedStorageWriteAccess(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return Environment.isExternalStorageManager();
+        }
+        return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED;
+    }
+
+    /** The system screen where the user grants "All files access" on API 30+. */
+    public static Intent allFilesAccessSettingsIntent(Context context) {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+        intent.setData(Uri.parse("package:" + context.getPackageName()));
+        return intent;
+    }
+
+    /** True when {@code file} needs broad storage access to be writable: under the primary
+     * shared volume but not inside Android/data or Android/media, which are already accessible
+     * to Gitling without any permission. */
+    public static boolean isOnSharedStorage(File file) {
+        String root = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String path = file.getAbsolutePath();
+        if (!path.equals(root) && !path.startsWith(root + File.separator)) {
+            return false;
+        }
+        return !path.startsWith(root + "/Android/data/")
+                && !path.startsWith(root + "/Android/media/");
+    }
+
+    /** Verifies that {@code dir} exists and can actually be written to before JGit starts
+     * cloning into it. mkdirs() alone is not enough: it returns false for an existing
+     * directory, and a directory can exist but still reject every write (missing All files
+     * access, revoked permission, read-only volume). Throws with the exact path so the clone
+     * error dialog tells the user which location is the problem. */
+    public static void ensureWritableDirectory(File dir) throws IOException {
+        if (!dir.isDirectory() && !dir.mkdirs() && !dir.isDirectory()) {
+            throw new IOException("Could not create directory " + dir.getAbsolutePath());
+        }
+        if (!dir.canWrite()) {
+            throw new IOException("Directory is not writable: " + dir.getAbsolutePath());
+        }
+        File probe = new File(dir, ".gitling-write-test-" + System.nanoTime());
+        try {
+            if (!probe.createNewFile() && !probe.exists()) {
+                throw new IOException("Could not create files in " + dir.getAbsolutePath());
+            }
+        } finally {
+            if (probe.exists() && !probe.delete()) {
+                Timber.w("Could not delete write probe %s", probe);
+            }
+        }
     }
 
     /** Matches the message java.io.FileNotFoundException carries on Android when the underlying

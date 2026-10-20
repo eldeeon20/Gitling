@@ -11,6 +11,7 @@ import com.manichord.mgit.update.UpdateCheckResult
 import com.manichord.mgit.update.UpdateChecker
 import me.sheimi.android.activities.SheimiFragmentActivity
 import me.sheimi.android.utils.BasicFunctions
+import me.sheimi.android.utils.FsUtils
 import me.sheimi.android.utils.Profile
 import me.sheimi.sgit.BuildConfig
 import me.sheimi.sgit.MGitApplication
@@ -48,25 +49,31 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
      * (see Repo.moveReposBetweenDefaultRoots) and the setting is left as it was. */
     fun setUseSharedMediaStorage(use: Boolean) = moveRepoStorage(use, toDocuments = false)
 
-    /** Stores repos in the public Documents folder. On Android 11+ this needs the
-     * "All files access" permission; if it isn't granted yet, send the user to
-     * the system settings and leave the toggle off until they come back and retry. */
+    /** Stores repos in the public Documents folder. API 30+ needs the "All files access"
+     * special grant; API 29 and older need WRITE_EXTERNAL_STORAGE (plus legacy storage mode,
+     * see AndroidManifest). Ask for whichever is missing first, and only move repos once the
+     * user actually granted it -- otherwise the move (and later clones) would fail with EACCES. */
     fun setUseDocumentsStorage(use: Boolean) {
-        val app = getApplication<MGitApplication>()
-        if (use && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R &&
-            !android.os.Environment.isExternalStorageManager()) {
-            val activity = BasicFunctions.getActiveActivity()
-            val intent = android.content.Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION).apply {
-                data = android.net.Uri.parse("package:${app.packageName}")
-            }
-            try {
-                activity?.startActivity(intent)
-            } catch (e: Exception) {
-                activity?.startActivity(android.content.Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION))
-            }
+        if (!use) {
+            moveRepoStorage(false, toDocuments = true)
             return
         }
-        moveRepoStorage(use, toDocuments = true)
+        val app = getApplication<MGitApplication>()
+        if (FsUtils.hasSharedStorageWriteAccess(app)) {
+            moveRepoStorage(true, toDocuments = true)
+            return
+        }
+        val activity = BasicFunctions.getActiveActivity()
+        if (activity == null) {
+            showMoveError(app.getString(R.string.error_storage_permission_required))
+            return
+        }
+        activity.requestSharedStorageAccess(object : SheimiFragmentActivity.OnPermissionResult {
+            override fun onGranted() = moveRepoStorage(true, toDocuments = true)
+
+            override fun onDenied() =
+                showMoveError(app.getString(R.string.error_storage_permission_required))
+        })
     }
 
     private fun moveRepoStorage(use: Boolean, isRetry: Boolean = false, toDocuments: Boolean = false) {

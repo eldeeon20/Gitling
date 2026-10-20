@@ -2,6 +2,12 @@
 
 package com.manichord.mgit.repolist
 
+import android.net.Uri
+import android.os.Environment
+import android.provider.DocumentsContract
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -15,6 +21,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -30,6 +37,26 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.text.style.TextOverflow
 import me.sheimi.sgit.R
+
+/**
+ * SAF folder pickers return a content:// tree URI, but JGit needs a real java.io.File path.
+ * For the primary shared-storage volume we can resolve the document id straight to its
+ * absolute path (we hold All files access). Other providers/volumes are not resolvable this
+ * way, so return null and let the UI ask for another folder.
+ */
+private fun resolvePrimaryVolumePath(uri: Uri): String? {
+    if (uri.authority != "com.android.externalstorage.documents") return null
+    val docId = try {
+        DocumentsContract.getTreeDocumentId(uri)
+    } catch (e: IllegalArgumentException) {
+        return null
+    }
+    val parts = docId.split(":", limit = 2)
+    if (!parts[0].equals("primary", ignoreCase = true)) return null
+    val relativePath = parts.getOrElse(1) { "" }
+    val base = Environment.getExternalStorageDirectory().absolutePath
+    return if (relativePath.isEmpty()) base else "$base/$relativePath"
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,6 +78,23 @@ fun CloneView(
     val localRepoNameError by viewModel.localRepoNameError.observeAsState()
 
     val cloneLocation by viewModel.cloneLocation.observeAsState("")
+    val context = LocalContext.current
+    val folderPickerLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocumentTree()
+    ) { uri: Uri? ->
+        uri?.let {
+            val path = resolvePrimaryVolumePath(it)
+            if (path != null) {
+                viewModel.setCustomCloneLocation(path)
+            } else {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.error_clone_folder_unsupported),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
 
     Column(
         modifier = modifier
@@ -162,6 +206,14 @@ fun CloneView(
                     Text(text = localRepoNameError!!)
                 } else {
                     Text(text = "Cloning to: $cloneLocation/$localRepoName")
+                }
+            },
+            trailingIcon = {
+                IconButton(onClick = { folderPickerLauncher.launch(null) }) {
+                    Icon(
+                        Icons.Default.FolderOpen,
+                        contentDescription = stringResource(R.string.action_change_clone_folder)
+                    )
                 }
             },
             keyboardOptions = KeyboardOptions(

@@ -8,6 +8,7 @@ import me.sheimi.sgit.R
 import me.sheimi.sgit.database.models.Repo
 import me.sheimi.sgit.repo.tasks.repo.CloneTask
 import me.sheimi.sgit.repo.tasks.repo.InitLocalTask
+import java.io.File
 import timber.log.Timber
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,8 +31,13 @@ class CloneViewModel(application: Application) : AndroidViewModel(application) {
 
     val visible : MutableLiveData<Boolean> = MutableLiveData()
 
+    private val prefsHelper = (application as MGitApplication).prefenceHelper!!
     private val accountManager = (application as MGitApplication).accountManager!!
     private val githubAuthManager = (application as MGitApplication).githubAuthManager!!
+
+    /** A folder the user picked in the clone sheet (real filesystem path, resolved from the SAF
+     * tree URI). Null means the current default root from Settings. */
+    private var customCloneLocation: String? = null
 
     val accounts: MutableLiveData<List<com.manichord.mgit.models.Account>> = MutableLiveData(emptyList())
     val selectedAccount: MutableLiveData<com.manichord.mgit.models.Account?> = MutableLiveData(null)
@@ -63,7 +69,28 @@ class CloneViewModel(application: Application) : AndroidViewModel(application) {
      * outlives any single sheet open/close, and the default root can change via the "make repos
      * visible to other apps" Settings toggle without the app restarting in between). */
     fun refreshCloneLocation() {
+        // Called whenever the sheet opens: forget any folder picked during a previous sheet,
+        // so cancelling a clone doesn't silently move the destination next time.
+        customCloneLocation = null
         cloneLocation.value = Repo.getDefaultRepoRootDir().absolutePath
+    }
+
+    /** Sets a destination picked in the system folder picker. The caller resolves the SAF tree
+     * URI to a real path first (JGit needs java.io.File, not content://). */
+    fun setCustomCloneLocation(path: String) {
+        customCloneLocation = path
+        cloneLocation.value = path
+    }
+
+    /** True when this clone writes outside Gitling's permission-free default roots. Documents
+     * and any folder picked on shared storage need the All files access / legacy storage grant. */
+    fun cloneRequiresSharedStorageAccess(): Boolean {
+        val location = customCloneLocation
+        return if (location == null) {
+            prefsHelper.useDocumentsStorage()
+        } else {
+            me.sheimi.android.utils.FsUtils.isOnSharedStorage(File(location))
+        }
     }
 
     override fun onCleared() {
@@ -118,7 +145,17 @@ class CloneViewModel(application: Application) : AndroidViewModel(application) {
         } else {
             Timber.d("CLONE REPO %s %s [%b]", localRepoName.value, remoteUrl, cloneRecursively)
             val repoName = localRepoName.value ?: ""
-            val repo = Repo.createRepo(repoName, remoteUrl, "")
+            val defaultRoot = Repo.getDefaultRepoRootDir().absolutePath
+            val pickedLocation = customCloneLocation
+            val repo = if (pickedLocation != null && pickedLocation != defaultRoot) {
+                Repo.createRepo(
+                    Repo.EXTERNAL_PREFIX + File(pickedLocation, repoName).absolutePath,
+                    remoteUrl,
+                    ""
+                )
+            } else {
+                Repo.createRepo(repoName, remoteUrl, "")
+            }
 
             selectedAccount.value?.let { account ->
                 repo.username = account.username

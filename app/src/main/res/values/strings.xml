@@ -186,7 +186,10 @@
     <string name="preference_use_shared_media_storage_summary">Store repos somewhere other apps (e.g. a file manager with storage access) can also reach, instead of Gitling\'s own private folder</string>
     <string name="pref_key_use_shared_media_storage" translatable="false">use_shared_media_storage</string>
     <string name="preference_use_documents_storage">Store repos in Documents</string>
-    <string name="preference_use_documents_storage_summary">Store repos in the public Documents folder, reachable by every app. On Android 11+ requires "All files access" permission.</string>
+    <string name="preference_use_documents_storage_summary">Store repos in the public Documents folder, reachable by every app. Requires storage access: "All files access" on Android 11+, or the storage permission on Android 10 and older.</string>
+    <string name="error_storage_permission_required">Gitling needs storage access to store repositories in Documents. Grant it in Settings, then try again.</string>
+    <string name="error_clone_folder_unsupported">That folder can\'t be used. Pick a folder on this device\'s internal storage.</string>
+    <string name="action_change_clone_folder">Change clone folder</string>
     <string name="pref_key_use_documents_storage" translatable="false">use_documents_storage</string>
     <string name="preference_app_font">App font</string>
     <string name="pref_key_app_font" translatable="false">app_font</string>

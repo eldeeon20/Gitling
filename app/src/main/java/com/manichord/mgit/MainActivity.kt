@@ -63,6 +63,7 @@ import me.sheimi.sgit.repo.tasks.repo.CheckoutTask
 import me.sheimi.sgit.repo.tasks.SheimiAsyncTask
 import me.sheimi.sgit.repo.tasks.repo.CloneTask
 import me.sheimi.sgit.ssh.PrivateKeyUtils
+import me.sheimi.android.utils.FsUtils
 import me.sheimi.android.utils.Profile
 import timber.log.Timber
 import java.io.IOException
@@ -592,6 +593,12 @@ class MainActivity : SheimiFragmentActivity() {
             } else if (Repo.getDir((applicationContext as MGitApplication).prefenceHelper, repoName).exists()) {
                 cloneViewModel.remoteUrl = repoUrlBuilder.toString()
                 showCloneView()
+            } else if (needsCloneStorageAccess()) {
+                // Opening a git link must not jump straight into a clone that will fail with
+                // EACCES. Open the clone sheet instead; its Clone button runs the permission
+                // flow above and starts the clone once access is granted.
+                cloneViewModel.remoteUrl = repoUrlBuilder.toString()
+                showCloneView()
             } else {
                 val cloningStatus = getString(R.string.cloning)
                 val mRepo = Repo.createRepo(repoName, repoUrlBuilder.toString(), cloningStatus)
@@ -639,12 +646,36 @@ class MainActivity : SheimiFragmentActivity() {
 
     private fun cloneRepo(): Boolean {
         val valid = cloneViewModel.validate()
-        if (valid) {
-            hideCloneView()
-            cloneViewModel.cloneRepo()
+        if (!valid) return false
+        if (needsCloneStorageAccess()) {
+            // Keep the sheet open while the system permission screen is showing. Once the user
+            // grants access, start the clone with the values they already entered; if they back
+            // out without granting, leave everything as-is and explain what is missing.
+            requestSharedStorageAccess(object : SheimiFragmentActivity.OnPermissionResult {
+                override fun onGranted() {
+                    hideCloneView()
+                    cloneViewModel.cloneRepo()
+                }
+
+                override fun onDenied() {
+                    showMessageDialog(
+                        R.string.dialog_error_title,
+                        getString(R.string.error_storage_permission_required)
+                    )
+                }
+            })
+            return false
         }
-        return valid
+        hideCloneView()
+        cloneViewModel.cloneRepo()
+        return true
     }
+
+    /** The default private/Android-media roots are always writable by Gitling itself; Documents
+     * and any folder picked on shared storage need All files access (or legacy storage on API 29
+     * and older). */
+    private fun needsCloneStorageAccess(): Boolean =
+        cloneViewModel.cloneRequiresSharedStorageAccess() && !FsUtils.hasSharedStorageWriteAccess(this)
 
     private fun showCloneView() {
         // Opened for a clone link: never in "Init Local" mode left over from the add menu
